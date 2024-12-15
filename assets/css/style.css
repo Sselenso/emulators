@@ -153,6 +153,8 @@ body[data-theme="light"] .theme-toggle .fa-sun {
 
 .emulators__links {
 	margin-bottom: 20px;
+	min-width: 300px;
+	max-width: 300px;
 }
 
 .emulators__link {
