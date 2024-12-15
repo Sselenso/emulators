@@ -17,6 +17,15 @@ html {
 	scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+	width: 7px !important;
+	height: 7px !important;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--accent-color);
+}
+
 /* Общие стили */
 body {
 	font-family: 'Arial', sans-serif;
