@@ -1,0 +1,167 @@
+/* Объявление CSS переменных */
+:root {
+	--primary-bg: #121212;
+	--secondary-bg: #1e1e1e;
+	--accent-bg: #2a2a2a;
+	--primary-color: #ffffff;
+	--secondary-color: #e0e0e0;
+	--accent-color: #00b7ff;
+	--accent-hover: #0074f8;
+	--shadow-light: rgba(0, 0, 0, 0.2);
+	--shadow-dark: rgba(0, 0, 0, 0.4);
+	--border-radius: 10px;
+	--transition: 0.3s ease;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+/* Общие стили */
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: var(--primary-bg);
+	color: var(--secondary-color);
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+/* Стили для заголовка */
+.emulators__header {
+	text-align: center;
+	padding: 20px 0;
+}
+
+.emulators__title {
+	font-size: 2em;
+	margin: 0;
+	color: var(--primary-color);
+	text-shadow: 2px 2px 4px var(--shadow-dark);
+	animation: slideInDown 0.6s var(--transition);
+}
+
+/* Стили для списка эмуляторов */
+.emulators__list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+	padding: 20px;
+}
+
+.emulators__item {
+	background-color: var(--secondary-bg);
+	border-radius: var(--border-radius);
+	box-shadow: 0 4px 8px var(--shadow-light);
+	overflow: hidden;
+	min-width: 300px;
+	transition: transform var(--transition), box-shadow var(--transition);
+	animation: fadeIn 0.5s var(--transition);
+}
+
+.emulators__item:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 8px 16px var(--shadow-dark);
+}
+
+.emulators__item-header {
+	background-color: var(--accent-bg);
+	padding: 15px;
+	text-align: center;
+}
+
+.emulators__item-title {
+	font-size: 1.5em;
+	margin: 0;
+	color: var(--primary-color);	
+}
+
+
+.emulators__item-content {
+	padding: 20px;
+}
+
+.emulators__links {
+	margin-bottom: 20px;
+}
+
+.emulators__link {
+	display: block;
+	margin: 10px 0;
+	color: var(--accent-color);
+	text-decoration: none;
+	transition: color var(--transition), transform 0.5s ease-in-out;
+}
+
+.emulators__link:hover {
+	color: var(--accent-hover);	
+	transform: scale(1.05);
+}
+
+.emulators__instruction-title {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+	color: var(--primary-color);
+}
+
+.emulators__instruction-block {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.emulators__instruction-link {
+	color: var(--accent-color);
+	text-decoration: none;
+	transition: color var(--transition);
+}
+
+.emulators__instruction-link:hover {
+	color: var(--accent-hover);
+}
+
+.emulators__additional-info {
+	margin-top: 20px;
+}
+
+.emulators__additional-info p {
+	margin: 5px 0;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+	from {
+			opacity: 0;
+			transform: scale(0.9);
+	}
+	to {
+			opacity: 1;
+			transform: scale(1);
+	}
+}
+
+@keyframes slideInDown {
+	from {
+			opacity: 0;
+			transform: translateY(-20px);
+	}
+	to {
+			opacity: 1;
+			transform: translateY(0);
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+			transform: scale(1);
+	}
+	50% {
+			transform: scale(1.05);
+	}
+}
+
+
+/* Добавление картинок */
+.emulators__item-header {	
+}
