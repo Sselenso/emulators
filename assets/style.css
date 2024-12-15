@@ -10,7 +10,7 @@
 	--shadow-light: rgba(0, 0, 0, 0.2);
 	--shadow-dark: rgba(0, 0, 0, 0.4);
 	--border-radius: 10px;
-	--transition: 0.s ease;
+	--transition: 0.4s ease;
 }
 
 [data-theme="light"] {
