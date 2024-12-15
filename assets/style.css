@@ -13,6 +13,19 @@
 	--transition: 0.3s ease;
 }
 
+[data-theme="light"] {
+	--primary-bg: #ffffff;
+	--secondary-bg: #f0f0f0;
+	--accent-bg: #e0e0e0;
+	--primary-color: #000000;
+	--secondary-color: #333333;
+	--accent-color: #0074f8;
+	--accent-hover: #005bb5;
+	--shadow-light: rgba(0, 0, 0, 0.1);
+	--shadow-dark: rgba(0, 0, 0, 0.2);
+}
+
+
 html {
 	scroll-behavior: smooth;
 }
@@ -25,6 +38,8 @@ html {
 ::-webkit-scrollbar-thumb {
 	background-color: var(--accent-color);
 }
+
+
 
 /* Общие стили */
 body {
@@ -40,6 +55,7 @@ body {
 .emulators__header {
 	text-align: center;
 	padding: 20px 0;
+	position: relative;
 }
 
 .emulators__title {
@@ -48,6 +64,48 @@ body {
 	color: var(--primary-color);
 	text-shadow: 2px 2px 4px var(--shadow-dark);
 	animation: slideInDown 0.6s var(--transition);
+}
+
+.theme-toggle {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	padding: 10px;
+	background-color: var(--accent-bg);
+	color: var(--primary-color);
+	border: none;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: background-color var(--transition), color var(--transition);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.theme-toggle i {
+	font-size: 1.5em;
+	margin: 0 5px;
+}
+
+.theme-toggle .fa-sun {
+	display: none;
+}
+
+.theme-toggle .fa-moon {
+	display: block;
+}
+
+body[data-theme="light"] .theme-toggle .fa-sun {
+	display: block;
+}
+
+body[data-theme="light"] .theme-toggle .fa-moon {
+	display: none;
+}
+
+.theme-toggle:hover {
+	background-color: var(--accent-color);
+	color: var(--primary-bg);
 }
 
 /* Стили для списка эмуляторов */
@@ -83,9 +141,8 @@ body {
 .emulators__item-title {
 	font-size: 1.5em;
 	margin: 0;
-	color: var(--primary-color);	
+	color: var(--primary-color);
 }
-
 
 .emulators__item-content {
 	padding: 20px;
@@ -104,7 +161,7 @@ body {
 }
 
 .emulators__link:hover {
-	color: var(--accent-hover);	
+	color: var(--accent-hover);
 	transform: scale(1.05);
 }
 
@@ -171,6 +228,3 @@ body {
 }
 
 
-/* Добавление картинок */
-.emulators__item-header {	
-}
