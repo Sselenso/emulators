@@ -10,7 +10,7 @@
 	--shadow-light: rgba(0, 0, 0, 0.2);
 	--shadow-dark: rgba(0, 0, 0, 0.4);
 	--border-radius: 10px;
-	--transition: 0.3s ease;
+	--transition: 0.s ease;
 }
 
 [data-theme="light"] {
@@ -87,19 +87,19 @@ body {
 	margin: 0 5px;
 }
 
-.theme-toggle .fa-sun {
+.theme-toggle .fa-moon {
 	display: none;
 }
 
-.theme-toggle .fa-moon {
-	display: block;
-}
-
-body[data-theme="light"] .theme-toggle .fa-sun {
+.theme-toggle .fa-sun {
 	display: block;
 }
 
 body[data-theme="light"] .theme-toggle .fa-moon {
+	display: block;
+}
+
+body[data-theme="light"] .theme-toggle .fa-sun {
 	display: none;
 }
 
