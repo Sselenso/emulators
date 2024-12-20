@@ -1,0 +1,188 @@
+/* 
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;	
+}
+
+.container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+
+
+.theme-toggle {
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.main {	
+	padding: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+}
+
+.article__wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.article {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.article__title {
+	font-size: 28px;
+	margin: 0;
+}
+
+.article__text {
+	font-size: 18px;
+	line-height: 1.6;
+}
+
+.article img {
+	max-width: 80%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {	
+
+	.article__text {
+			font-size: 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	
+
+	.article__text {
+			font-size: 14px;
+	}
+} */
+
+
+/* Общие стили */
+body {
+	margin: 0;
+	padding: 0;	
+}
+
+.container {
+	width: 80%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+
+
+.main {
+	padding: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+}
+
+.article__wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.article {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.article__title {
+	font-size: 28px;
+	margin: 0;
+}
+
+.article__text {
+	font-size: 18px;
+	line-height: 1.6;
+}
+
+.text__alert{
+	font-weight: 700;
+}
+
+.article__gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+}
+
+.article__img-wrapper {
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article__img-wrapper:hover {
+	transform: scale(1.05);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.article__img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+.img__settings{
+	max-width: 300px;
+}
+
+
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+	.emulators__title {
+			font-size: 20px;
+	}
+
+	.article__title {
+			font-size: 24px;
+	}
+
+	.article__text {
+			font-size: 16px;
+	}
+
+	.article__img-wrapper {
+			flex: 1 1 calc(100% - 10px);
+	}
+}
+
+@media (max-width: 480px) {
+	.emulators__title {
+			font-size: 18px;
+	}
+
+	.article__title {
+			font-size: 22px;
+	}
+
+	.article__text {
+			font-size: 14px;
+	}
+
+	.article__img-wrapper {
+			flex: 1 1 calc(100% - 10px);
+	}
+}
