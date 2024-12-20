@@ -111,9 +111,11 @@ body {
 	margin: 0;
 }
 
+
 .article__text {
 	font-size: 18px;
 	line-height: 1.6;
+	margin-bottom: 20px; 
 }
 
 .text__alert{
