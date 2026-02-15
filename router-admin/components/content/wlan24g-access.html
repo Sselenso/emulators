@@ -1,0 +1,507 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Контроль доступа Wi-Fi - wlan0</h2>
+    <p class="content-description">
+      Если выбран список разрешенных, только те клиенты, чьи MAC-адреса находятся в списке контроля доступа, смогут подключиться к вашей точке доступа. Если выбран список запрещенных, эти клиенты не смогут подключиться.
+    </p>
+  </div>
+
+  <!-- Режим контроля доступа -->
+  <div class="form-row">
+    <div class="form-label">Режим контроля доступа Wi-Fi:</div>
+    <div class="form-field">
+      <select class="form-control" id="accessMode">
+        <option value="blocked">Запрещен</option>
+        <option value="allowed" selected>Разрешен</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Добавление нового правила -->
+  <div class="form-row">
+    <div class="form-label">MAC-адрес:</div>
+    <div class="form-field">
+      <input type="text" class="form-control" id="macAddress" placeholder="00:11:22:33:44:55">
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-label">Комментарий:</div>
+    <div class="form-field">
+      <input type="text" class="form-control" id="comment" placeholder="Например: Ноутбук Ивана">
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-label"></div>
+    <div class="form-field">
+      <div class="button-group">
+        <button class="btn btn-secondary" id="saveRuleBtn">Сохранить</button>
+        <button class="btn btn-secondary" id="saveApplyBtn">Сохранить и применить</button>
+        <button class="btn btn-secondary" id="resetBtn">Сбросить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Текущий список контроля доступа -->
+  <div class="form-row" style="margin-top: 30px;">
+    <div class="form-label">Текущий список контроля доступа:</div>
+    <div class="form-field">
+      <button class="btn btn-primary" id="addRuleBtn">Добавить</button>
+    </div>
+  </div>
+
+  <!-- Таблица клиентов -->
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>MAC-адрес</th>
+          <th>Комментарий</th>
+          <th>Действие</th>
+        </tr>
+      </thead>
+      <tbody id="accessList">
+        <tr>
+          <td>00:11:22:33:44:55</td>
+          <td>Основной компьютер</td>
+          <td>
+            <button class="btn btn-warning btn-sm" data-mac="00:11:22:33:44:55">Удалить</button>
+          </td>
+        </tr>
+        <tr>
+          <td>aa:bb:cc:dd:ee:ff</td>
+          <td>Мобильный телефон</td>
+          <td>
+            <button class="btn btn-warning btn-sm" data-mac="aa:bb:cc:dd:ee:ff">Удалить</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили (общие с предыдущими страницами) */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 220px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  .form-control::placeholder {
+    color: #99a8b9;
+    font-style: italic;
+  }
+
+  select.form-control {
+    width: auto;
+    min-width: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+  }
+
+  .btn-sm {
+    padding: 4px 12px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-warning {
+    background: #fff3e0;
+    border-color: #ffb366;
+    color: #994d00;
+  }
+
+  .btn-warning:hover {
+    background: #ffe0b3;
+    border-color: #ff9933;
+  }
+
+  /* Таблица */
+  .table-container {
+    margin-top: 20px;
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    background: #f0f7fc;
+    color: #004466;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #d0e0f0;
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table tr:hover {
+    background: #f8fbff;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    select.form-control {
+      width: 100%;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .data-table {
+      font-size: 13px;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 8px 10px;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  const macInput = document.getElementById('macAddress');
+  const commentInput = document.getElementById('comment');
+  const accessList = document.getElementById('accessList');
+  const saveRuleBtn = document.getElementById('saveRuleBtn');
+  const saveApplyBtn = document.getElementById('saveApplyBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const addRuleBtn = document.getElementById('addRuleBtn');
+  const accessMode = document.getElementById('accessMode');
+
+  // Пример данных (можно заменить на реальный API)
+  let rules = [
+    { mac: '00:11:22:33:44:55', comment: 'Основной компьютер' },
+    { mac: 'aa:bb:cc:dd:ee:ff', comment: 'Мобильный телефон' }
+  ];
+
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.background = isError ? '#f8d7da' : '#d4edda';
+    notification.style.color = isError ? '#721c24' : '#155724';
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Валидация MAC-адреса
+  const validateMAC = (mac) => {
+    const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
+    return macRegex.test(mac);
+  };
+
+  // Форматирование MAC-адреса (приводим к единому формату)
+  const formatMAC = (mac) => {
+    // Удаляем все разделители и приводим к верхнему регистру
+    const clean = mac.replace(/[^0-9A-Fa-f]/g, '').toUpperCase();
+    if (clean.length === 12) {
+      return clean.match(/.{2}/g).join(':');
+    }
+    return mac;
+  };
+
+  // Рендеринг таблицы
+  function renderList() {
+    accessList.innerHTML = '';
+    
+    if (rules.length === 0) {
+      const emptyRow = document.createElement('tr');
+      emptyRow.innerHTML = '<td colspan="3" style="text-align: center; color: #666; padding: 20px;">Список контроля доступа пуст</td>';
+      accessList.appendChild(emptyRow);
+    } else {
+      rules.forEach(rule => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><code style="background: #f0f4f8; padding: 2px 6px; border-radius: 4px;">${rule.mac}</code></td>
+          <td>${rule.comment || '-'}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" data-mac="${rule.mac}">Удалить</button>
+          </td>
+        `;
+        accessList.appendChild(row);
+      });
+
+      // Привязка обработчиков удаления
+      document.querySelectorAll('.btn-warning').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const mac = this.dataset.mac;
+          rules = rules.filter(r => r.mac !== mac);
+          renderList();
+          showNotification('Правило удалено');
+        });
+      });
+    }
+  }
+
+  // Сохранить правило
+  const saveRule = () => {
+    let mac = macInput.value.trim();
+    const comment = commentInput.value.trim();
+
+    if (!mac) {
+      showNotification('Введите MAC-адрес', true);
+      macInput.focus();
+      return;
+    }
+
+    // Проверка и форматирование MAC
+    if (!validateMAC(mac)) {
+      showNotification('Неверный формат MAC-адреса. Используйте формат XX:XX:XX:XX:XX:XX', true);
+      macInput.focus();
+      return;
+    }
+
+    mac = formatMAC(mac);
+
+    // Проверка на дубликаты
+    if (rules.some(r => r.mac === mac)) {
+      showNotification('Этот MAC-адрес уже существует в списке', true);
+      return;
+    }
+
+    rules.push({ mac, comment });
+    renderList();
+    showNotification('Правило добавлено');
+    
+    // Очистка полей
+    macInput.value = '';
+    commentInput.value = '';
+  };
+
+  // Сохранить и применить (имитация применения)
+  const saveAndApply = () => {
+    saveRule();
+    if (rules.length > 0) {
+      showNotification('Настройки применены');
+    }
+  };
+
+  // Сброс полей ввода
+  const resetFields = () => {
+    macInput.value = '';
+    commentInput.value = '';
+    showNotification('Поля сброшены');
+  };
+
+  // Фокус на поле MAC
+  const focusMacField = () => {
+    macInput.focus();
+    showNotification('Введите MAC-адрес нового устройства');
+  };
+
+  // Обработчики событий
+  if (saveRuleBtn) saveRuleBtn.addEventListener('click', saveRule);
+  if (saveApplyBtn) saveApplyBtn.addEventListener('click', saveAndApply);
+  if (resetBtn) resetBtn.addEventListener('click', resetFields);
+  if (addRuleBtn) addRuleBtn.addEventListener('click', focusMacField);
+
+  // Сохранение режима доступа
+  if (accessMode) {
+    accessMode.addEventListener('change', function() {
+      const mode = this.value === 'allowed' ? 'разрешенных' : 'запрещенных';
+      showNotification(`Режим изменен на список ${mode}`);
+    });
+  }
+
+  // Валидация при вводе MAC-адреса (автоматическая вставка разделителей)
+  if (macInput) {
+    macInput.addEventListener('input', function(e) {
+      let value = this.value.replace(/[^0-9A-Fa-f]/g, '').toUpperCase();
+      if (value.length > 12) value = value.slice(0, 12);
+      
+      const parts = [];
+      for (let i = 0; i < value.length; i += 2) {
+        parts.push(value.substr(i, 2));
+      }
+      
+      this.value = parts.join(':');
+    });
+  }
+
+  // Инициализация
+  renderList();
+})();
+</script>

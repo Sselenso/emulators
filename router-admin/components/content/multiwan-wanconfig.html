@@ -1,0 +1,821 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Настройка WAN</h2>
+    <p class="content-description">
+      Вы можете настроить параметры интернет-сайта, подключённого к порту WAN вашего маршрутизатора. Здесь вы можете изменить тип доступа WAN на статический IP, DHCP, PPPoE, а также значение элемента Тип доступа WAN.
+    </p>
+  </div>
+
+  <!-- Имя подключения -->
+  <div class="form-row">
+    <div class="form-label">Имя подключения:</div>
+    <div class="form-field">
+      <select class="form-control" id="connectionName">
+        <option value="WAN1" selected>WAN1</option>
+        <option value="WAN2">WAN2</option>
+        <option value="WAN3">WAN3</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Тип доступа WAN -->
+  <div class="form-row">
+    <div class="form-label">Тип доступа WAN:</div>
+    <div class="form-field">
+      <select class="form-control" id="wanType">
+        <option value="dhcp" selected>DHCP (динамический IP)</option>
+        <option value="static">Статический IP</option>
+        <option value="pppoe">PPPoE</option>
+        <option value="l2tp">L2TP</option>
+        <option value="pptp">PPTP</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Поля для статического IP (скрыты по умолчанию) -->
+  <div class="static-fields" style="display: none;">
+    <div class="form-row">
+      <div class="form-label">IP-адрес:</div>
+      <div class="form-field">
+        <div class="field-with-hint">
+          <input type="text" class="form-control" id="staticIp" value="192.168.1.100" placeholder="xxx.xxx.xxx.xxx">
+          <span class="hint">Основной IP-адрес</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">Маска подсети:</div>
+      <div class="form-field">
+        <div class="field-with-hint">
+          <input type="text" class="form-control" id="staticMask" value="255.255.255.0" placeholder="xxx.xxx.xxx.xxx">
+          <span class="hint">Маска сети</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">Шлюз:</div>
+      <div class="form-field">
+        <div class="field-with-hint">
+          <input type="text" class="form-control" id="staticGateway" value="192.168.1.1" placeholder="xxx.xxx.xxx.xxx">
+          <span class="hint">Основной шлюз</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Поля для PPPoE (скрыты по умолчанию) -->
+  <div class="pppoe-fields" style="display: none;">
+    <div class="form-row">
+      <div class="form-label">Имя пользователя:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="pppoeUsername" value="user@provider" placeholder="Введите логин">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">Пароль:</div>
+      <div class="form-field">
+        <div class="field-with-button">
+          <input type="password" class="form-control" id="pppoePassword" value="password" placeholder="Введите пароль">
+          <label class="checkbox-label">
+            <input type="checkbox" id="showPppoePassword">
+            <span>Показать</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">Имя службы:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="pppoeService" placeholder="Необязательно">
+      </div>
+    </div>
+  </div>
+
+  <!-- Поля для L2TP/PPTP (скрыты по умолчанию) -->
+  <div class="tunnel-fields" style="display: none;">
+    <div class="form-row">
+      <div class="form-label">Сервер:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="tunnelServer" value="server.example.com" placeholder="IP или домен сервера">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">Имя пользователя:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="tunnelUsername" value="user" placeholder="Логин">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">Пароль:</div>
+      <div class="form-field">
+        <div class="field-with-button">
+          <input type="password" class="form-control" id="tunnelPassword" value="pass" placeholder="Пароль">
+          <label class="checkbox-label">
+            <input type="checkbox" id="showTunnelPassword">
+            <span>Показать</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IP протокол -->
+  <div class="form-row">
+    <div class="form-label">IP протокол:</div>
+    <div class="form-field">
+      <select class="form-control" id="ipProtocol">
+        <option value="ipv4" selected>IPv4</option>
+        <option value="ipv6">IPv6</option>
+        <option value="dual">IPv4 + IPv6</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Тип соединения -->
+  <div class="form-row">
+    <div class="form-label">Тип соединения:</div>
+    <div class="form-field">
+      <select class="form-control" id="connectionType">
+        <option value="internet_tr069" selected>Internet, TR069</option>
+        <option value="internet">Internet</option>
+        <option value="tr069">TR069</option>
+        <option value="bridge">Мост</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Получить DNS автоматически -->
+  <div class="form-row">
+    <div class="form-label">Получить DNS автоматически:</div>
+    <div class="form-field">
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="dnsMode" value="auto" id="dns-auto" checked>
+          <span>Включено</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="dnsMode" value="manual" id="dns-manual">
+          <span>Отключено (ручной ввод)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ручной ввод DNS (показывается при отключенном авто) -->
+  <div class="dns-manual-fields" style="display: none;">
+    <div class="form-row">
+      <div class="form-label">DNS сервер 1:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="dns1" value="8.8.8.8" placeholder="Основной DNS">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-label">DNS сервер 2:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="dns2" value="8.8.4.4" placeholder="Дополнительный DNS">
+      </div>
+    </div>
+  </div>
+
+  <!-- MTU -->
+  <div class="form-row">
+    <div class="form-label">MTU:</div>
+    <div class="form-field">
+      <div class="field-with-hint">
+        <input type="number" class="form-control" id="mtu" value="1500" min="1280" max="1500" style="width: 150px;">
+        <span class="hint">байт</span>
+        <span style="color:#666; margin-left: 4px;">(1280–1500 байт)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Включить VLAN -->
+  <div class="form-row">
+    <div class="form-label">Включить VLAN:</div>
+    <div class="form-field">
+      <label class="checkbox-label">
+        <input type="checkbox" id="enableVlan">
+        <span>Включить VLAN тегирование</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Поля VLAN (показываются при включенном VLAN) -->
+  <div class="vlan-fields" style="display: none;">
+    <div class="form-row">
+      <div class="form-label">VLAN ID:</div>
+      <div class="form-field">
+        <div class="field-with-hint">
+          <input type="number" class="form-control" id="vlanId" value="10" min="1" max="4094" style="width: 150px;">
+          <span class="hint">1-4094</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-label">Приоритет 802.1p:</div>
+      <div class="form-field">
+        <select class="form-control" id="vlanPriority" style="width: 150px;">
+          <option value="0">0 (Best Effort)</option>
+          <option value="1">1 (Background)</option>
+          <option value="2">2 (Spare)</option>
+          <option value="3" selected>3 (Excellent Effort)</option>
+          <option value="4">4 (Controlled Load)</option>
+          <option value="5">5 (Video)</option>
+          <option value="6">6 (Voice)</option>
+          <option value="7">7 (Network Control)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- IGMP Proxy -->
+  <div class="form-row">
+    <div class="form-label">IGMP Proxy:</div>
+    <div class="form-field">
+      <label class="checkbox-label">
+        <input type="checkbox" id="igmpProxy" checked>
+        <span>Включить IGMP прокси (для multicast трафика)</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Включение DHCPv6 -->
+  <div class="form-row">
+    <div class="form-label">Включение DHCPv6:</div>
+    <div class="form-field">
+      <div class="field-with-hint">
+        <input type="text" class="form-control" id="dhcpv6Enable" value="off" readonly style="background: #f8f9fa; width: 150px;">
+        <span class="hint">Только для чтения</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Кнопки внизу -->
+  <div class="form-row" style="margin-top: 40px;">
+    <div class="form-label"></div>
+    <div class="form-field">
+      <div class="button-group">
+        <button class="btn btn-secondary" id="saveBtn">Сохранить</button>
+        <button class="btn btn-primary" id="saveApplyBtn">Сохранить и применить</button>
+        <button class="btn btn-danger" id="resetBtn">Сбросить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили в соответствии с предыдущими страницами */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 220px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+    width: 100%;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  .form-control:read-only {
+    background: #f8f9fa;
+    border-color: #d0d8e5;
+    color: #666;
+  }
+
+  .form-control::placeholder {
+    color: #99a8b9;
+    font-style: italic;
+  }
+
+  input[type="number"].form-control {
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"].form-control::-webkit-outer-spin-button,
+  input[type="number"].form-control::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .field-with-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .field-with-button {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: #666;
+    background: #f5f7fa;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: 1px solid #e0e8f0;
+    white-space: nowrap;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #f8fafc;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .radio-label input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    background: #f8fafc;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+    transition: all 0.2s;
+  }
+
+  .checkbox-label:hover {
+    background: #eef2f6;
+    border-color: #b0c0d0;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-danger {
+    background: #f8f0f0;
+    border-color: #d0b0b0;
+    color: #993333;
+  }
+
+  .btn-danger:hover {
+    background: #f0e0e0;
+    border-color: #b09090;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .field-with-hint,
+    .field-with-button {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hint {
+      align-self: flex-start;
+    }
+
+    .radio-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .checkbox-label {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Элементы DOM
+  const wanType = document.getElementById('wanType');
+  const dnsAuto = document.getElementById('dns-auto');
+  const dnsManual = document.getElementById('dns-manual');
+  const enableVlan = document.getElementById('enableVlan');
+  const saveBtn = document.getElementById('saveBtn');
+  const saveApplyBtn = document.getElementById('saveApplyBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // Поля для показа/скрытия
+  const staticFields = document.querySelector('.static-fields');
+  const pppoeFields = document.querySelector('.pppoe-fields');
+  const tunnelFields = document.querySelector('.tunnel-fields');
+  const dnsManualFields = document.querySelector('.dns-manual-fields');
+  const vlanFields = document.querySelector('.vlan-fields');
+
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.background = isError ? '#f8d7da' : '#d4edda';
+    notification.style.color = isError ? '#721c24' : '#155724';
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Переключение полей в зависимости от типа WAN
+  const toggleWanFields = () => {
+    const type = wanType.value;
+    
+    // Скрываем все группы
+    if (staticFields) staticFields.style.display = 'none';
+    if (pppoeFields) pppoeFields.style.display = 'none';
+    if (tunnelFields) tunnelFields.style.display = 'none';
+    
+    // Показываем нужную группу
+    switch(type) {
+      case 'static':
+        if (staticFields) staticFields.style.display = 'block';
+        break;
+      case 'pppoe':
+        if (pppoeFields) pppoeFields.style.display = 'block';
+        break;
+      case 'l2tp':
+      case 'pptp':
+        if (tunnelFields) tunnelFields.style.display = 'block';
+        break;
+    }
+  };
+
+  // Переключение полей DNS
+  const toggleDnsFields = () => {
+    if (dnsManualFields) {
+      dnsManualFields.style.display = dnsManual?.checked ? 'block' : 'none';
+    }
+  };
+
+  // Переключение полей VLAN
+  const toggleVlanFields = () => {
+    if (vlanFields) {
+      vlanFields.style.display = enableVlan?.checked ? 'block' : 'none';
+    }
+  };
+
+  // Показ пароля для PPPoE
+  const showPppoePassword = document.getElementById('showPppoePassword');
+  const pppoePassword = document.getElementById('pppoePassword');
+  if (showPppoePassword && pppoePassword) {
+    showPppoePassword.addEventListener('change', function() {
+      pppoePassword.type = this.checked ? 'text' : 'password';
+    });
+  }
+
+  // Показ пароля для туннелей
+  const showTunnelPassword = document.getElementById('showTunnelPassword');
+  const tunnelPassword = document.getElementById('tunnelPassword');
+  if (showTunnelPassword && tunnelPassword) {
+    showTunnelPassword.addEventListener('change', function() {
+      tunnelPassword.type = this.checked ? 'text' : 'password';
+    });
+  }
+
+  // Валидация IP-адреса
+  const isValidIP = (ip) => {
+    const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    return ipRegex.test(ip);
+  };
+
+  // Валидация числовых полей
+  const mtu = document.getElementById('mtu');
+  if (mtu) {
+    mtu.addEventListener('input', function() {
+      let value = parseInt(this.value);
+      if (isNaN(value) || value < 1280) this.value = 1280;
+      if (value > 1500) this.value = 1500;
+    });
+  }
+
+  const vlanId = document.getElementById('vlanId');
+  if (vlanId) {
+    vlanId.addEventListener('input', function() {
+      let value = parseInt(this.value);
+      if (isNaN(value) || value < 1) this.value = 1;
+      if (value > 4094) this.value = 4094;
+    });
+  }
+
+  // Сбор настроек
+  const collectSettings = () => {
+    return {
+      connectionName: document.getElementById('connectionName')?.value || 'WAN1',
+      wanType: wanType?.value || 'dhcp',
+      ipProtocol: document.getElementById('ipProtocol')?.value || 'ipv4',
+      connectionType: document.getElementById('connectionType')?.value || 'internet_tr069',
+      dnsMode: dnsAuto?.checked ? 'auto' : 'manual',
+      dnsServers: {
+        primary: document.getElementById('dns1')?.value || '',
+        secondary: document.getElementById('dns2')?.value || ''
+      },
+      mtu: parseInt(mtu?.value) || 1500,
+      vlan: {
+        enabled: enableVlan?.checked || false,
+        id: parseInt(vlanId?.value) || 10,
+        priority: document.getElementById('vlanPriority')?.value || '3'
+      },
+      igmpProxy: document.getElementById('igmpProxy')?.checked || false,
+      dhcpv6Enable: document.getElementById('dhcpv6Enable')?.value || 'off'
+    };
+  };
+
+  // Сохранение
+  if (saveBtn) {
+    saveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const settings = collectSettings();
+      console.log('WAN настройки сохранены:', settings);
+      showNotification('Настройки WAN сохранены');
+    });
+  }
+
+  // Сохранить и применить
+  if (saveApplyBtn) {
+    saveApplyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const settings = collectSettings();
+      console.log('WAN настройки применены:', settings);
+      showNotification('Настройки WAN сохранены и применены');
+    });
+  }
+
+  // Сброс
+  if (resetBtn) {
+    resetBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Сброс к значениям по умолчанию
+      document.getElementById('connectionName').value = 'WAN1';
+      wanType.value = 'dhcp';
+      document.getElementById('ipProtocol').value = 'ipv4';
+      document.getElementById('connectionType').value = 'internet_tr069';
+      dnsAuto.checked = true;
+      dnsManual.checked = false;
+      document.getElementById('mtu').value = '1500';
+      enableVlan.checked = false;
+      document.getElementById('igmpProxy').checked = true;
+      
+      // Скрываем все динамические поля
+      toggleWanFields();
+      toggleDnsFields();
+      toggleVlanFields();
+      
+      showNotification('Настройки WAN сброшены');
+    });
+  }
+
+  // Обработчики событий
+  if (wanType) {
+    wanType.addEventListener('change', toggleWanFields);
+  }
+
+  if (dnsAuto && dnsManual) {
+    dnsAuto.addEventListener('change', toggleDnsFields);
+    dnsManual.addEventListener('change', toggleDnsFields);
+  }
+
+  if (enableVlan) {
+    enableVlan.addEventListener('change', toggleVlanFields);
+  }
+
+  // Валидация IP-полей для статического режима
+  const staticIp = document.getElementById('staticIp');
+  const staticMask = document.getElementById('staticMask');
+  const staticGateway = document.getElementById('staticGateway');
+
+  [staticIp, staticMask, staticGateway].forEach(input => {
+    if (input) {
+      input.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g, '');
+      });
+    }
+  });
+
+  // Инициализация
+  toggleWanFields();
+  toggleDnsFields();
+  toggleVlanFields();
+
+  // Добавляем анимации
+  if (!document.getElementById('wan-animations')) {
+    const style = document.createElement('style');
+    style.id = 'wan-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+})();
+</script>

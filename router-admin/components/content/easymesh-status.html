@@ -1,0 +1,705 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Настройка EasyMesh</h2>
+    <p class="content-description">
+      Эта страница используется для настройки параметров функции EasyMesh вашей точки доступа. EasyMesh позволяет создавать единую бесшовную Wi-Fi сеть из нескольких устройств.
+    </p>
+  </div>
+
+  <!-- Имя устройства -->
+  <div class="form-row">
+    <div class="form-label">Имя устройства:</div>
+    <div class="form-field">
+      <div class="field-with-hint">
+        <input type="text" class="form-control" id="deviceName" value="EasyMesh_123456" placeholder="Введите имя устройства">
+        <span class="hint">Уникальное имя в сети Mesh</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Роль -->
+  <div class="form-row">
+    <div class="form-label">Роль:</div>
+    <div class="form-field">
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="role" value="controller" id="role-controller">
+          <span>Контроллер</span>
+          <span class="role-badge" style="background: #006699; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin-left: 6px;">Главный</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="role" value="agent" id="role-agent">
+          <span>Агент</span>
+          <span class="role-badge" style="background: #5a6268; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin-left: 6px;">Подчиненный</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="role" value="disabled" id="role-disabled" checked>
+          <span>Отключено</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Дополнительная информация для роли Контроллер -->
+  <div class="info-box" id="controllerInfo" style="display: none;">
+    <div class="info-icon">ℹ️</div>
+    <div class="info-text">
+      <strong>Режим контроллера</strong> — устройство будет управлять всей Mesh-сетью, координировать подключения и собирать статистику.
+    </div>
+  </div>
+
+  <!-- Дополнительная информация для роли Агент -->
+  <div class="info-box" id="agentInfo" style="display: none;">
+    <div class="info-icon">ℹ️</div>
+    <div class="info-text">
+      <strong>Режим агента</strong> — устройство будет подключаться к контроллеру и расширять зону покрытия сети.
+    </div>
+  </div>
+
+  <!-- Авто-режим -->
+  <div class="form-row">
+    <div class="form-label">Авто-конфигурация:</div>
+    <div class="form-field">
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="auto" value="enabled" id="auto-enabled">
+          <span>Включено</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="auto" value="disabled" id="auto-disabled" checked>
+          <span>Отключено</span>
+        </label>
+      </div>
+      <div class="field-hint" style="margin-top: 8px; color: #666; font-size: 13px; padding-left: 4px;">
+        Автоматическое обнаружение и настройка устройств в Mesh-сети
+      </div>
+    </div>
+  </div>
+
+  <!-- Дополнительные настройки (будут видны при включенном EasyMesh) -->
+  <div class="advanced-settings" id="advancedSettings" style="display: none; margin-top: 30px;">
+    <h3 style="color: #004466; font-size: 16px; margin-bottom: 16px;">Дополнительные параметры</h3>
+    
+    <div class="form-row">
+      <div class="form-label">Backhaul:</div>
+      <div class="form-field">
+        <select class="form-control" id="backhaul">
+          <option value="auto" selected>Авто (2.4 ГГц / 5 ГГц)</option>
+          <option value="2.4">Только 2.4 ГГц</option>
+          <option value="5">Только 5 ГГц</option>
+          <option value="wired">Проводное соединение (Ethernet)</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-label">Приоритет:</div>
+      <div class="form-field">
+        <select class="form-control" id="priority">
+          <option value="0" selected>Обычный</option>
+          <option value="1">Высокий</option>
+          <option value="2">Низкий</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-label"></div>
+      <div class="form-field">
+        <label class="checkbox-label">
+          <input type="checkbox" id="enableBackup" checked>
+          <span>Использовать как резервный узел</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Статус текущей сети (если активна) -->
+  <div class="status-box" id="statusBox" style="margin-top: 30px; display: none;">
+    <h3 style="color: #004466; font-size: 16px; margin-bottom: 16px;">Состояние сети</h3>
+    
+    <div class="mesh-devices">
+      <div class="device-item">
+        <div class="device-status online"></div>
+        <div class="device-info">
+          <strong>EasyMesh_123456</strong> (это устройство)
+          <span class="device-role">Контроллер</span>
+        </div>
+      </div>
+      <div class="device-item">
+        <div class="device-status online"></div>
+        <div class="device-info">
+          <strong>EasyMesh_789012</strong>
+          <span class="device-role">Агент</span>
+          <span class="device-signal">-42 dBm</span>
+        </div>
+      </div>
+      <div class="device-item">
+        <div class="device-status online"></div>
+        <div class="device-info">
+          <strong>EasyMesh_345678</strong>
+          <span class="device-role">Агент</span>
+          <span class="device-signal">-58 dBm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Кнопки внизу -->
+  <div class="form-row" style="margin-top: 30px;">
+    <div class="form-label"></div>
+    <div class="form-field">
+      <div class="button-group">
+        <button class="btn btn-secondary" id="saveBtn">Сохранить</button>
+        <button class="btn btn-primary" id="saveApplyBtn">Сохранить и применить</button>
+        <button class="btn btn-danger" id="cancelBtn">Отмена</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили в соответствии с предыдущими страницами */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 200px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+    width: 100%;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  .form-control::placeholder {
+    color: #99a8b9;
+    font-style: italic;
+  }
+
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .field-with-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: #666;
+    background: #f5f7fa;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: 1px solid #e0e8f0;
+    white-space: nowrap;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #f8fafc;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .radio-label input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .radio-label span {
+    line-height: 1;
+  }
+
+  .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    background: #f8fafc;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-danger {
+    background: #f8f0f0;
+    border-color: #d0b0b0;
+    color: #993333;
+  }
+
+  .btn-danger:hover {
+    background: #f0e0e0;
+    border-color: #b09090;
+  }
+
+  /* Информационные блоки */
+  .info-box {
+    display: flex;
+    gap: 12px;
+    background: #e6f3ff;
+    border: 1px solid #b8d9ff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+    max-width: 600px;
+  }
+
+  .info-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .info-text {
+    font-size: 13px;
+    color: #004466;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  /* Статус сети */
+  .status-box {
+    background: #f8fafc;
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-left: 200px;
+    max-width: 600px;
+  }
+
+  .mesh-devices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .device-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .device-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .device-status.online {
+    background: #28a745;
+    box-shadow: 0 0 0 2px rgba(40,167,69,0.2);
+  }
+
+  .device-status.offline {
+    background: #dc3545;
+  }
+
+  .device-info {
+    flex: 1;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .device-role {
+    font-size: 12px;
+    background: #e0e8f0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #004466;
+  }
+
+  .device-signal {
+    font-size: 12px;
+    color: #666;
+    background: #f0f4f8;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .info-box {
+      margin-left: 0;
+    }
+
+    .status-box {
+      margin-left: 0;
+    }
+
+    .field-with-hint {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hint {
+      white-space: normal;
+      text-align: center;
+    }
+
+    .radio-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .device-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Элементы DOM
+  const saveBtn = document.getElementById('saveBtn');
+  const saveApplyBtn = document.getElementById('saveApplyBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const deviceName = document.getElementById('deviceName');
+  
+  const roleController = document.getElementById('role-controller');
+  const roleAgent = document.getElementById('role-agent');
+  const roleDisabled = document.getElementById('role-disabled');
+  const autoEnabled = document.getElementById('auto-enabled');
+  const autoDisabled = document.getElementById('auto-disabled');
+  
+  const controllerInfo = document.getElementById('controllerInfo');
+  const agentInfo = document.getElementById('agentInfo');
+  const advancedSettings = document.getElementById('advancedSettings');
+  const statusBox = document.getElementById('statusBox');
+
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.background = isError ? '#f8d7da' : '#d4edda';
+    notification.style.color = isError ? '#721c24' : '#155724';
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Обновление отображения в зависимости от выбранной роли
+  const updateRoleDisplay = () => {
+    // Показываем/скрываем информационные блоки
+    if (controllerInfo && agentInfo) {
+      controllerInfo.style.display = roleController?.checked ? 'flex' : 'none';
+      agentInfo.style.display = roleAgent?.checked ? 'flex' : 'none';
+    }
+
+    // Показываем дополнительные настройки и статус, если выбрана роль (не "Отключено")
+    if (advancedSettings && statusBox) {
+      const isEnabled = roleController?.checked || roleAgent?.checked;
+      advancedSettings.style.display = isEnabled ? 'block' : 'none';
+      statusBox.style.display = isEnabled ? 'block' : 'none';
+    }
+
+    // Если включен авто-режим, показываем уведомление
+    if (autoEnabled?.checked) {
+      showNotification('Авто-конфигурация включена. Устройства будут обнаруживаться автоматически.');
+    }
+  };
+
+  // Сохранение настроек
+  const saveSettings = (apply = false) => {
+    // Определяем выбранную роль
+    let role = 'disabled';
+    if (roleController?.checked) role = 'controller';
+    if (roleAgent?.checked) role = 'agent';
+    
+    // Определяем авто-режим
+    const auto = autoEnabled?.checked ? 'enabled' : 'disabled';
+    
+    // Собираем все настройки
+    const settings = {
+      deviceName: deviceName?.value || 'EasyMesh_123456',
+      role: role,
+      auto: auto,
+      backhaul: document.getElementById('backhaul')?.value || 'auto',
+      priority: document.getElementById('priority')?.value || '0',
+      enableBackup: document.getElementById('enableBackup')?.checked || false
+    };
+
+    console.log('EasyMesh настройки:', settings);
+    
+    const message = apply ? 'Настройки EasyMesh применены' : 'Настройки EasyMesh сохранены';
+    showNotification(message);
+  };
+
+  // Сброс к исходным значениям
+  const resetSettings = () => {
+    if (deviceName) deviceName.value = 'EasyMesh_123456';
+    if (roleDisabled) roleDisabled.checked = true;
+    if (autoDisabled) autoDisabled.checked = true;
+    if (document.getElementById('backhaul')) document.getElementById('backhaul').value = 'auto';
+    if (document.getElementById('priority')) document.getElementById('priority').value = '0';
+    if (document.getElementById('enableBackup')) document.getElementById('enableBackup').checked = true;
+    
+    updateRoleDisplay();
+    showNotification('Настройки сброшены');
+  };
+
+  // Обработчики событий для радио-кнопок
+  if (roleController) roleController.addEventListener('change', updateRoleDisplay);
+  if (roleAgent) roleAgent.addEventListener('change', updateRoleDisplay);
+  if (roleDisabled) roleDisabled.addEventListener('change', updateRoleDisplay);
+  if (autoEnabled) autoEnabled.addEventListener('change', updateRoleDisplay);
+  if (autoDisabled) autoDisabled.addEventListener('change', updateRoleDisplay);
+
+  // Обработчики кнопок
+  if (saveBtn) {
+    saveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      saveSettings(false);
+    });
+  }
+
+  if (saveApplyBtn) {
+    saveApplyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      saveSettings(true);
+    });
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetSettings();
+    });
+  }
+
+  // Валидация имени устройства (только буквы, цифры и дефис)
+  if (deviceName) {
+    deviceName.addEventListener('input', function() {
+      this.value = this.value.replace(/[^a-zA-Z0-9_-]/g, '');
+    });
+  }
+
+  // Инициализация
+  updateRoleDisplay();
+  
+  // Добавляем анимации, если их нет
+  if (!document.getElementById('wizard-animations')) {
+    const style = document.createElement('style');
+    style.id = 'wizard-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+})();
+</script>

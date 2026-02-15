@@ -142,7 +142,7 @@ body[data-theme="light"] .theme-toggle .fa-sun {
 	border-radius: var(--border-radius);
 	box-shadow: 0 4px 8px var(--shadow-light);
 	overflow: hidden;
-	min-width: 300px;
+	min-width: 350px;
 	transition: transform var(--transition), box-shadow var(--transition);
 	animation: fadeIn 0.5s var(--transition);
 }
@@ -191,6 +191,8 @@ body[data-theme="light"] .theme-toggle .fa-sun {
 	font-size: 1.2em;
 	margin-bottom: 10px;
 	color: var(--primary-color);
+	min-width: 300px;
+	max-width: 300px;
 }
 
 .emulators__instruction-block {

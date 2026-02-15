@@ -1,285 +1,528 @@
-<div class="content-section" id="master-mode">
+<div class="content-section active">
   <div class="content-header">
-    <h2 class="content-title">Шаг 1: Выбор режима работы</h2>
+    <h2 class="content-title">Режим работы</h2>
     <p class="content-description">
-      Выберите, в каком режиме будет работать ваш роутер. Это основной параметр, который влияет на все остальные настройки.
+      Вы можете настроить различные режимы для интерфейсов LAN и WLAN для функций NAT и моста.
     </p>
   </div>
 
-  <div class="mode-selection-grid">
-    <div class="mode-card active" data-value="router">
-      <div class="mode-icon">📡</div>
-      <h3>Роутер (Router Mode)</h3>
-      <p>Полноценный роутер: NAT, DHCP, firewall, раздача Wi-Fi и интернета.</p>
-      <div class="mode-check"></div>
+  <!-- Режим Шлюз -->
+  <div class="mode-section">
+    <div class="form-row">
+      <div class="form-label">Режим работы:</div>
+      <div class="form-field">
+        <div class="radio-group mode-group">
+          <label class="mode-radio">
+            <input type="radio" name="mode" value="gateway" id="mode-gateway" checked>
+            <span class="mode-title">Шлюз (Gateway)</span>
+            <span class="mode-badge">NAT включен</span>
+          </label>
+          
+          <label class="mode-radio">
+            <input type="radio" name="mode" value="bridge" id="mode-bridge">
+            <span class="mode-title">Мост (Bridge)</span>
+            <span class="mode-badge">NAT отключен</span>
+          </label>
+        </div>
+      </div>
     </div>
 
-    <div class="mode-card" data-value="ap">
-      <div class="mode-icon">📶</div>
-      <h3>Точка доступа (AP Mode)</h3>
-      <p>Только Wi-Fi точка доступа без NAT и DHCP. Подключается к основному роутеру.</p>
-      <div class="mode-check"></div>
+    <!-- Описание режима Шлюз -->
+    <div class="mode-description" id="gateway-description">
+      <div class="description-icon">🌐</div>
+      <div class="description-text">
+        <strong>Режим шлюза</strong> — устройство подключается к интернету через ADSL/кабельный модем, 
+        <span class="highlight">NAT включен</span>, и клиенты на порту LAN используют один IP-адрес для доступа 
+        к провайдеру через порт WAN. Тип соединения можно настроить на странице WAN, используя 
+        <span class="badge-light">PPPoE</span>, 
+        <span class="badge-light">DHCP-клиент</span> или 
+        <span class="badge-light">статический IP</span>.
+      </div>
     </div>
 
-    <div class="mode-card" data-value="bridge">
-      <div class="mode-icon">🌉</div>
-      <h3>Клиент (Bridge Mode)</h3>
-      <p>Роутер как Wi-Fi адаптер для проводных устройств (без раздачи Wi-Fi).</p>
-      <div class="mode-check"></div>
+    <!-- Описание режима Мост (изначально скрыто) -->
+    <div class="mode-description" id="bridge-description" style="display: none;">
+      <div class="description-icon">🔗</div>
+      <div class="description-text">
+        <strong>Режим моста</strong> — все Ethernet-порты и беспроводной интерфейс объединены в мост, 
+        <span class="highlight">функция NAT отключена</span>. Все функции, связанные с WAN, включая 
+        брандмауэр, не поддерживаются. Устройство работает как прозрачный мост между интерфейсами.
+      </div>
     </div>
 
-    <div class="mode-card" data-value="wisp">
-      <div class="mode-icon">🌐</div>
-      <h3>WISP (Wireless ISP)</h3>
-      <p>Подключение к беспроводному провайдеру + раздача интернета в доме.</p>
-      <div class="mode-check"></div>
+    <!-- Дополнительная информация для режима мост -->
+    <div class="info-warning" id="bridge-warning" style="display: none;">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text">
+        <strong>Внимание!</strong> В режиме моста будут отключены: NAT, брандмауэр, DHCP-сервер, 
+        и все функции маршрутизации. Устройство будет работать как обычный коммутатор с Wi-Fi.
+      </div>
     </div>
   </div>
 
-  <div id="modeDescription" class="mode-description">
-    <strong>Выбран режим:</strong> <span id="selectedModeText">Роутер (Router Mode)</span>
-  </div>
-
-  <div class="wizard-actions">
-    <button class="btn btn-primary next-step">Далее →</button>
+  <!-- Кнопки внизу -->
+  <div class="form-row" style="margin-top: 40px;">
+    <div class="form-label"></div>
+    <div class="form-field">
+      <div class="button-group">
+        <button class="btn btn-secondary" id="saveBtn">Сохранить</button>
+        <button class="btn btn-primary" id="saveApplyBtn">Сохранить и применить</button>
+        <button class="btn btn-danger" id="resetBtn">Сбросить</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
-  .mode-selection-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin: 32px 0;
+  /* Унифицированные стили в соответствии с предыдущими страницами */
+  * {
+    box-sizing: border-box;
   }
 
-  .mode-card {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 28px 24px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
 
-  .mode-card:hover {
-    border-color: #00a8e0;
-    box-shadow: 0 12px 32px rgba(0,168,224,0.18);
-    transform: translateY(-6px);
+  .content-header {
+    margin-bottom: 24px;
   }
 
-  .mode-card.active {
-    border-color: #00a8e0;
-    box-shadow: 0 0 0 4px rgba(0,168,224,0.2);
-  }
-
-  .mode-icon {
-    font-size: 64px;
-    margin-bottom: 16px;
-    color: #006699;
-  }
-
-  .mode-card h3 {
+  .content-title {
     font-size: 20px;
     color: #004466;
-    margin: 0 0 12px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
   }
 
-  .mode-card p {
-    color: #555;
+  .content-description {
     font-size: 14px;
+    color: #555;
     line-height: 1.5;
     margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
   }
 
-  .mode-check {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 28px;
-    height: 28px;
-    border: 2px solid #ccc;
-    border-radius: 50%;
-    background: white;
-    transition: all 0.25s;
+  .mode-section {
+    margin-top: 20px;
   }
 
-  .mode-card.active .mode-check {
-    background: #00a8e0;
-    border-color: #00a8e0;
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding: 4px 0;
   }
 
-  .mode-card.active .mode-check::after {
-    content: "✓";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .mode-description {
-    background: #e8f4ff;
-    border-left: 5px solid #00a8e0;
-    padding: 20px 24px;
-    border-radius: 0 12px 12px 0;
-    margin: 24px 0;
-    font-size: 15px;
-    color: #333;
-    display: none;
-  }
-
-  .wizard-actions {
-    margin-top: 40px;
-    text-align: right;
-  }
-
-  .next-step {
-    padding: 12px 32px;
-    font-size: 16px;
+  .form-label {
+    width: 200px;
     font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 700px;
+  }
+
+  /* Группа радио-кнопок для режимов */
+  .radio-group.mode-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .mode-radio {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .mode-radio:hover {
+    border-color: #006699;
+    box-shadow: 0 2px 8px rgba(0,102,153,0.1);
+  }
+
+  .mode-radio input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .mode-title {
+    font-weight: 600;
+    color: #004466;
+    font-size: 16px;
+    min-width: 120px;
+  }
+
+  .mode-badge {
+    background: #e0e8f0;
+    color: #004466;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* Описание режима */
+  .mode-description {
+    display: flex;
+    gap: 16px;
+    background: #e6f3ff;
+    border: 1px solid #b8d9ff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-left: 200px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    max-width: 700px;
+  }
+
+  .description-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .description-text {
+    font-size: 14px;
+    color: #004466;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .highlight {
+    background: #ffd700;
+    color: #004466;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .badge-light {
+    background: white;
+    color: #006699;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    border: 1px solid #b0c0d0;
+    display: inline-block;
+    margin: 0 2px;
+  }
+
+  /* Предупреждение */
+  .info-warning {
+    display: flex;
+    gap: 16px;
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-left: 200px;
+    margin-top: 16px;
+    max-width: 700px;
+  }
+
+  .warning-icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .warning-text {
+    font-size: 14px;
+    color: #856404;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .warning-text strong {
+    color: #856404;
+  }
+
+  /* Кнопки */
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-danger {
+    background: #f8f0f0;
+    border-color: #d0b0b0;
+    color: #993333;
+  }
+
+  .btn-danger:hover {
+    background: #f0e0e0;
+    border-color: #b09090;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .radio-group.mode-group {
+      padding: 12px;
+    }
+
+    .mode-radio {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mode-title {
+      min-width: auto;
+    }
+
+    .mode-description,
+    .info-warning {
+      margin-left: 0;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .description-icon,
+    .warning-icon {
+      font-size: 24px;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 </style>
 
 <script>
-  // Без type="module" — чтобы работало даже при динамической подгрузке
-  (function() {
-    // Ждём, пока элементы появятся (защита от раннего запуска)
-    function init() {
-      const cards = document.querySelectorAll('#master-mode .mode-card');
-      const descBox = document.getElementById('modeDescription');
-      const descText = document.getElementById('selectedModeText');
-      const nextBtn = document.querySelector('#master-mode .next-step');
+(function() {
+  // Элементы DOM
+  const modeGateway = document.getElementById('mode-gateway');
+  const modeBridge = document.getElementById('mode-bridge');
+  const gatewayDescription = document.getElementById('gateway-description');
+  const bridgeDescription = document.getElementById('bridge-description');
+  const bridgeWarning = document.getElementById('bridge-warning');
+  const saveBtn = document.getElementById('saveBtn');
+  const saveApplyBtn = document.getElementById('saveApplyBtn');
+  const resetBtn = document.getElementById('resetBtn');
 
-      if (!cards.length || !nextBtn) {
-        // Если ещё не готово — пробуем позже
-        setTimeout(init, 100);
-        return;
-      }
-
-      console.log('master-mode: элементы найдены, привязываем события');
-
-      const descriptions = {
-        router: "Роутер будет раздавать интернет, создавать свою локальную сеть, выдавать IP-адреса и защищать устройства файрволом.",
-        ap: "Роутер превращается в обычную точку доступа. NAT, DHCP и маршрутизация отключаются. Подключайте его LAN-портом к основному роутеру.",
-        bridge: "Роутер работает как Wi-Fi клиент. Полезно для подключения телевизора, ПК или приставки без Wi-Fi к беспроводной сети.",
-        wisp: "Подключение к беспроводному провайдеру + раздача интернета по Wi-Fi и кабелю в доме."
-      };
-
-      let selectedValue = 'router';
-
-      function updateDescription(value) {
-        if (descBox && descText) {
-          descText.textContent = descriptions[value] || 'Выберите режим';
-          descBox.style.display = 'block';
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.background = isError ? '#f8d7da' : '#d4edda';
+    notification.style.color = isError ? '#721c24' : '#155724';
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
         }
-      }
+      }, 300);
+    }, 3000);
+  };
 
-      cards.forEach(card => {
-        card.addEventListener('click', () => {
-          cards.forEach(c => c.classList.remove('active'));
-          card.classList.add('active');
-          selectedValue = card.dataset.value;
-          updateDescription(selectedValue);
-        });
-      });
-
-      // Показываем начальное
-      updateDescription(selectedValue);
-
-      // Кнопка Далее — просто сообщение + перезагрузка
-      nextBtn.addEventListener('click', () => {
-        if (!selectedValue) {
-          alert('Выберите режим работы');
-          return;
-        }
-
-        localStorage.setItem('selectedRouterMode', selectedValue);
-
-        alert(`Режим изменён на: ${selectedValue}\nРоутер будет перезагружен.`);
-
-        // Запускаем анимацию перезагрузки (как в wizard.js)
-        const container = document.getElementById('wizardContainer');
-        if (!container) {
-          alert('Не найден контейнер мастера');
-          return;
-        }
-
-        const current = document.querySelector('#master-mode');
-        if (current) current.style.display = 'none';
-
-        const reboot = document.createElement('div');
-        reboot.style.cssText = `
-          text-align: center;
-          padding: 80px 30px;
-          background: linear-gradient(135deg, #f0f4f8, #e0eaff);
-          border-radius: 16px;
-          box-shadow: 0 10px 30px rgba(0,102,153,0.15);
-          max-width: 700px;
-          margin: 60px auto;
-        `;
-        reboot.innerHTML = `
-          <h2 style="color:#004466;font-size:28px;margin-bottom:20px;">Режим изменён!</h2>
-          <div style="margin:40px 0;height:120px;position:relative;">
-            <div style="width:80px;height:80px;border:8px solid #e0e0e0;border-top:8px solid #00a8e0;border-radius:50%;animation:spin 1.2s linear infinite;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
-          </div>
-          <p style="font-size:18px;color:#555;margin:20px 0 40px;">
-            Роутер перезагружается...<br>Подождите 30–60 секунд.
-          </p>
-          <div id="countdown" style="font-size:48px;font-weight:bold;color:#006699;margin:20px 0;">15</div>
-          <p style="color:#777;font-size:16px;">Автоматический возврат через <span id="sec">15</span> сек...</p>
-        `;
-        container.appendChild(reboot);
-
-        let sec = 15;
-        const cd = reboot.querySelector('#countdown');
-        const st = reboot.querySelector('#sec');
-
-        const timer = setInterval(() => {
-          sec--;
-          if (cd) cd.textContent = sec;
-          if (st) st.textContent = sec;
-          if (sec <= 0) {
-            clearInterval(timer);
-            reboot.innerHTML = `
-              <div style="padding:60px 20px;">
-                <div style="font-size:80px;color:#28a745;margin-bottom:30px;">✔</div>
-                <h2 style="color:#28a745;font-size:32px;margin-bottom:20px;">Перезагрузка завершена</h2>
-                <p style="font-size:18px;color:#444;margin-bottom:40px;">
-                  Роутер запущен в режиме: ${selectedValue}
-                </p>
-                <p style="font-size:16px;color:#666;">Возврат на начальный экран через 4 секунды...</p>
-              </div>
-            `;
-
-            setTimeout(() => {
-              const welcome = document.getElementById('welcomeScreen');
-              const container = document.getElementById('wizardContainer');
-              if (welcome) welcome.style.display = 'block';
-              if (container) {
-                container.style.display = 'none';
-                container.querySelectorAll('.wizard-step, .content-section').forEach(el => {
-                  el.style.display = 'none';
-                  el.classList.remove('active');
-                });
-                const step1 = container.querySelector('#step1, #master-mode');
-                if (step1) step1.classList.add('active');
-              }
-              reboot.remove();
-              alert('Роутер перезагружен. Мастер готов к новому использованию.');
-            }, 4000);
-          }
-        }, 1000);
-      });
+  // Переключение описания в зависимости от выбранного режима
+  const toggleModeDescription = () => {
+    const isGateway = modeGateway.checked;
+    
+    // Показываем/скрываем описания
+    if (gatewayDescription) {
+      gatewayDescription.style.display = isGateway ? 'flex' : 'none';
+    }
+    
+    if (bridgeDescription) {
+      bridgeDescription.style.display = isGateway ? 'none' : 'flex';
+    }
+    
+    if (bridgeWarning) {
+      bridgeWarning.style.display = isGateway ? 'none' : 'flex';
     }
 
-    // Запускаем с небольшой задержкой (чтобы DOM был готов)
-    setTimeout(init, 200);
-  })();
+    // Логируем изменение
+    console.log(`Режим изменен на: ${isGateway ? 'Шлюз' : 'Мост'}`);
+  };
+
+  // Сохранение настроек
+  const saveSettings = (apply = false) => {
+    const mode = modeGateway.checked ? 'gateway' : 'bridge';
+    
+    const settings = {
+      mode: mode,
+      modeName: mode === 'gateway' ? 'Шлюз (NAT включен)' : 'Мост (NAT отключен)',
+      natEnabled: mode === 'gateway',
+      firewallEnabled: mode === 'gateway',
+      dhcpEnabled: mode === 'gateway'
+    };
+
+    console.log('Режим работы:', settings);
+    
+    const message = apply ? 'Режим работы применен' : 'Режим работы сохранен';
+    showNotification(message);
+  };
+
+  // Сброс к значениям по умолчанию
+  const resetSettings = () => {
+    modeGateway.checked = true;
+    modeBridge.checked = false;
+    toggleModeDescription();
+    showNotification('Режим сброшен к шлюзу');
+  };
+
+  // Обработчики событий
+  if (modeGateway) {
+    modeGateway.addEventListener('change', toggleModeDescription);
+  }
+
+  if (modeBridge) {
+    modeBridge.addEventListener('change', toggleModeDescription);
+  }
+
+  if (saveBtn) {
+    saveBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      saveSettings(false);
+    });
+  }
+
+  if (saveApplyBtn) {
+    saveApplyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      saveSettings(true);
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetSettings();
+    });
+  }
+
+  // Инициализация
+  toggleModeDescription();
+
+  // Добавляем анимации, если их нет
+  if (!document.getElementById('mode-animations')) {
+    const style = document.createElement('style');
+    style.id = 'mode-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+})();
 </script>

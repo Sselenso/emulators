@@ -1,0 +1,444 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Статус WAN</h2>
+    <p class="content-description">
+      Текущее состояние WAN-подключений и их параметры.
+    </p>
+  </div>
+
+  <!-- Таблица статуса WAN -->
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Имя подключения</th>
+          <th>Включено</th>
+          <th>VLAN ID</th>
+          <th>Статус</th>
+          <th>IP-адрес</th>
+          <th>Шлюз</th>
+          <th>DNS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="status-online">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator online"></span>
+              WAN1 IPv6
+            </div>
+          </td>
+          <td><span class="badge badge-success">Включено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text online">Подключено</span></td>
+          <td><code class="ip-address">198.243.257.60</code></td>
+          <td><code class="ip-address">198.243.259.1</code></td>
+          <td>
+            <div class="dns-list">
+              <code>93.100.1.4</code>
+              <code>10.255.3.0</code>
+            </div>
+          </td>
+        </tr>
+        <tr class="status-offline">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator offline"></span>
+              WAN2
+            </div>
+          </td>
+          <td><span class="badge badge-secondary">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text offline">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+        </tr>
+        <tr class="status-offline">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator offline"></span>
+              WAN2 IPv6
+            </div>
+          </td>
+          <td><span class="badge badge-secondary">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text offline">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+        </tr>
+        <tr class="status-offline">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator offline"></span>
+              WAN3
+            </div>
+          </td>
+          <td><span class="badge badge-secondary">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text offline">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+        </tr>
+        <tr class="status-offline">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator offline"></span>
+              WAN3 IPv6
+            </div>
+          </td>
+          <td><span class="badge badge-secondary">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text offline">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+        </tr>
+        <tr class="status-offline">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator offline"></span>
+              WAN4
+            </div>
+          </td>
+          <td><span class="badge badge-secondary">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text offline">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+        </tr>
+        <tr class="status-offline">
+          <td>
+            <div class="connection-name">
+              <span class="status-indicator offline"></span>
+              WAN4 IPv6
+            </div>
+          </td>
+          <td><span class="badge badge-secondary">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td><span class="status-text offline">Отключено</span></td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+          <td class="text-muted">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<style>
+  /* Унифицированные стили в соответствии с предыдущими страницами */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  /* Карточки сводки */
+  .status-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .summary-card {
+    background: #f8fafc;
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+
+  .summary-card:hover {
+    box-shadow: 0 4px 12px rgba(0,102,153,0.1);
+    border-color: #b0c0d0;
+  }
+
+  .summary-icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .summary-info {
+    flex: 1;
+  }
+
+  .summary-label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 4px;
+  }
+
+  .summary-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #004466;
+  }
+
+  /* Таблица */
+  .table-container {
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    margin-top: 20px;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    background: #f0f7fc;
+    color: #004466;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #d0e0f0;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e0e8f0;
+    color: #333;
+    vertical-align: middle;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table tbody tr:hover {
+    background: #f8fbff;
+  }
+
+  .data-table tbody tr.status-online {
+    background: #f0faf0;
+  }
+
+  .data-table tbody tr.status-online:hover {
+    background: #e8f5e8;
+  }
+
+  .data-table tbody tr.status-offline {
+    background: #fff;
+  }
+
+  /* Индикаторы статуса */
+  .connection-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .status-indicator.online {
+    background: #28a745;
+    box-shadow: 0 0 0 2px rgba(40,167,69,0.2);
+    animation: pulse 2s infinite;
+  }
+
+  .status-indicator.offline {
+    background: #dc3545;
+  }
+
+  .status-text.online {
+    color: #28a745;
+    font-weight: 500;
+  }
+
+  .status-text.offline {
+    color: #dc3545;
+  }
+
+  /* Бейджи */
+  .badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .badge-success {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  .badge-secondary {
+    background: #e0e8f0;
+    color: #004466;
+  }
+
+  /* IP-адреса */
+  .ip-address {
+    background: #f0f4f8;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #004466;
+  }
+
+  .dns-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dns-list code {
+    background: #f0f4f8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+
+  .text-muted {
+    color: #999;
+  }
+
+  /* Информационный блок */
+  .info-box {
+    display: flex;
+    gap: 16px;
+    background: #e6f3ff;
+    border: 1px solid #b8d9ff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+
+  .info-icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .info-text {
+    font-size: 14px;
+    color: #004466;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  /* Анимации */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(40,167,69,0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 6px rgba(40,167,69,0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(40,167,69,0);
+    }
+  }
+
+  /* Адаптивность */
+  @media (max-width: 1024px) {
+    .data-table {
+      font-size: 13px;
+    }
+    
+    .data-table th,
+    .data-table td {
+      padding: 12px 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .status-summary {
+      grid-template-columns: 1fr;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .data-table {
+      min-width: 800px;
+    }
+
+    .info-box {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Функция для обновления статуса в реальном времени (опционально)
+  const updateStatus = () => {
+    // В реальном приложении здесь был бы AJAX-запрос к API
+    console.log('Статус WAN обновлен');
+  };
+
+  // Обновляем статус каждые 30 секунд
+  setInterval(updateStatus, 30000);
+
+  // Добавляем анимации, если их нет
+  if (!document.getElementById('wan-status-animations')) {
+    const style = document.createElement('style');
+    style.id = 'wan-status-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+})();
+</script>

@@ -8,196 +8,763 @@
       </p>
     </div>
 
-    <div class="welcome-box" style="
-      background: #f0f8ff;
-      border: 1px solid #cce5ff;
-      border-radius: 8px;
-      padding: 28px;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-    ">
-      <strong>Добро пожаловать в Мастер настройки.</strong><br><br>
+    <div class="welcome-box">
+      <div style="font-size: 16px; color: #004466; margin-bottom: 16px;">
+        <strong>Добро пожаловать в Мастер настройки.</strong>
+      </div>
       
-      <hr style="margin: 20px 0; border-top: 1px solid #d0e0f0;">
+      <hr style="margin: 20px 0; border: none; border-top: 2px solid #e0e8f0;">
       
-      Мастер настройки проведёт вас через следующие шаги. Начните с нажатия на <strong>Next</strong>.<br><br>
+      <p style="color: #555; margin-bottom: 20px;">
+        Мастер настройки проведёт вас через следующие шаги. Начните с нажатия на кнопку <strong>Далее</strong>.
+      </p>
       
-      <ol style="margin-left: 20px; margin-bottom: 24px; line-height: 1.7;">
+      <ol class="wizard-steps-list">
         <li>Настройка режима работы</li>
         <li>Выбор часового пояса</li>
         <li>Настройка беспроводной сети</li>
         <li>Выбор диапазона сети</li>
         <li>Настройка доступа к интернету</li>
         <li>Окончание настройки беспроводной сети</li>
-        <li>Настройка беспроводной сети</li>
+        <li>Финальные настройки</li>
       </ol>
       
-      <button id="startWizardBtn" class="btn btn-primary" style="display: inline-block; margin-top: 10px;">
-        Next →
-      </button>
+      <div style="margin-top: 30px; text-align: right;">
+        <button id="startWizardBtn" class="btn btn-primary">
+          Далее →
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Основной мастер (изначально скрыт) -->
   <div class="wizard-container" id="wizardContainer" style="display: none;">
-    <!-- Шаг 1 -->
+    <!-- Шаг 1: Режим работы -->
     <div class="wizard-step active" id="step1">
       <div class="content-header">
         <h2 class="content-title">Шаг 1 из 7: Режим работы</h2>
         <p class="content-description">Выберите, как будет работать ваш роутер.</p>
       </div>
-      <div class="form-group">
-        <label><input type="radio" name="mode" value="router" checked> Роутер (Router Mode)</label><br>
-        <label><input type="radio" name="mode" value="ap"> Точка доступа (Access Point)</label><br>
-        <label><input type="radio" name="mode" value="repeater"> Репитер / Усилитель сигнала</label><br>
-        <label><input type="radio" name="mode" value="bridge"> Клиент (Bridge Mode)</label><br>
-        <label><input type="radio" name="mode" value="wisp"> WISP</label>
+      
+      <div class="settings-group">
+        <div class="form-row">
+          <div class="form-label">Режим работы:</div>
+          <div class="form-field">
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="mode" value="router" checked>
+                <span>Роутер (Router Mode)</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="mode" value="ap">
+                <span>Точка доступа (Access Point)</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="mode" value="repeater">
+                <span>Репитер / Усилитель сигнала</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="mode" value="bridge">
+                <span>Клиент (Bridge Mode)</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="mode" value="wisp">
+                <span>WISP</span>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Шаг 2 -->
+    <!-- Шаг 2: Часовой пояс -->
     <div class="wizard-step" id="step2">
       <div class="content-header">
         <h2 class="content-title">Шаг 2 из 7: Часовой пояс</h2>
         <p class="content-description">Укажите ваш часовой пояс для корректного отображения времени.</p>
       </div>
-      <div class="form-group">
-        <label>Часовой пояс:</label>
-        <select class="form-control">
-          <option selected>Москва (UTC+3)</option>
-          <option>Санкт-Петербург (UTC+3)</option>
-          <option>Екатеринбург (UTC+5)</option>
-          <option>Новосибирск (UTC+6)</option>
-          <option>Владивосток (UTC+10)</option>
-        </select>
+      
+      <div class="settings-group">
+        <div class="form-row">
+          <div class="form-label">Часовой пояс:</div>
+          <div class="form-field">
+            <select class="form-control" id="timezone">
+              <option value="UTC+3" selected>Москва, Санкт-Петербург (UTC+3)</option>
+              <option value="UTC+2">Калининград (UTC+2)</option>
+              <option value="UTC+4">Самара (UTC+4)</option>
+              <option value="UTC+5">Екатеринбург (UTC+5)</option>
+              <option value="UTC+6">Новосибирск, Омск (UTC+6)</option>
+              <option value="UTC+7">Красноярск (UTC+7)</option>
+              <option value="UTC+8">Иркутск (UTC+8)</option>
+              <option value="UTC+9">Якутск (UTC+9)</option>
+              <option value="UTC+10">Владивосток (UTC+10)</option>
+              <option value="UTC+11">Магадан (UTC+11)</option>
+              <option value="UTC+12">Камчатка (UTC+12)</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Шаг 3 -->
+    <!-- Шаг 3: Беспроводная сеть -->
     <div class="wizard-step" id="step3">
       <div class="content-header">
         <h2 class="content-title">Шаг 3 из 7: Беспроводная сеть</h2>
         <p class="content-description">Настройте основные параметры Wi-Fi.</p>
       </div>
-      <div class="form-group">
-        <label>SSID:</label>
-        <input type="text" class="form-control" value="XDM RUS-5G">
-      </div>
-      <div class="form-group">
-        <label>Пароль Wi-Fi:</label>
-        <input type="password" class="form-control" placeholder="Не менее 8 символов">
+      
+      <div class="settings-group">
+        <div class="form-row">
+          <div class="form-label">SSID (имя сети):</div>
+          <div class="form-field">
+            <input type="text" class="form-control" id="ssid" value="XDM RUS-5G" placeholder="Введите имя сети">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label">Пароль Wi-Fi:</div>
+          <div class="form-field">
+            <div class="field-with-button">
+              <input type="password" class="form-control" id="wifiPassword" placeholder="Не менее 8 символов" style="flex: 1;">
+              <label class="checkbox-label">
+                <input type="checkbox" id="showPassword">
+                <span>Показать</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label">Безопасность:</div>
+          <div class="form-field">
+            <select class="form-control" id="security">
+              <option value="wpa2" selected>WPA2-PSK</option>
+              <option value="wpa3">WPA3-PSK</option>
+              <option value="wpa2-wpa3">WPA2/WPA3 Mixed</option>
+              <option value="none">Без пароля (не рекомендуется)</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Шаг 4 -->
+    <!-- Шаг 4: Диапазон сети -->
     <div class="wizard-step" id="step4">
       <div class="content-header">
         <h2 class="content-title">Шаг 4 из 7: Диапазон сети</h2>
         <p class="content-description">Выберите диапазон частот для беспроводной сети.</p>
       </div>
-      <div class="form-group">
-        <label>Диапазон:</label>
-        <select class="form-control">
-          <option selected>5ГГц (A+N+AC)</option>
-          <option>2.4ГГц (B+G+N)</option>
-          <option>Двойной диапазон</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Канал:</label>
-        <select class="form-control">
-          <option selected>44</option>
-          <option>36</option>
-          <option>40</option>
-          <option>48</option>
-        </select>
+      
+      <div class="settings-group">
+        <div class="form-row">
+          <div class="form-label">Диапазон:</div>
+          <div class="form-field">
+            <select class="form-control" id="band">
+              <option value="5ghz" selected>5 ГГц (A+N+AC) — выше скорость, меньше дальность</option>
+              <option value="2.4ghz">2.4 ГГц (B+G+N) — ниже скорость, больше дальность</option>
+              <option value="dual">Двойной диапазон (2.4 + 5 ГГц)</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label">Канал:</div>
+          <div class="form-field">
+            <div class="field-with-hint">
+              <select class="form-control" id="channel" style="width: 120px;">
+                <option value="auto" selected>Авто</option>
+                <option value="36">36</option>
+                <option value="40">40</option>
+                <option value="44">44</option>
+                <option value="48">48</option>
+                <option value="149">149</option>
+                <option value="153">153</option>
+                <option value="157">157</option>
+                <option value="161">161</option>
+              </select>
+              <span class="hint">Рекомендуется: Авто</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label">Ширина канала:</div>
+          <div class="form-field">
+            <select class="form-control" id="channelWidth">
+              <option value="20">20 MHz</option>
+              <option value="40" selected>40 MHz</option>
+              <option value="80">80 MHz</option>
+              <option value="160">160 MHz</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Шаг 5 -->
+    <!-- Шаг 5: Доступ к интернету -->
     <div class="wizard-step" id="step5">
       <div class="content-header">
         <h2 class="content-title">Шаг 5 из 7: Доступ к интернету</h2>
         <p class="content-description">Настройте подключение к провайдеру.</p>
       </div>
-      <div class="form-group">
-        <label>Тип подключения:</label>
-        <select class="form-control">
-          <option selected>Динамический IP (DHCP)</option>
-          <option>Статический IP</option>
-          <option>PPPoE</option>
-        </select>
+      
+      <div class="settings-group">
+        <div class="form-row">
+          <div class="form-label">Тип подключения:</div>
+          <div class="form-field">
+            <select class="form-control" id="wanType">
+              <option value="dhcp" selected>Динамический IP (DHCP)</option>
+              <option value="static">Статический IP</option>
+              <option value="pppoe">PPPoE</option>
+              <option value="pptp">PPTP</option>
+              <option value="l2tp">L2TP</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Дополнительные поля для статического IP (скрыты по умолчанию) -->
+        <div class="static-fields" style="display: none;">
+          <div class="form-row">
+            <div class="form-label">IP-адрес:</div>
+            <div class="form-field">
+              <input type="text" class="form-control" id="staticIp" placeholder="192.168.1.100">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Маска подсети:</div>
+            <div class="form-field">
+              <input type="text" class="form-control" id="staticMask" placeholder="255.255.255.0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Шлюз:</div>
+            <div class="form-field">
+              <input type="text" class="form-control" id="staticGateway" placeholder="192.168.1.1">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">DNS:</div>
+            <div class="form-field">
+              <input type="text" class="form-control" id="staticDns" placeholder="8.8.8.8">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Поля для PPPoE (скрыты по умолчанию) -->
+        <div class="pppoe-fields" style="display: none;">
+          <div class="form-row">
+            <div class="form-label">Имя пользователя:</div>
+            <div class="form-field">
+              <input type="text" class="form-control" id="pppoeUser" placeholder="user@provider">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">Пароль:</div>
+            <div class="form-field">
+              <input type="password" class="form-control" id="pppoePassword" placeholder="••••••••">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Шаг 6 -->
+    <!-- Шаг 6: Окончание настройки WLAN -->
     <div class="wizard-step" id="step6">
       <div class="content-header">
-        <h2 class="content-title">Шаг 6 из 7: Окончание настройки WLAN</h2>
-        <p class="content-description">Подтвердите выбранные параметры.</p>
+        <h2 class="content-title">Шаг 6 из 7: Параметры беспроводной сети</h2>
+        <p class="content-description">Проверьте выбранные параметры Wi-Fi.</p>
       </div>
-      <ul style="padding-left: 20px; margin: 15px 0;">
-        <li><strong>SSID:</strong> XDM RUS-5G</li>
-        <li><strong>Диапазон:</strong> 5 ГГц, канал 44</li>
-        <li><strong>Подключение:</strong> DHCP</li>
-      </ul>
+      
+      <div class="settings-group">
+        <div class="summary-box">
+          <h3 style="color: #004466; margin-top: 0;">Основные параметры</h3>
+          <table class="summary-table">
+            <tr>
+              <td><strong>SSID:</strong></td>
+              <td id="summary-ssid">XDM RUS-5G</td>
+            </tr>
+            <tr>
+              <td><strong>Безопасность:</strong></td>
+              <td id="summary-security">WPA2-PSK</td>
+            </tr>
+            <tr>
+              <td><strong>Диапазон:</strong></td>
+              <td id="summary-band">5 ГГц</td>
+            </tr>
+            <tr>
+              <td><strong>Канал:</strong></td>
+              <td id="summary-channel">Авто (40 MHz)</td>
+            </tr>
+            <tr>
+              <td><strong>Широковещательный SSID:</strong></td>
+              <td>Включен</td>
+            </tr>
+          </table>
+          
+          <h3 style="color: #004466; margin-top: 24px;">Подключение к интернету</h3>
+          <table class="summary-table">
+            <tr>
+              <td><strong>Тип подключения:</strong></td>
+              <td id="summary-wan">Динамический IP (DHCP)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <!-- Шаг 7 -->
+    <!-- Шаг 7: Финальные настройки -->
     <div class="wizard-step" id="step7">
       <div class="content-header">
-        <h2 class="content-title">Шаг 7 из 7: Финальные настройки</h2>
+        <h2 class="content-title">Шаг 7 из 7: Дополнительные параметры</h2>
         <p class="content-description">Завершите настройку дополнительными параметрами.</p>
       </div>
-      <div class="form-group">
-        <label>Макс. клиентов: <input type="number" value="64" min="1" max="64"></label>
-      </div>
-      <div class="form-group">
-        <label><input type="checkbox" checked> Включить WMM</label>
-      </div>
-      <div class="form-group">
-        <label><input type="checkbox" checked> Широковещательный SSID</label>
+      
+      <div class="settings-group">
+        <div class="form-row">
+          <div class="form-label">Максимальное количество клиентов:</div>
+          <div class="form-field">
+            <div class="field-with-hint">
+              <input type="number" class="form-control" id="maxClients" value="64" min="1" max="128" style="width: 100px;">
+              <span class="hint">(1–128)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label"></div>
+          <div class="form-field">
+            <label class="checkbox-label">
+              <input type="checkbox" id="wmm" checked>
+              <span>Включить WMM (Wi-Fi Multimedia)</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label"></div>
+          <div class="form-field">
+            <label class="checkbox-label">
+              <input type="checkbox" id="broadcastSsid" checked>
+              <span>Широковещательный SSID (видимость сети)</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label"></div>
+          <div class="form-field">
+            <label class="checkbox-label">
+              <input type="checkbox" id="isolateClients">
+              <span>Изоляция клиентов (запретить связь между Wi-Fi клиентами)</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-label"></div>
+          <div class="form-field">
+            <label class="checkbox-label">
+              <input type="checkbox" id="wps" checked>
+              <span>Включить WPS (Wi-Fi Protected Setup)</span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Кнопки навигации -->
-    <div class="wizard-buttons" style="margin-top: 30px; display: flex; gap: 12px; justify-content: flex-end;">
+    <div class="wizard-buttons">
       <button id="wizardBack" class="btn btn-secondary" disabled>← Назад</button>
       <button id="wizardNext" class="btn btn-primary">Далее →</button>
-      <button id="wizardFinish" class="btn btn-success" style="display:none;">Готово</button>
+      <button id="wizardFinish" class="btn btn-success" style="display: none;">Применить настройки</button>
     </div>
   </div>
 </div>
 
 <style>
-.form-group { margin-bottom: 16px; }
-.form-control {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #b0c0d0;
-  border-radius: 4px;
-  font-size: 14px;
-}
-.wizard-step { display: none; }
-.wizard-step.active { display: block; }
+  /* Унифицированные стили в соответствии с предыдущими страницами */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .welcome-box {
+    background: #f8fbff;
+    border: 1px solid #d0e0f0;
+    border-radius: 8px;
+    padding: 28px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,102,153,0.05);
+  }
+
+  .wizard-steps-list {
+    margin-left: 20px;
+    margin-bottom: 24px;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .wizard-steps-list li {
+    margin-bottom: 6px;
+  }
+
+  .settings-group {
+    margin-top: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 200px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+    width: 100%;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  .form-control::placeholder {
+    color: #99a8b9;
+    font-style: italic;
+  }
+
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .radio-label input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    background: #f8fafc;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .field-with-button {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .field-with-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: #666;
+    background: #f5f7fa;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: 1px solid #e0e8f0;
+    white-space: nowrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-success {
+    background: #28a745;
+    border-color: #1e7e34;
+    color: white;
+  }
+
+  .btn-success:hover {
+    background: #1e7e34;
+  }
+
+  .wizard-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    border-top: 1px solid #e0e8f0;
+    padding-top: 20px;
+  }
+
+  .wizard-step {
+    display: none;
+  }
+
+  .wizard-step.active {
+    display: block;
+  }
+
+  /* Таблица сводки */
+  .summary-box {
+    background: #f8fafc;
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .summary-table td {
+    padding: 10px 0;
+    border-bottom: 1px solid #d0e0f0;
+  }
+
+  .summary-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .summary-table td:first-child {
+    width: 200px;
+    color: #004466;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .field-with-button,
+    .field-with-hint {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .wizard-buttons {
+      flex-direction: column;
+    }
+
+    .summary-table td:first-child {
+      width: 120px;
+    }
+  }
+
+  /* Анимации */
+  @keyframes spin {
+    0% { transform: translate(-50%,-50%) rotate(0deg); }
+    100% { transform: translate(-50%,-50%) rotate(360deg); }
+  }
 </style>
 
 <script>
-// Этот скрипт гарантированно запустится после вставки в DOM
 (function() {
-  // Ждём, пока элементы появятся в DOM (на случай асинхронной загрузки)
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.className = 'wizard-notification';
+    notification.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: ${isError ? '#f8d7da' : '#d4edda'};
+      color: ${isError ? '#721c24' : '#155724'};
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Добавляем анимации, если их нет
+  if (!document.getElementById('wizard-animations')) {
+    const style = document.createElement('style');
+    style.id = 'wizard-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Инициализация мастера
   function initWizard() {
     const welcomeScreen = document.getElementById('welcomeScreen');
     const wizardContainer = document.getElementById('wizardContainer');
     const startBtn = document.getElementById('startWizardBtn');
     
     if (!welcomeScreen || !wizardContainer || !startBtn) {
-      // Если ещё не готово — попробуем через 100 мс
       setTimeout(initWizard, 100);
       return;
     }
 
+    // Состояние мастера
     let currentStep = 1;
     const totalSteps = 7;
     const steps = [
@@ -209,11 +776,178 @@
       document.getElementById('step6'),
       document.getElementById('step7')
     ];
+    
     const backBtn = document.getElementById('wizardBack');
     const nextBtn = document.getElementById('wizardNext');
     const finishBtn = document.getElementById('wizardFinish');
 
+    // Данные мастера
+    const wizardData = {
+      mode: 'router',
+      timezone: 'UTC+3',
+      ssid: 'XDM RUS-5G',
+      password: '',
+      security: 'wpa2',
+      band: '5ghz',
+      channel: 'auto',
+      channelWidth: '40',
+      wanType: 'dhcp',
+      maxClients: 64,
+      wmm: true,
+      broadcastSsid: true,
+      isolateClients: false,
+      wps: true
+    };
+
+    // Функция обновления сводки на шаге 6
+    const updateSummary = () => {
+      const ssidEl = document.getElementById('summary-ssid');
+      const securityEl = document.getElementById('summary-security');
+      const bandEl = document.getElementById('summary-band');
+      const channelEl = document.getElementById('summary-channel');
+      const wanEl = document.getElementById('summary-wan');
+
+      if (ssidEl) ssidEl.textContent = wizardData.ssid;
+      
+      if (securityEl) {
+        const securityMap = {
+          'wpa2': 'WPA2-PSK',
+          'wpa3': 'WPA3-PSK',
+          'wpa2-wpa3': 'WPA2/WPA3 Mixed',
+          'none': 'Без пароля'
+        };
+        securityEl.textContent = securityMap[wizardData.security] || wizardData.security;
+      }
+      
+      if (bandEl) {
+        const bandMap = {
+          '5ghz': '5 ГГц',
+          '2.4ghz': '2.4 ГГц',
+          'dual': 'Двойной диапазон'
+        };
+        bandEl.textContent = bandMap[wizardData.band] || wizardData.band;
+      }
+      
+      if (channelEl) {
+        const channel = wizardData.channel === 'auto' ? 'Авто' : wizardData.channel;
+        channelEl.textContent = `${channel} (${wizardData.channelWidth} MHz)`;
+      }
+      
+      if (wanEl) {
+        const wanMap = {
+          'dhcp': 'Динамический IP (DHCP)',
+          'static': 'Статический IP',
+          'pppoe': 'PPPoE',
+          'pptp': 'PPTP',
+          'l2tp': 'L2TP'
+        };
+        wanEl.textContent = wanMap[wizardData.wanType] || wizardData.wanType;
+      }
+    };
+
+    // Сбор данных с текущего шага
+    const collectStepData = (step) => {
+      switch(step) {
+        case 1: // Режим работы
+          const modeRadios = document.querySelectorAll('input[name="mode"]');
+          modeRadios.forEach(radio => {
+            if (radio.checked) wizardData.mode = radio.value;
+          });
+          break;
+          
+        case 2: // Часовой пояс
+          const timezone = document.getElementById('timezone');
+          if (timezone) wizardData.timezone = timezone.value;
+          break;
+          
+        case 3: // Беспроводная сеть
+          const ssid = document.getElementById('ssid');
+          const password = document.getElementById('wifiPassword');
+          const security = document.getElementById('security');
+          
+          if (ssid) wizardData.ssid = ssid.value;
+          if (password) wizardData.password = password.value;
+          if (security) wizardData.security = security.value;
+          break;
+          
+        case 4: // Диапазон
+          const band = document.getElementById('band');
+          const channel = document.getElementById('channel');
+          const channelWidth = document.getElementById('channelWidth');
+          
+          if (band) wizardData.band = band.value;
+          if (channel) wizardData.channel = channel.value;
+          if (channelWidth) wizardData.channelWidth = channelWidth.value;
+          break;
+          
+        case 5: // Доступ к интернету
+          const wanType = document.getElementById('wanType');
+          if (wanType) wizardData.wanType = wanType.value;
+          break;
+          
+        case 7: // Финальные настройки
+          const maxClients = document.getElementById('maxClients');
+          const wmm = document.getElementById('wmm');
+          const broadcastSsid = document.getElementById('broadcastSsid');
+          const isolateClients = document.getElementById('isolateClients');
+          const wps = document.getElementById('wps');
+          
+          if (maxClients) wizardData.maxClients = parseInt(maxClients.value) || 64;
+          if (wmm) wizardData.wmm = wmm.checked;
+          if (broadcastSsid) wizardData.broadcastSsid = broadcastSsid.checked;
+          if (isolateClients) wizardData.isolateClients = isolateClients.checked;
+          if (wps) wizardData.wps = wps.checked;
+          break;
+      }
+      
+      // Обновляем сводку после сбора данных
+      updateSummary();
+    };
+
+    // Показать/скрыть дополнительные поля на шаге 5
+    const toggleWanFields = () => {
+      const wanType = document.getElementById('wanType');
+      const staticFields = document.querySelector('.static-fields');
+      const pppoeFields = document.querySelector('.pppoe-fields');
+      
+      if (!wanType) return;
+      
+      if (staticFields) staticFields.style.display = 'none';
+      if (pppoeFields) pppoeFields.style.display = 'none';
+      
+      switch(wanType.value) {
+        case 'static':
+          if (staticFields) staticFields.style.display = 'block';
+          break;
+        case 'pppoe':
+        case 'pptp':
+        case 'l2tp':
+          if (pppoeFields) pppoeFields.style.display = 'block';
+          break;
+      }
+    };
+
+    // Показ пароля
+    const showPasswordCheck = document.getElementById('showPassword');
+    const passwordInput = document.getElementById('wifiPassword');
+    
+    if (showPasswordCheck && passwordInput) {
+      showPasswordCheck.addEventListener('change', function() {
+        passwordInput.type = this.checked ? 'text' : 'password';
+      });
+    }
+
+    // Обработчик изменения типа подключения
+    const wanType = document.getElementById('wanType');
+    if (wanType) {
+      wanType.addEventListener('change', toggleWanFields);
+    }
+
+    // Функция переключения шагов
     function showStep(stepNum) {
+      // Сохраняем данные текущего шага перед переходом
+      collectStepData(currentStep);
+      
       // Скрываем все шаги
       steps.forEach(step => {
         if (step) step.classList.remove('active');
@@ -237,6 +971,16 @@
         }
       }
       
+      // Если переходим на шаг 6, обновляем сводку
+      if (stepNum === 6) {
+        updateSummary();
+      }
+      
+      // Если переходим на шаг 5, обновляем доп. поля
+      if (stepNum === 5) {
+        toggleWanFields();
+      }
+      
       currentStep = stepNum;
     }
 
@@ -246,27 +990,63 @@
       welcomeScreen.style.display = 'none';
       wizardContainer.style.display = 'block';
       showStep(1);
+      showNotification('Мастер настройки запущен');
     });
 
-    // Навигация
+    // Навигация назад
     if (backBtn) {
       backBtn.addEventListener('click', () => {
         if (currentStep > 1) showStep(currentStep - 1);
       });
     }
 
+    // Навигация вперед
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        if (currentStep < totalSteps) showStep(currentStep + 1);
-				console.log('нажал')
+        if (currentStep < totalSteps) {
+          // Валидация перед переходом
+          if (currentStep === 3) {
+            const password = document.getElementById('wifiPassword')?.value || '';
+            if (password && password.length < 8) {
+              showNotification('Пароль должен быть не менее 8 символов', true);
+              return;
+            }
+          }
+          showStep(currentStep + 1);
+        }
       });
     }
 
+    // Завершение мастера
     if (finishBtn) {
       finishBtn.addEventListener('click', () => {
-        alert('✅ Настройки успешно применены!\nРоутер перезагрузится.');
+        // Сохраняем данные последнего шага
+        collectStepData(currentStep);
+        
+        console.log('Настройки мастера:', wizardData);
+        
+        // Показываем финальное уведомление
+        showNotification('✅ Настройки успешно применены!');
+        
+        // Здесь можно отправить данные на сервер
+        setTimeout(() => {
+          alert('Настройки сохранены. Роутер перезагружается...');
+          
+          // Возврат к приветственному экрану
+          wizardContainer.style.display = 'none';
+          welcomeScreen.style.display = 'block';
+          showStep(1);
+          
+          // Сброс кнопок
+          if (backBtn) backBtn.disabled = true;
+          if (nextBtn) nextBtn.style.display = 'inline-block';
+          if (finishBtn) finishBtn.style.display = 'none';
+        }, 1000);
       });
     }
+
+    // Инициализация
+    showStep(1);
   }
 
   // Запускаем инициализацию

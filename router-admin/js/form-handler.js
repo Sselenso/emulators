@@ -2,12 +2,7 @@
 import { initWizard } from './wizard.js';
 
 export function initFormHandlersIn(container = document) {
-  // Общие обработчики (для других страниц)
-  container.querySelectorAll('#showClientsBtn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      alert('Список подключённых устройств (демо)');
-    });
-  });
+  // #showClientsBtn обрабатывается локальным скриптом в wlan24g-basic и др., не дублируем
 
   container.querySelectorAll('.save-btn, .save-apply-btn').forEach(btn => {
     btn.addEventListener('click', e => {

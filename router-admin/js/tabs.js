@@ -17,18 +17,25 @@ const sidebarConfigs = {
   ],
   wlan24g: [
     { section: 'basic',    label: 'ОСНОВНЫЕ НАСТРОЙКИ', active: true },
-    { section: 'advanced', label: 'РАСШИРЕННЫЕ НАСТРОЙКИ' }
+    { section: 'advanced', label: 'РАСШИРЕННЫЕ НАСТРОЙКИ' },
+    { section: 'security', label: 'БЕЗОПАСНОСТЬ' },
+    { section: 'access',   label: 'КОНТРОЛЬ ДОСТУПА' },
+    { section: 'wps',      label: 'WPS' }
   ],
   easymesh: [
-    { section: 'status',   label: 'СТАТУС СЕТИ', active: true },
-    { section: 'devices',  label: 'УСТРОЙСТВА В MESH' },
-    { section: 'settings', label: 'НАСТРОЙКИ MESH' },
-    { section: 'advanced', label: 'РАСШИРЕННЫЕ' }
+    { section: 'status',   label: 'НАСТРОЙКА EASYMESH', active: true },    
   ],
   tcpip: [
-    { section: 'lan',      label: 'LAN', active: true },
-    { section: 'dhcp',     label: 'DHCP-сервер' },
-    { section: 'static',   label: 'Статические IP' }
+    { section: 'lan',      label: 'НАСТРОЙКА LAN', active: true },
+    
+  ],
+	ipv6: [
+    { section: 'ipv6',      label: 'IPV6 LAN SETTING', active: true },
+		 { section: 'radvd',      label: 'RADVD' },    
+  ],
+	multiwan: [
+    { section: 'wanconfig',      label: 'WAN CONFIG', active: true },
+		 { section: 'wanstatus',      label: 'WANSTATUS' },    
   ],
   default: [
     { section: 'placeholder', label: 'Раздел в разработке', active: true }

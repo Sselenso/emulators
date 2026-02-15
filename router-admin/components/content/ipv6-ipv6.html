@@ -1,0 +1,452 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Настройка LAN</h2>
+    <p class="content-description">
+      Настройка параметров локальной сети и IPv6.
+    </p>
+  </div>
+
+  <!-- IPv6 настройки -->
+  <div class="ipv6-section">
+    <!-- Автоматическая настройка IPv6 LAN -->
+    <div class="form-row">
+      <div class="form-label">Автоматическая настройка IPv6 LAN</div>
+      <div class="form-field">
+        <select class="form-control" id="autoIPv6">
+          <option value="disabled" selected>Отключено</option>
+          <option value="enabled">Включено</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Ручная настройка IPv6 LAN -->
+    <div class="form-row">
+      <div class="form-label">Ручная настройка IPv6 LAN</div>
+      <div class="form-field">
+        <select class="form-control" id="manualIPv6">
+          <option value="disabled" selected>Отключено</option>
+          <option value="enabled">Включено</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- IP-адрес и Длина трафика -->
+    <div class="form-row">
+      <div class="form-label">IP-адрес:</div>
+      <div class="form-field">
+        <div class="ipv6-address-group">
+          <input type="text" class="form-control" id="ipv6Address" value="2001:db8::5d" placeholder="IPv6 адрес">
+          <span class="separator">/</span>
+          <input type="number" class="form-control" id="prefixLength" value="0" min="0" max="128" style="width: 80px;">
+          <span class="hint">длина префикса</span>
+        </div>
+        <div class="field-hint" style="margin-top: 6px; color: #666; font-size: 13px;">
+          Длина трафика: 0
+        </div>
+      </div>
+    </div>
+
+    <!-- Разделитель -->
+    <hr style="margin: 30px 0; border: none; border-top: 2px solid #e0e8f0;">
+
+    <!-- Настройка DHCPv6 сервера -->
+    <h3 style="color: #004466; font-size: 18px; margin-bottom: 20px;">Настройка DHCPv6 сервера</h3>
+
+    <!-- Включить DHCPv6 -->
+    <div class="form-row">
+      <div class="form-label">Включить:</div>
+      <div class="form-field">
+        <label class="checkbox-label">
+          <input type="checkbox" id="enableDhcpv6">
+          <span>Включить DHCPv6 сервер</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Адрес IPv6 -->
+    <div class="form-row dhcpv6-field">
+      <div class="form-label">Адрес IPv6</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="dhcpv6Address" value="2001:db8::5d" placeholder="IPv6 адрес сервера">
+      </div>
+    </div>
+
+    <!-- Имя и порт/файл -->
+    <div class="form-row dhcpv6-field">
+      <div class="form-label">Имя и порт/файл:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="dhcpv6Name" value="0a0" placeholder="Имя и порт/файл">
+      </div>
+    </div>
+
+    <!-- Диапазон адресов (начало) -->
+    <div class="form-row dhcpv6-field">
+      <div class="form-label">Диапазон адресов:</div>
+      <div class="form-field">
+        <div class="ipv6-range">
+          <input type="text" class="form-control" id="dhcpv6RangeStart" value="2001:db8::2.1:1000" placeholder="Начало диапазона">
+        </div>
+      </div>
+    </div>
+
+    <!-- ID (конец диапазона) -->
+    <div class="form-row dhcpv6-field">
+      <div class="form-label">ID:</div>
+      <div class="form-field">
+        <input type="text" class="form-control" id="dhcpv6RangeEnd" value="2001:db8::2.2:2000" placeholder="Конец диапазона">
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="form-row" style="margin-top: 30px;">
+      <div class="form-label"></div>
+      <div class="form-field">
+        <div class="button-group">
+          <button class="btn btn-secondary" id="nextBtn">Следующая</button>
+          <button class="btn btn-primary" id="saveApplyBtn">Сохранить и применить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 250px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+    width: 100%;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    background: #f8fafc;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .ipv6-address-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .separator {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: #666;
+    background: #f5f7fa;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: 1px solid #e0e8f0;
+    white-space: nowrap;
+  }
+
+  .ipv6-range {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .ipv6-address-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .separator {
+      align-self: center;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Элементы DOM
+  const autoIPv6 = document.getElementById('autoIPv6');
+  const manualIPv6 = document.getElementById('manualIPv6');
+  const enableDhcpv6 = document.getElementById('enableDhcpv6');
+  const nextBtn = document.getElementById('nextBtn');
+  const saveApplyBtn = document.getElementById('saveApplyBtn');
+
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: ${isError ? '#f8d7da' : '#d4edda'};
+      color: ${isError ? '#721c24' : '#155724'};
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Переключение полей DHCPv6
+  const toggleDhcpv6Fields = () => {
+    const dhcpv6Fields = document.querySelectorAll('.dhcpv6-field');
+    const isEnabled = enableDhcpv6?.checked || false;
+    
+    dhcpv6Fields.forEach(field => {
+      field.style.display = isEnabled ? 'flex' : 'none';
+    });
+  };
+
+  // Автоматическое переключение между авто и ручной настройкой
+  const toggleIPv6Modes = () => {
+    if (autoIPv6?.value === 'enabled') {
+      manualIPv6.value = 'disabled';
+    } else if (manualIPv6?.value === 'enabled') {
+      autoIPv6.value = 'disabled';
+    }
+  };
+
+  // Обработчики событий
+  if (autoIPv6) {
+    autoIPv6.addEventListener('change', toggleIPv6Modes);
+  }
+
+  if (manualIPv6) {
+    manualIPv6.addEventListener('change', toggleIPv6Modes);
+  }
+
+  if (enableDhcpv6) {
+    enableDhcpv6.addEventListener('change', toggleDhcpv6Fields);
+  }
+
+  // Кнопка "Следующая"
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showNotification('Переход к следующему шагу');
+    });
+  }
+
+  // Кнопка "Сохранить и применить"
+  if (saveApplyBtn) {
+    saveApplyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Сбор данных
+      const settings = {
+        autoIPv6: autoIPv6?.value || 'disabled',
+        manualIPv6: manualIPv6?.value || 'disabled',
+        ipv6Address: document.getElementById('ipv6Address')?.value || '',
+        prefixLength: document.getElementById('prefixLength')?.value || '0',
+        dhcpv6: {
+          enabled: enableDhcpv6?.checked || false,
+          address: document.getElementById('dhcpv6Address')?.value || '',
+          name: document.getElementById('dhcpv6Name')?.value || '',
+          rangeStart: document.getElementById('dhcpv6RangeStart')?.value || '',
+          rangeEnd: document.getElementById('dhcpv6RangeEnd')?.value || ''
+        }
+      };
+      
+      console.log('Настройки LAN IPv6:', settings);
+      showNotification('Настройки LAN сохранены и применены');
+    });
+  }
+
+  // Добавляем анимации
+  if (!document.getElementById('lan-ipv6-animations')) {
+    const style = document.createElement('style');
+    style.id = 'lan-ipv6-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Инициализация
+  toggleDhcpv6Fields();
+})();
+</script>
