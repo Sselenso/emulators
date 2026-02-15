@@ -1,0 +1,285 @@
+<div class="content-section" id="master-mode">
+  <div class="content-header">
+    <h2 class="content-title">Шаг 1: Выбор режима работы</h2>
+    <p class="content-description">
+      Выберите, в каком режиме будет работать ваш роутер. Это основной параметр, который влияет на все остальные настройки.
+    </p>
+  </div>
+
+  <div class="mode-selection-grid">
+    <div class="mode-card active" data-value="router">
+      <div class="mode-icon">📡</div>
+      <h3>Роутер (Router Mode)</h3>
+      <p>Полноценный роутер: NAT, DHCP, firewall, раздача Wi-Fi и интернета.</p>
+      <div class="mode-check"></div>
+    </div>
+
+    <div class="mode-card" data-value="ap">
+      <div class="mode-icon">📶</div>
+      <h3>Точка доступа (AP Mode)</h3>
+      <p>Только Wi-Fi точка доступа без NAT и DHCP. Подключается к основному роутеру.</p>
+      <div class="mode-check"></div>
+    </div>
+
+    <div class="mode-card" data-value="bridge">
+      <div class="mode-icon">🌉</div>
+      <h3>Клиент (Bridge Mode)</h3>
+      <p>Роутер как Wi-Fi адаптер для проводных устройств (без раздачи Wi-Fi).</p>
+      <div class="mode-check"></div>
+    </div>
+
+    <div class="mode-card" data-value="wisp">
+      <div class="mode-icon">🌐</div>
+      <h3>WISP (Wireless ISP)</h3>
+      <p>Подключение к беспроводному провайдеру + раздача интернета в доме.</p>
+      <div class="mode-check"></div>
+    </div>
+  </div>
+
+  <div id="modeDescription" class="mode-description">
+    <strong>Выбран режим:</strong> <span id="selectedModeText">Роутер (Router Mode)</span>
+  </div>
+
+  <div class="wizard-actions">
+    <button class="btn btn-primary next-step">Далее →</button>
+  </div>
+</div>
+
+<style>
+  .mode-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  .mode-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .mode-card:hover {
+    border-color: #00a8e0;
+    box-shadow: 0 12px 32px rgba(0,168,224,0.18);
+    transform: translateY(-6px);
+  }
+
+  .mode-card.active {
+    border-color: #00a8e0;
+    box-shadow: 0 0 0 4px rgba(0,168,224,0.2);
+  }
+
+  .mode-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    color: #006699;
+  }
+
+  .mode-card h3 {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 12px;
+  }
+
+  .mode-card p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .mode-check {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.25s;
+  }
+
+  .mode-card.active .mode-check {
+    background: #00a8e0;
+    border-color: #00a8e0;
+  }
+
+  .mode-card.active .mode-check::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .mode-description {
+    background: #e8f4ff;
+    border-left: 5px solid #00a8e0;
+    padding: 20px 24px;
+    border-radius: 0 12px 12px 0;
+    margin: 24px 0;
+    font-size: 15px;
+    color: #333;
+    display: none;
+  }
+
+  .wizard-actions {
+    margin-top: 40px;
+    text-align: right;
+  }
+
+  .next-step {
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  // Без type="module" — чтобы работало даже при динамической подгрузке
+  (function() {
+    // Ждём, пока элементы появятся (защита от раннего запуска)
+    function init() {
+      const cards = document.querySelectorAll('#master-mode .mode-card');
+      const descBox = document.getElementById('modeDescription');
+      const descText = document.getElementById('selectedModeText');
+      const nextBtn = document.querySelector('#master-mode .next-step');
+
+      if (!cards.length || !nextBtn) {
+        // Если ещё не готово — пробуем позже
+        setTimeout(init, 100);
+        return;
+      }
+
+      console.log('master-mode: элементы найдены, привязываем события');
+
+      const descriptions = {
+        router: "Роутер будет раздавать интернет, создавать свою локальную сеть, выдавать IP-адреса и защищать устройства файрволом.",
+        ap: "Роутер превращается в обычную точку доступа. NAT, DHCP и маршрутизация отключаются. Подключайте его LAN-портом к основному роутеру.",
+        bridge: "Роутер работает как Wi-Fi клиент. Полезно для подключения телевизора, ПК или приставки без Wi-Fi к беспроводной сети.",
+        wisp: "Подключение к беспроводному провайдеру + раздача интернета по Wi-Fi и кабелю в доме."
+      };
+
+      let selectedValue = 'router';
+
+      function updateDescription(value) {
+        if (descBox && descText) {
+          descText.textContent = descriptions[value] || 'Выберите режим';
+          descBox.style.display = 'block';
+        }
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          selectedValue = card.dataset.value;
+          updateDescription(selectedValue);
+        });
+      });
+
+      // Показываем начальное
+      updateDescription(selectedValue);
+
+      // Кнопка Далее — просто сообщение + перезагрузка
+      nextBtn.addEventListener('click', () => {
+        if (!selectedValue) {
+          alert('Выберите режим работы');
+          return;
+        }
+
+        localStorage.setItem('selectedRouterMode', selectedValue);
+
+        alert(`Режим изменён на: ${selectedValue}\nРоутер будет перезагружен.`);
+
+        // Запускаем анимацию перезагрузки (как в wizard.js)
+        const container = document.getElementById('wizardContainer');
+        if (!container) {
+          alert('Не найден контейнер мастера');
+          return;
+        }
+
+        const current = document.querySelector('#master-mode');
+        if (current) current.style.display = 'none';
+
+        const reboot = document.createElement('div');
+        reboot.style.cssText = `
+          text-align: center;
+          padding: 80px 30px;
+          background: linear-gradient(135deg, #f0f4f8, #e0eaff);
+          border-radius: 16px;
+          box-shadow: 0 10px 30px rgba(0,102,153,0.15);
+          max-width: 700px;
+          margin: 60px auto;
+        `;
+        reboot.innerHTML = `
+          <h2 style="color:#004466;font-size:28px;margin-bottom:20px;">Режим изменён!</h2>
+          <div style="margin:40px 0;height:120px;position:relative;">
+            <div style="width:80px;height:80px;border:8px solid #e0e0e0;border-top:8px solid #00a8e0;border-radius:50%;animation:spin 1.2s linear infinite;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+          </div>
+          <p style="font-size:18px;color:#555;margin:20px 0 40px;">
+            Роутер перезагружается...<br>Подождите 30–60 секунд.
+          </p>
+          <div id="countdown" style="font-size:48px;font-weight:bold;color:#006699;margin:20px 0;">15</div>
+          <p style="color:#777;font-size:16px;">Автоматический возврат через <span id="sec">15</span> сек...</p>
+        `;
+        container.appendChild(reboot);
+
+        let sec = 15;
+        const cd = reboot.querySelector('#countdown');
+        const st = reboot.querySelector('#sec');
+
+        const timer = setInterval(() => {
+          sec--;
+          if (cd) cd.textContent = sec;
+          if (st) st.textContent = sec;
+          if (sec <= 0) {
+            clearInterval(timer);
+            reboot.innerHTML = `
+              <div style="padding:60px 20px;">
+                <div style="font-size:80px;color:#28a745;margin-bottom:30px;">✔</div>
+                <h2 style="color:#28a745;font-size:32px;margin-bottom:20px;">Перезагрузка завершена</h2>
+                <p style="font-size:18px;color:#444;margin-bottom:40px;">
+                  Роутер запущен в режиме: ${selectedValue}
+                </p>
+                <p style="font-size:16px;color:#666;">Возврат на начальный экран через 4 секунды...</p>
+              </div>
+            `;
+
+            setTimeout(() => {
+              const welcome = document.getElementById('welcomeScreen');
+              const container = document.getElementById('wizardContainer');
+              if (welcome) welcome.style.display = 'block';
+              if (container) {
+                container.style.display = 'none';
+                container.querySelectorAll('.wizard-step, .content-section').forEach(el => {
+                  el.style.display = 'none';
+                  el.classList.remove('active');
+                });
+                const step1 = container.querySelector('#step1, #master-mode');
+                if (step1) step1.classList.add('active');
+              }
+              reboot.remove();
+              alert('Роутер перезагружен. Мастер готов к новому использованию.');
+            }, 4000);
+          }
+        }, 1000);
+      });
+    }
+
+    // Запускаем с небольшой задержкой (чтобы DOM был готов)
+    setTimeout(init, 200);
+  })();
+</script>

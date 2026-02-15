@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>192.168.1.1 — Управление роутером</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="container"> 
+
+  <!-- main-tabs -->
+  <div class="main-tabs" id="mainTabs">
+		<div class="main-tab active" data-tab="master">НАСТРОЙКА</div>
+    <div class="main-tab" data-tab="wlan5g">WLAN5G</div>
+    <div class="main-tab" data-tab="wlan24g">WLAN2.4G</div>
+    <div class="main-tab" data-tab="easymesh">EASY MESH</div>
+    <!-- остальные вкладки -->
+  </div>
+
+  <div class="main">
+    <!-- sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-item active" data-section="basic">МАСТЕР</div>
+      <div class="sidebar-item" data-section="advanced">РЕЖИМ РАБОТЫ</div>      
+    </div>
+
+    <!-- сюда будет подгружаться контент -->
+    <div class="content" id="contentArea">
+      <div class="loading">Загрузка...</div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  // Импортируем и сразу запускаем
+  import { initTabs } from './js/tabs.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log("Страница загружена → запускаем initTabs()");
+    initTabs();
+  });
+</script>
+</body>
+</html>

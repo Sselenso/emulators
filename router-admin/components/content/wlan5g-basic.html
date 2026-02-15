@@ -1,0 +1,146 @@
+<div class="content-section active" id="basic">
+  <div class="content-header">
+    <h2 class="content-title">Базовые настройки беспроводной сети - wlan0 (5 ГГц)</h2>
+    <p class="content-description">
+      Эта страница используется для настройки параметров беспроводных клиентов LAN, которые могут подключаться к вашей точке доступа. 
+      Здесь вы можете изменить настройки беспроводного интерфейса LAN.
+    </p>
+  </div>
+
+  <table class="form-table">
+    <tr>
+      <td class="label">Отключить беспроводной интерфейс LAN</td>
+      <td>
+        <label class="checkbox-label">
+          <input type="checkbox"> Отключить
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Диапазон</td>
+      <td>
+        <select>
+          <option selected>5ГГц (A+N+AC)</option>
+          <option>5ГГц (A+N+AC+AX)</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Режим</td>
+      <td>
+        <select>
+          <option selected>AP (точка доступа)</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Тип сети</td>
+      <td>
+        <select>
+          <option selected>Инфраструктура</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">SSID</td>
+      <td>
+        <input type="text" value="XDM RUS-5G">
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Ширина канала</td>
+      <td>
+        <select>
+          <option selected>20/40/80MHz</option>
+          <option>20MHz</option>
+          <option>40MHz</option>
+          <option>80MHz</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Контрольная боковая полоса</td>
+      <td>
+        <select>
+          <option selected>Авто</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Номер канала</td>
+      <td>
+        <select>
+          <option selected>44</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Широковещательный SSID</td>
+      <td>
+        <select>
+          <option selected>Включено</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">WMM</td>
+      <td>
+        <select>
+          <option selected>Включено</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Максимальное количество подключений</td>
+      <td>
+        <input type="number" value="64" min="1" max="64"> (1-64)
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Скорость передачи данных</td>
+      <td>
+        <select>
+          <option selected>Авто</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Ограничение TX (Мбит/с)</td>
+      <td>
+        <input type="number" value="0"> (0 — нет ограничения)
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Ограничение RX (Мбит/с)</td>
+      <td>
+        <input type="number" value="0"> (0 — нет ограничения)
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Подключенные клиенты</td>
+      <td>
+        <button class="btn btn-secondary">Показать активных клиентов</button>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">Включить универсальный режим повторителя</td>
+      <td>
+        <label class="checkbox-label">
+          <input type="checkbox"> (работает одновременно как точка доступа и клиент)
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">SSID расширенного интерфейса</td>
+      <td>
+        <input type="text" placeholder="Введите SSID">
+      </td>
+    </tr>
+  </table>
+
+  <div class="btn-group">
+    <button class="btn btn-primary save-btn">Сохранить</button>
+    <button class="btn btn-primary save-apply-btn">Сохранить и применить</button>
+    <button class="btn btn-danger cancel-btn">Отмена</button>
+  </div>
+</div>

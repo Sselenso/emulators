@@ -1,0 +1,652 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Wi-Fi Protected Setup</h2>
+    <p class="content-description">
+      Эта страница позволяет изменить настройки WPS (Wi-Fi Protected Setup). Использование этой функции позволяет быстро и безопасно настроить беспроводное соединение без необходимости ввода пароля.
+    </p>
+  </div>
+
+  <!-- Отключить WPS -->
+  <div class="form-row">
+    <div class="form-label"></div>
+    <div class="form-field">
+      <label class="checkbox-label">
+        <input type="checkbox" id="disableWps">
+        <span>Отключить WPS</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Статус и PIN -->
+  <div class="form-row">
+    <div class="form-label">Статус WPS:</div>
+    <div class="form-field">
+      <select class="form-control" id="wpsStatus" style="width: auto; min-width: 200px;">
+        <option value="configured">Сконфигурировано</option>
+        <option value="unconfigured">Не сконфигурировано</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-label">Собственный PIN-код:</div>
+    <div class="form-field">
+      <div class="pin-display">
+        <code class="pin-code">87643513</code>
+        <button class="btn btn-secondary btn-sm" id="regeneratePin">Сгенерировать новый</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-label">Конфигурация кнопок:</div>
+    <div class="form-field">
+      <div class="button-group">
+        <button class="btn btn-secondary" id="startWpsBtn">Запустить WPS</button>
+        <button class="btn btn-secondary" id="stopWpsBtn">Остановить WPS</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-label">PIN-код клиента:</div>
+    <div class="form-field">
+      <div class="field-with-button">
+        <input type="text" class="form-control" id="clientPin" placeholder="Введите PIN-код (8 цифр)" style="width: 200px;">
+        <button class="btn btn-primary" id="startPinBtn">Запустить PIN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Текущая информация о ключе -->
+  <div class="form-row" style="margin-top: 30px;">
+    <div class="form-label">Текущая информация о ключе:</div>
+    <div class="form-field"></div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Аутентификация</th>
+          <th>Шифрование</th>
+          <th>Ключ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>WPA3 WPA2 Mixed PSK</td>
+          <td>AES</td>
+          <td><code class="key-display">12hj73cE</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Индикатор процесса WPS -->
+  <div class="form-row" id="wpsProgress" style="display: none;">
+    <div class="form-label">Прогресс WPS:</div>
+    <div class="form-field">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%;"></div>
+      </div>
+      <span class="progress-text" id="wpsProgressText">Подключение...</span>
+    </div>
+  </div>
+
+  <!-- Кнопки внизу -->
+  <div class="form-row" style="margin-top: 30px;">
+    <div class="form-label"></div>
+    <div class="form-field">
+      <div class="button-group">
+        <button class="btn btn-secondary" id="saveBtn">Сохранить</button>
+        <button class="btn btn-primary" id="saveApplyBtn">Сохранить и применить</button>
+        <button class="btn btn-danger" id="cancelBtn">Отмена</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили (общие с предыдущими страницами) */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 220px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  .form-control:read-only {
+    background: #f8f9fa;
+    border-color: #d0d8e5;
+    color: #666;
+  }
+
+  .form-control::placeholder {
+    color: #99a8b9;
+    font-style: italic;
+  }
+
+  select.form-control {
+    width: auto;
+    min-width: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    background: #f8fafc;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .field-with-button {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .pin-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .pin-code {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    color: #006699;
+    letter-spacing: 2px;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+  }
+
+  .btn-sm {
+    padding: 4px 12px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-danger {
+    background: #f8f0f0;
+    border-color: #d0b0b0;
+    color: #993333;
+  }
+
+  .btn-danger:hover {
+    background: #f0e0e0;
+    border-color: #b09090;
+  }
+
+  /* Таблица */
+  .table-container {
+    margin-top: 20px;
+    border: 1px solid #e0e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    background: #f0f7fc;
+    color: #004466;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #d0e0f0;
+  }
+
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table tr:hover {
+    background: #f8fbff;
+  }
+
+  .key-display {
+    background: #f0f4f8;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #004466;
+  }
+
+  /* Прогресс бар */
+  .progress-bar {
+    width: 100%;
+    height: 24px;
+    background: #e0e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #006699, #00a0d0);
+    transition: width 0.3s ease;
+    border-radius: 12px;
+  }
+
+  .progress-text {
+    font-size: 14px;
+    color: #006699;
+    font-weight: 500;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    select.form-control {
+      width: 100%;
+    }
+
+    .button-group {
+      flex-direction: column;
+    }
+
+    .field-with-button {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .pin-display {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .data-table {
+      font-size: 13px;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 8px 10px;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Элементы DOM
+  const disableWps = document.getElementById('disableWps');
+  const wpsStatus = document.getElementById('wpsStatus');
+  const clientPin = document.getElementById('clientPin');
+  const startPinBtn = document.getElementById('startPinBtn');
+  const startWpsBtn = document.getElementById('startWpsBtn');
+  const stopWpsBtn = document.getElementById('stopWpsBtn');
+  const regeneratePin = document.getElementById('regeneratePin');
+  const wpsProgress = document.getElementById('wpsProgress');
+  const progressFill = document.querySelector('.progress-fill');
+  const progressText = document.getElementById('wpsProgressText');
+  const saveBtn = document.getElementById('saveBtn');
+  const saveApplyBtn = document.getElementById('saveApplyBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+
+  // Текущий PIN-код
+  let currentPin = '87643513';
+  let wpsTimer = null;
+
+  // Функция показа уведомлений
+  const showNotification = (message, isError = false) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.background = isError ? '#f8d7da' : '#d4edda';
+    notification.style.color = isError ? '#721c24' : '#155724';
+    notification.innerHTML = `
+      <span>${isError ? '✕' : '✓'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Генерация случайного PIN-кода (8 цифр)
+  const generatePin = () => {
+    let pin = '';
+    for (let i = 0; i < 8; i++) {
+      pin += Math.floor(Math.random() * 10);
+    }
+    return pin;
+  };
+
+  // Обновление отображения PIN-кода
+  const updatePinDisplay = (pin) => {
+    const pinElement = document.querySelector('.pin-code');
+    if (pinElement) {
+      pinElement.textContent = pin;
+    }
+  };
+
+  // Обработка чекбокса "Отключить WPS"
+  if (disableWps) {
+    disableWps.addEventListener('change', function() {
+      const status = this.checked ? 'unconfigured' : 'configured';
+      wpsStatus.value = status;
+      showNotification(this.checked ? 'WPS отключен' : 'WPS включен');
+    });
+  }
+
+  // Генерация нового PIN-кода
+  if (regeneratePin) {
+    regeneratePin.addEventListener('click', function() {
+      currentPin = generatePin();
+      updatePinDisplay(currentPin);
+      showNotification('Новый PIN-код сгенерирован');
+    });
+  }
+
+  // Запуск WPS (кнопка)
+  if (startWpsBtn) {
+    startWpsBtn.addEventListener('click', function() {
+      if (disableWps && disableWps.checked) {
+        showNotification('WPS отключен. Включите WPS для использования', true);
+        return;
+      }
+
+      wpsProgress.style.display = 'flex';
+      let progress = 0;
+      
+      const interval = setInterval(() => {
+        progress += 10;
+        progressFill.style.width = progress + '%';
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressText.textContent = 'Устройство подключено';
+          showNotification('Устройство успешно подключено через WPS');
+          
+          setTimeout(() => {
+            wpsProgress.style.display = 'none';
+            progressFill.style.width = '0%';
+          }, 2000);
+        } else {
+          progressText.textContent = `Подключение... ${progress}%`;
+        }
+      }, 300);
+
+      // Сохраняем таймер для возможности остановки
+      wpsTimer = interval;
+    });
+  }
+
+  // Остановка WPS
+  if (stopWpsBtn) {
+    stopWpsBtn.addEventListener('click', function() {
+      if (wpsTimer) {
+        clearInterval(wpsTimer);
+        wpsProgress.style.display = 'none';
+        progressFill.style.width = '0%';
+        showNotification('WPS остановлен');
+      } else {
+        showNotification('WPS не запущен', true);
+      }
+    });
+  }
+
+  // Запуск PIN-метода
+  if (startPinBtn) {
+    startPinBtn.addEventListener('click', function() {
+      const pin = clientPin.value.trim();
+      
+      if (!pin) {
+        showNotification('Введите PIN-код клиента', true);
+        clientPin.focus();
+        return;
+      }
+
+      // Проверка формата (8 цифр)
+      if (!/^\d{8}$/.test(pin)) {
+        showNotification('PIN должен состоять из 8 цифр', true);
+        clientPin.focus();
+        return;
+      }
+
+      if (disableWps && disableWps.checked) {
+        showNotification('WPS отключен. Включите WPS для использования', true);
+        return;
+      }
+
+      showNotification('WPS-соединение по PIN запущено');
+      
+      // Имитация успешного подключения
+      setTimeout(() => {
+        showNotification('Устройство подключено по PIN');
+        clientPin.value = '';
+      }, 2000);
+    });
+  }
+
+  // Сохранение настроек
+  if (saveBtn) {
+    saveBtn.addEventListener('click', function() {
+      showNotification('Настройки WPS сохранены');
+    });
+  }
+
+  // Сохранить и применить
+  if (saveApplyBtn) {
+    saveApplyBtn.addEventListener('click', function() {
+      showNotification('Настройки WPS применены');
+    });
+  }
+
+  // Отмена
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', function() {
+      // Сброс к исходным значениям
+      if (disableWps) disableWps.checked = false;
+      if (wpsStatus) wpsStatus.value = 'configured';
+      clientPin.value = '';
+      currentPin = '87643513';
+      updatePinDisplay(currentPin);
+      
+      if (wpsTimer) {
+        clearInterval(wpsTimer);
+        wpsProgress.style.display = 'none';
+      }
+      
+      showNotification('Изменения отменены');
+    });
+  }
+
+  // Валидация ввода PIN-кода (только цифры)
+  if (clientPin) {
+    clientPin.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);
+    });
+  }
+
+  // Инициализация
+  updatePinDisplay(currentPin);
+})();
+</script>

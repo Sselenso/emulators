@@ -1,0 +1,275 @@
+<div class="content-section active" id="master">
+  <!-- Приветственный экран -->
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="content-header">
+      <h2 class="content-title">Мастер настройки</h2>
+      <p class="content-description">
+        Мастер настройки поможет вам настроить точку доступа в первый раз. Следуйте инструкциям пошагово.
+      </p>
+    </div>
+
+    <div class="welcome-box" style="
+      background: #f0f8ff;
+      border: 1px solid #cce5ff;
+      border-radius: 8px;
+      padding: 28px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    ">
+      <strong>Добро пожаловать в Мастер настройки.</strong><br><br>
+      
+      <hr style="margin: 20px 0; border-top: 1px solid #d0e0f0;">
+      
+      Мастер настройки проведёт вас через следующие шаги. Начните с нажатия на <strong>Next</strong>.<br><br>
+      
+      <ol style="margin-left: 20px; margin-bottom: 24px; line-height: 1.7;">
+        <li>Настройка режима работы</li>
+        <li>Выбор часового пояса</li>
+        <li>Настройка беспроводной сети</li>
+        <li>Выбор диапазона сети</li>
+        <li>Настройка доступа к интернету</li>
+        <li>Окончание настройки беспроводной сети</li>
+        <li>Настройка беспроводной сети</li>
+      </ol>
+      
+      <button id="startWizardBtn" class="btn btn-primary" style="display: inline-block; margin-top: 10px;">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <!-- Основной мастер (изначально скрыт) -->
+  <div class="wizard-container" id="wizardContainer" style="display: none;">
+    <!-- Шаг 1 -->
+    <div class="wizard-step active" id="step1">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 1 из 7: Режим работы</h2>
+        <p class="content-description">Выберите, как будет работать ваш роутер.</p>
+      </div>
+      <div class="form-group">
+        <label><input type="radio" name="mode" value="router" checked> Роутер (Router Mode)</label><br>
+        <label><input type="radio" name="mode" value="ap"> Точка доступа (Access Point)</label><br>
+        <label><input type="radio" name="mode" value="repeater"> Репитер / Усилитель сигнала</label><br>
+        <label><input type="radio" name="mode" value="bridge"> Клиент (Bridge Mode)</label><br>
+        <label><input type="radio" name="mode" value="wisp"> WISP</label>
+      </div>
+    </div>
+
+    <!-- Шаг 2 -->
+    <div class="wizard-step" id="step2">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 2 из 7: Часовой пояс</h2>
+        <p class="content-description">Укажите ваш часовой пояс для корректного отображения времени.</p>
+      </div>
+      <div class="form-group">
+        <label>Часовой пояс:</label>
+        <select class="form-control">
+          <option selected>Москва (UTC+3)</option>
+          <option>Санкт-Петербург (UTC+3)</option>
+          <option>Екатеринбург (UTC+5)</option>
+          <option>Новосибирск (UTC+6)</option>
+          <option>Владивосток (UTC+10)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Шаг 3 -->
+    <div class="wizard-step" id="step3">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 3 из 7: Беспроводная сеть</h2>
+        <p class="content-description">Настройте основные параметры Wi-Fi.</p>
+      </div>
+      <div class="form-group">
+        <label>SSID:</label>
+        <input type="text" class="form-control" value="XDM RUS-5G">
+      </div>
+      <div class="form-group">
+        <label>Пароль Wi-Fi:</label>
+        <input type="password" class="form-control" placeholder="Не менее 8 символов">
+      </div>
+    </div>
+
+    <!-- Шаг 4 -->
+    <div class="wizard-step" id="step4">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 4 из 7: Диапазон сети</h2>
+        <p class="content-description">Выберите диапазон частот для беспроводной сети.</p>
+      </div>
+      <div class="form-group">
+        <label>Диапазон:</label>
+        <select class="form-control">
+          <option selected>5ГГц (A+N+AC)</option>
+          <option>2.4ГГц (B+G+N)</option>
+          <option>Двойной диапазон</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Канал:</label>
+        <select class="form-control">
+          <option selected>44</option>
+          <option>36</option>
+          <option>40</option>
+          <option>48</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Шаг 5 -->
+    <div class="wizard-step" id="step5">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 5 из 7: Доступ к интернету</h2>
+        <p class="content-description">Настройте подключение к провайдеру.</p>
+      </div>
+      <div class="form-group">
+        <label>Тип подключения:</label>
+        <select class="form-control">
+          <option selected>Динамический IP (DHCP)</option>
+          <option>Статический IP</option>
+          <option>PPPoE</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Шаг 6 -->
+    <div class="wizard-step" id="step6">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 6 из 7: Окончание настройки WLAN</h2>
+        <p class="content-description">Подтвердите выбранные параметры.</p>
+      </div>
+      <ul style="padding-left: 20px; margin: 15px 0;">
+        <li><strong>SSID:</strong> XDM RUS-5G</li>
+        <li><strong>Диапазон:</strong> 5 ГГц, канал 44</li>
+        <li><strong>Подключение:</strong> DHCP</li>
+      </ul>
+    </div>
+
+    <!-- Шаг 7 -->
+    <div class="wizard-step" id="step7">
+      <div class="content-header">
+        <h2 class="content-title">Шаг 7 из 7: Финальные настройки</h2>
+        <p class="content-description">Завершите настройку дополнительными параметрами.</p>
+      </div>
+      <div class="form-group">
+        <label>Макс. клиентов: <input type="number" value="64" min="1" max="64"></label>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" checked> Включить WMM</label>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" checked> Широковещательный SSID</label>
+      </div>
+    </div>
+
+    <!-- Кнопки навигации -->
+    <div class="wizard-buttons" style="margin-top: 30px; display: flex; gap: 12px; justify-content: flex-end;">
+      <button id="wizardBack" class="btn btn-secondary" disabled>← Назад</button>
+      <button id="wizardNext" class="btn btn-primary">Далее →</button>
+      <button id="wizardFinish" class="btn btn-success" style="display:none;">Готово</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.form-group { margin-bottom: 16px; }
+.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #b0c0d0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.wizard-step { display: none; }
+.wizard-step.active { display: block; }
+</style>
+
+<script>
+// Этот скрипт гарантированно запустится после вставки в DOM
+(function() {
+  // Ждём, пока элементы появятся в DOM (на случай асинхронной загрузки)
+  function initWizard() {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const wizardContainer = document.getElementById('wizardContainer');
+    const startBtn = document.getElementById('startWizardBtn');
+    
+    if (!welcomeScreen || !wizardContainer || !startBtn) {
+      // Если ещё не готово — попробуем через 100 мс
+      setTimeout(initWizard, 100);
+      return;
+    }
+
+    let currentStep = 1;
+    const totalSteps = 7;
+    const steps = [
+      document.getElementById('step1'),
+      document.getElementById('step2'),
+      document.getElementById('step3'),
+      document.getElementById('step4'),
+      document.getElementById('step5'),
+      document.getElementById('step6'),
+      document.getElementById('step7')
+    ];
+    const backBtn = document.getElementById('wizardBack');
+    const nextBtn = document.getElementById('wizardNext');
+    const finishBtn = document.getElementById('wizardFinish');
+
+    function showStep(stepNum) {
+      // Скрываем все шаги
+      steps.forEach(step => {
+        if (step) step.classList.remove('active');
+      });
+      
+      // Показываем текущий
+      if (steps[stepNum - 1]) {
+        steps[stepNum - 1].classList.add('active');
+      }
+      
+      // Обновляем кнопки
+      if (backBtn) backBtn.disabled = (stepNum === 1);
+      
+      if (nextBtn && finishBtn) {
+        if (stepNum === totalSteps) {
+          nextBtn.style.display = 'none';
+          finishBtn.style.display = 'inline-block';
+        } else {
+          nextBtn.style.display = 'inline-block';
+          finishBtn.style.display = 'none';
+        }
+      }
+      
+      currentStep = stepNum;
+    }
+
+    // Запуск мастера
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      welcomeScreen.style.display = 'none';
+      wizardContainer.style.display = 'block';
+      showStep(1);
+    });
+
+    // Навигация
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        if (currentStep > 1) showStep(currentStep - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentStep < totalSteps) showStep(currentStep + 1);
+				console.log('нажал')
+      });
+    }
+
+    if (finishBtn) {
+      finishBtn.addEventListener('click', () => {
+        alert('✅ Настройки успешно применены!\nРоутер перезагрузится.');
+      });
+    }
+  }
+
+  // Запускаем инициализацию
+  initWizard();
+})();
+</script>

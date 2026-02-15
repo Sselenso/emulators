@@ -42,6 +42,12 @@ html {
 	background-color: var(--accent-color);
 }
 
+/* Скроллбар в Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--accent-color) transparent;
+}
+
 
 
 /* Общие стили */
@@ -109,6 +115,17 @@ body[data-theme="light"] .theme-toggle .fa-sun {
 .theme-toggle:hover {
 	background-color: var(--accent-color);
 	color: var(--primary-bg);
+}
+
+.theme-toggle:focus-visible {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 2px;
+}
+
+.emulators__link:focus-visible,
+.emulators__instruction-link:focus-visible {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 2px;
 }
 
 /* Стили для списка эмуляторов */
@@ -229,6 +246,23 @@ body[data-theme="light"] .theme-toggle .fa-sun {
 	}
 	50% {
 			transform: scale(1.05);
+	}
+}
+
+/* Уважение к настройке «Уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	.emulators__title,
+	.emulators__item {
+		animation: none;
+	}
+	.emulators__item:hover {
+		transform: none;
+	}
+	.emulators__link:hover {
+		transform: none;
 	}
 }
 
