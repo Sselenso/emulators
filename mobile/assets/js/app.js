@@ -1,356 +1,45 @@
-const routers = [
-  {
-    id: "dlink",
-    name: "D-Link",
-    icon: "📡",
-    emulators: [
-      { name: "DIR 615 (старая)", url: "http://em.dlink.ru/emul/DIR-615AA1A/#start/storInfo" },
-      { name: "DIR 842 (новая)", url: "https://anweb.dlink.ru:8003/session/start?deviceUrl=http://127.0.0.1:8000&profile=DIR_842E_RT8197F&lang=ru" },
-      { name: "Все эмуляторы", url: "https://anweb.dlink.ru/" }
-    ],
-    instructions: [
-      { name: "Новая", url: "https://pakt.ru/internet/oborudovanie/routeri/nastroyka_dir-842.html" },
-      { name: "Air", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/d-link/nastroyka-wi-fi-marshrutizatora-d-link-air-interfeys.html#ipoe" },
-      { name: "Черная", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/d-link/nastroyka-podklyucheniya-d-link-temnyy-interfeys.html#ipoe" }
-    ],
-    info: `
-      <h2>D-Link</h2>
-      <p><strong>IP:</strong> 192.168.0.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-      <p><strong>MAC у старых моделей:</strong> +1</p>
-    `
-  },
-  {
-    id: "tplink",
-    name: "TP-Link",
-    icon: "🌐",
-    emulators: [
-      { name: "Зелёная", url: "https://emulator.tp-link.com/Archer-C7_RU/Index.htm" },
-      { name: "Бирюзовая (новая)", url: "https://emulator.tp-link.com/c6-ru-v2/index.html" },
-      { name: "Все эмуляторы", url: "https://www.tp-link.com/kz/support/emulator/" }
-    ],
-    instructions: [
-      { name: "Зеленая", url: "https://help-wifi.com/tp-link/nastrojka-routera-tp-link-tl-wr841n-podklyuchenie-nastrojka-interneta-i-wi-fi/" },
-      { name: "Бирюзовая", url: "https://help-wifi.com/tp-link/kak-nastroit-marshrutizator-tp-link-archer-c6/" }
-    ],
-    info: `
-      <h2>TP-Link</h2>     
-      <p><strong>IP в новых моделях:</strong> 192.168.0.1</p>
-      <p><strong>IP в старых моделях:</strong> 192.168.1.1</p>
-			 <p><strong>IP:</strong> http://tplinkwifi.net/</p>
-      <p><strong>MAC:</strong> +1</p>
-    `
-  },
-  {
-    id: "asus",
-    name: "Asus",
-    icon: "🖥️",
-    emulators: [
-      { name: "Чёрная", url: "https://linserv.ru/Asus-RT-AC66U/" },
-      { name: "Синяя", url: "https://linserv.ru/Asus-RT-N12/" },
-      { name: "Фиолетовая", url: "https://linserv.ru/Asus_old/index-2.html" }
-    ],
-    instructions: [
-      { name: "Черная", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/asus/nastroyka-wi-fi-marshrutizatora-asus-rtn-12.html#ipoe" },
-      { name: "Синяя", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/asus/nastroyka-wi-fi-marshrutizatora-asus-rt-n16.html#ipoe" }
-    ],
-    info: `
-      <h2>Asus</h2>
-      <p><strong>IP в новых моделях:</strong> 192.168.50.1</p>
-      <p><strong>IP в старых моделях:</strong> 192.168.1.1</p>
-      <p><strong>IP:</strong> http://router.asus.com</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-    `
-  },
-  {
-    id: "keenetic",
-    name: "Netcraze / Keenetic / Zyxel",
-    icon: "📶",
-    emulators: [
-      { name: "Новая (user | user12345678)", url: "http://sgtramenator.keenetic.link" },
-      { name: "Старая Zyxel", url: "https://linserv.ru/Zuxel-Keenetic/home.html" },
-      { name: "Старая Zyxel 2", url: "https://linserv.ru/Keenetic-4G-II/index.html" },
-      { name: "Старая Zyxel 3", url: "https://linserv.ru/Keenetic-4G/index.html" }
-    ],
-    instructions: [
-      { name: "Новая", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/keenetic/nastroyka-wi-fi-routera-keenetic-startlite.html#ipoe" },
-      { name: "Старая", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/zyxel/nastroyka-wi-fi-marshrutizatora-zyxel-keenetic-lite.html#ipoe" }
-    ],
-    info: `
-      <h2>Keenetic / Zyxel</h2>
-      <p><strong>IP:</strong> 192.168.1.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-    `
-  },
-  {
-    id: "cudy",
-    name: "Cudy",
-    icon: "🔷",
-    emulators: [
-      { name: "WR3000", url: "https://support.cudy.com/emulator/WR3000/" }
-    ],
-    instructions: [
-      { name: "Инструкция от монтажников", url: "../cudy.html" },
-      { name: "Мануал", url: "https://www.cudy.com/ru-ru/blogs/faq/anleitung-zur-installation-des-cudy-wlan-routers" }
-    ],
-    info: `
-      <h2>Cudy</h2>
-      <p><strong>IP:</strong> 192.168.10.1</p>
-      <p><strong>IP:</strong> http://cudy.net</p>
-      <p><strong>MAC:</strong> +1</p>
-      <p><strong>Пароль от входа:</strong> password</p>
-    `
-  },
-  {
-    id: "tenda",
-    name: "Tenda",
-    icon: "🌊",
-    emulators: [
-      { name: "AC10", url: "https://static.tenda.com.cn/doc/2025/05/21/8c182a9fd98b4982b1d407e8bc9f4002/AC10v1Emulator/index.html" },
-      { name: "Все эмуляторы", url: "https://www.tendacn.com/simulator/default.html" }
-    ],
-    instructions: [
-      { name: "Новая прошивка", url: "https://help-wifi.com/tenda/bystraya-nastrojka-marshrutizatora-tenda-ac9-ac1200/" },
-      { name: "Старая прошивка", url: "https://help-wifi.com/tenda/nastrojka-routera-tenda-n301/" }
-    ],
-    info: `
-      <h2>Tenda</h2>
-      <p><strong>IP:</strong> 192.168.0.1</p>
-      <p><strong>MAC:</strong> +1</p>
-    `
-  },
-  {
-    id: "digma",
-    name: "Digma",
-    icon: "📱",
-    emulators: [
-      { name: "Digma = Tenda", url: "https://www.tendacn.com/simulator/default.html" }
-    ],
-    instructions: [
-      { name: "Мануал", url: "../digma.html" }
-    ],
-    info: `
-      <h2>Digma</h2>
-      <p><strong>IP:</strong> 192.168.0.1</p>
-      <p><strong>IP:</strong> digmawifi.com</p>
-      <p><strong>MAC:</strong> На этикетке + см. мануал</p>
-    `
-  },
-  {
-    id: "mercusys",
-    name: "Mercusys",
-    icon: "🏠",
-    emulators: [
-      { name: "Любая модель", url: "https://www.mercusys.com/simulator/mw325rv2-ru/web/common/Index.htm" },
-      { name: "Все эмуляторы", url: "https://www.mercusys.ru/support/simulator" }
-    ],
-    instructions: [
-      { name: "Все прошивки", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/mercusys/nastroyka-wi-fi-marshrutizatora-mercusys-ac12g.html#ipoe" }
-    ],
-    info: `
-      <h2>Mercusys</h2>
-      <p><strong>IP:</strong> 192.168.1.1</p>
-      <p><strong>IP:</strong> http://mwlogin.net</p>
-      <p><strong>MAC:</strong> +1</p>
-    `
-  },
-  {
-    id: "xiaomi",
-    name: "Xiaomi",
-    icon: "🍚",
-    emulators: [
-      { name: "MI Router", url: "https://linserv.ru/Xiaomi/cgi-bin/luci/home#router" }
-    ],
-    instructions: [
-      { name: "На английском", url: "https://help-wifi.com/xiaomi/podklyuchenie-i-nastrojka-xiaomi-mi-wi-fi-router-3/" },
-      { name: "На китайском", url: "https://tcenter.ru/upload/stelecom-b2c/Xiaomi_mi_wifi_router_3_s_interfeysom_na_kitayskom.pdf" }
-    ],
-    info: `
-      <h2>Xiaomi</h2>
-      <p><strong>IP:</strong> 192.168.31.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-    `
-  },
-  {
-    id: "huawei",
-    name: "Huawei",
-    icon: "🔴",
-    emulators: [
-      { name: "Старый", url: "https://linserv.ru/HG8120H/index.asp" }
-    ],
-    instructions: [
-      { name: "AX3", url: "https://consumer.huawei.com/ru/community/details/Statya-Nastroyka-routera-Huawei-WiFi-AX3/topicId-31438/" },
-      { name: "Старая", url: "https://setuprouter.com/router/huawei/hg8245h/screenshots.html" }
-    ],
-    info: `
-      <h2>Huawei</h2>
-      <p><strong>IP:</strong> 192.168.3.1</p>
-      <p><strong>MAC:</strong> +1</p>
-    `
-  },
-  {
-    id: "netis",
-    name: "Netis",
-    icon: "🔵",
-    emulators: [
-      { name: "Новая (белая)", url: "https://linserv.ru/Netis-GP8501G/index.htm" },
-      { name: "Старая (голубая)", url: "http://www.netisru.com/Uploads/Support/Emulators/WF2501_EN/index.htm" },
-      { name: "Все эмуляторы", url: "https://linserv.ru/Netis-WF2501/" }
-    ],
-    instructions: [
-      { name: "Инструкция", url: "https://my.volia.com/kiev/ru/faq/article/nastroika-wi-fi-routerov-netis" }
-    ],
-    info: `
-      <h2>Netis</h2>
-      <p><strong>IP:</strong> 192.168.1.1</p>
-      <p><strong>IP:</strong> https://netis.cc</p>
-      <p><strong>MAC:</strong> +1</p>
-    `
-  },
-  {
-    id: "snr",
-    name: "SNR",
-    icon: "⚡",
-    emulators: [
-      { name: "SNR CPE Дом.ру", url: "https://linserv.ru/SNR-CPE-W4n/home.html" },
-      { name: "SNR CPE W4N", url: "https://linserv.ru/SNR-CPE-W4N/home.html" }
-    ],
-    instructions: [
-      { name: "Новая прошивка", url: "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/39/nastroyka-wi-fi-marshrutizatora-snr-cpe-me1.html#ipoe" },
-      { name: "Старая", url: "https://netintel.ru/index.php?id=76" }
-    ],
-    info: `
-      <h2>SNR</h2>
-      <p><strong>IP:</strong> 192.168.1.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-    `
-  },
-  {
-    id: "wave",
-    name: "Wave",
-    icon: "🌊",
-    emulators: [
-      { name: "Эмулятор", url: "../router-admin/index.html" }
-    ],
-    instructions: [],
-    info: `
-      <h2>Wave</h2>
-      <p><strong>IP:</strong> 192.168.1.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-      <p>Настроить можно не прошитый под ДОМ.РУ</p>
-    `
-  },
-  {
-    id: "apple",
-    name: "Apple",
-    icon: "🍎",
-    emulators: [
-      { name: "Airport Utility", url: "https://chasms.com/osx/yosemite/apu1.htm" }
-    ],
-    instructions: [
-      { name: "Мануал", url: "https://help.citylink.pro/category/38/question/214" }
-    ],
-    info: `
-      <h2>Apple</h2>
-      <p><strong>IP:</strong> 10.0.1.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-    `
-  },
-  {
-    id: "mikrotik",
-    name: "Mikrotik",
-    icon: "🎯",
-    emulators: [
-      { name: "Эмулятор без пароля", url: "http://demo.mt.lv/" }
-    ],
-    instructions: [
-      { name: "Winbox", url: "https://www.technotrade.com.ua/Articles/mikrotik_router_setup.php" },
-      { name: "QuickSet", url: "https://www.technotrade.com.ua/Articles/mikrotik_quickset_setup_2012-10-12.php" }
-    ],
-    info: `
-      <h2>Mikrotik</h2>
-      <p><strong>IP:</strong> 192.168.88.1</p>
-      <p><strong>MAC:</strong> с этикетки</p>
-    `
-  },
-  {
-    id: "exotic",
-    name: "Экзотика",
-    icon: "🎪",
-    emulators: [
-      { name: "Netgear", url: "https://highspeed.tips/files/emulators/netgear_genie/start.html" },
-      { name: "Linksys/Cisco", url: "https://linserv.ru/Linksys-E4200/" },
-      { name: "Linksys", url: "https://linserv.ru/Linksys-WRT330N/" },
-      { name: "UPVEL", url: "http://upvel.ru/support/emulyatoryi.html" },
-      { name: "Totolink", url: "https://totolink.net/home/news/me_name/menu_listtpl/support/id/41.html" },
-      { name: "Trendnet", url: "https://www.trendnet.com/emulators/TEW-923DAP_V1.0R/index.html" }
-    ],
-    instructions: [],
-    info: `
-      <h2>Экзотика</h2>
-      <p>Netgear, Linksys, UPVEL, Totolink, Trendnet</p>
-      <p><strong>IP:</strong> см. эмулятор</p>
-      <p><strong>MAC:</strong> см. эмулятор</p>
-    `
-  }
-];
+// Глобальные переменные
+let routers = [];
 
-const grid = document.getElementById("grid");
-const modal = document.getElementById("modal");
-const modalBody = document.getElementById("modal-body");
-const search = document.getElementById("search");
-
-function render(list) {
-  grid.innerHTML = "";
-  list.forEach((r, index) => {
-    const mainUrl = r.emulators && r.emulators.length > 0 ? r.emulators[0].url : "#";
-
-    // Извлекаем все IP и MAC из info (включая "IP в новых моделях" и т.д.)
-    const ipMatches = [...r.info.matchAll(/<p><strong>(IP[^<]*)<\/strong>\s*([^<]+)<\/p>/g)];
-    const macMatches = [...r.info.matchAll(/<p><strong>(MAC[^<]*)<\/strong>\s*([^<]+)<\/p>/g)];
-
-    let ipHtml = "";
-    if (ipMatches.length > 0) {
-      if (ipMatches.length === 1) {
-        ipHtml = `<div class="card-info"><span class="info-label">${ipMatches[0][1]}</span> ${ipMatches[0][2].trim()}</div>`;
-      } else {
-        ipHtml = `<div class="card-info-list">` +
-          ipMatches.map(m => `<div class="card-info-item"><span class="info-label">${m[1]}</span> ${m[2].trim()}</div>`).join("") +
-          `</div>`;
-      }
-    }
-
-    let macHtml = "";
-    if (macMatches.length > 0) {
-      if (macMatches.length === 1) {
-        macHtml = `<div class="card-info"><span class="info-label">${macMatches[0][1]}</span> ${macMatches[0][2].trim()}</div>`;
-      } else {
-        macHtml = `<div class="card-info-list">` +
-          macMatches.map(m => `<div class="card-info-item"><span class="info-label">${m[1]}</span> ${m[2].trim()}</div>`).join("") +
-          `</div>`;
-      }
-    }
-
-    // Пустой заполнитель для одинаковой высоты карточек
-    const placeholderHtml = (!ipHtml && !macHtml) ? `<div class="card-info" style="visibility:hidden">IP: placeholder</div>` : "";
-
-    grid.innerHTML += `
-      <div class="card" data-type="${r.id}">
-        <h1>${r.name}</h1>
-        ${ipHtml}
-        ${macHtml}
-        ${placeholderHtml}
-        <div class="actions">
-          <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">Эмулятор</a>
-          <button onclick="openModal('${r.id}')">Подробнее</button>
-        </div>
-      </div>
-    `;
-  });
-}
-
+// Функция открытия модалки
 function openModal(id) {
   const router = routers.find(r => r.id === id);
+  if (!router) return;
+  
+  const modal = document.getElementById("modal");
+  const modalBody = document.getElementById("modal-body");
+  
+  // Формируем HTML для модалки из структурированных данных
+  let infoHtml = `<h2>${router.info.title || router.name}</h2>`;
+  
+  // Добавляем IP адреса
+  if (router.info.ip && router.info.ip.length > 0) {
+    router.info.ip.forEach(ip => {
+      infoHtml += `<p><strong>IP:</strong> ${ip}</p>`;
+    });
+  }
+  
+  // Добавляем MAC адреса
+  if (router.info.mac && router.info.mac.length > 0) {
+    router.info.mac.forEach(mac => {
+      infoHtml += `<p><strong>MAC:</strong> ${mac}</p>`;
+    });
+  }
+  
+  // Добавляем пароль если есть
+  if (router.info.password) {
+    infoHtml += `<p><strong>Пароль по-умолчанию:</strong> ${router.info.password}</p>`;
+  }
+  
+  // Добавляем описание если есть
+  if (router.info.description) {
+    infoHtml += `<p>${router.info.description}</p>`;
+  }
+  
+  // Добавляем примечание если есть
+  if (router.info.note) {
+    infoHtml += `<p><em>${router.info.note}</em></p>`;
+  }
   
   let emulatorsHtml = "";
   if (router.emulators && router.emulators.length > 0) {
@@ -367,7 +56,7 @@ function openModal(id) {
   }
   
   modalBody.innerHTML = `
-    ${router.info}
+    ${infoHtml}
     ${emulatorsHtml}
     ${instructionsHtml}
   `;
@@ -376,50 +65,156 @@ function openModal(id) {
   document.body.style.overflow = 'hidden';
 }
 
-function closeModalFunc() {
-  modal.classList.remove('active');
-  setTimeout(() => {
-    modal.style.display = "none";
-    document.body.style.overflow = '';
-  }, 300);
+// Делаем функцию глобальной
+window.openModal = openModal;
+
+// Загрузка данных из JSON
+async function loadRouters() {
+  try {
+    const response = await fetch('./assets/data/routers.json');
+    if (!response.ok) {
+      throw new Error('Ошибка загрузки данных');
+    }
+    routers = await response.json();
+    return routers;
+  } catch (error) {
+    console.error('Ошибка:', error);
+    return [];
+  }
 }
 
-document.getElementById("closeModal").onclick = closeModalFunc;
+// Ждем загрузку DOM
+document.addEventListener('DOMContentLoaded', async function() {
+  // Загружаем данные
+  await loadRouters();
+  
+  // DOM элементы
+  const grid = document.getElementById("grid");
+  const modal = document.getElementById("modal");
+  const search = document.getElementById("search");
+  const closeModalBtn = document.getElementById("closeModal");
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
 
-modal.onclick = (e) => {
-  if (e.target === modal) {
-    closeModalFunc();
+  // Функция закрытия модалки
+  function closeModalFunc() {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      modal.style.display = "none";
+      document.body.style.overflow = '';
+    }, 300);
   }
-};
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.classList.contains('active')) {
-    closeModalFunc();
+  // Функция отрисовки карточек
+  function render(list) {
+    if (!grid) return;
+    
+    grid.innerHTML = "";
+    list.forEach((r) => {
+      const mainUrl = r.emulators && r.emulators.length > 0 ? r.emulators[0].url : "#";
+
+      // Формируем HTML для IP адресов
+      let ipHtml = '';
+      if (r.info && r.info.ip && r.info.ip.length > 0) {
+        ipHtml = '<div class="card-info-list">';
+        r.info.ip.forEach(ip => {
+          // Если IP содержит двоеточие (например "в новых моделях: 192.168.0.1")
+          if (ip.includes(':')) {
+            const [label, value] = ip.split(':').map(s => s.trim());
+            ipHtml += `<div class="card-info-item"><span class="info-label">${label}</span> ${value}</div>`;
+          } else {
+            ipHtml += `<div class="card-info-item"><span class="info-label">IP</span> ${ip}</div>`;
+          }
+        });
+        ipHtml += '</div>';
+      }
+
+      // Формируем HTML для MAC адресов
+      let macHtml = '';
+      if (r.info && r.info.mac && r.info.mac.length > 0) {
+        macHtml = '<div class="card-info">';
+        r.info.mac.forEach(mac => {
+          // Если MAC содержит двоеточие (например "у старых моделей: +1")
+          if (mac.includes(':')) {
+            const [label, value] = mac.split(':').map(s => s.trim());
+            macHtml += `<div class="card-info-item"><span class="info-label">${label}</span> ${value}</div>`;
+          } else {
+            macHtml += `<div class="card-info-item"><span class="info-label">MAC</span> ${mac}</div>`;
+          }
+        });
+        macHtml += '</div>';
+      }
+			//  // Добавляем пароль если есть
+      // let passwordHtml = '';
+      // if (r.info && r.info.password) {
+      //   passwordHtml = `<div class="card-info-item"><div class="card-info-item"><span class="info-label">Пароль</span> ${r.info.password}</div></div>`;
+      // }
+     
+
+      // Пустой заполнитель для одинаковой высоты карточек
+      const hasContent = ipHtml || macHtml || passwordHtml;
+      const placeholderHtml = !hasContent ? `<div class="card-info" style="visibility:hidden">IP: placeholder</div>` : "";
+
+      grid.innerHTML += `
+        <div class="card" data-type="${r.id}">
+          <div class="card-title"><h2>${r.name}</h2></div>
+          ${ipHtml}					
+          ${macHtml}         
+          ${placeholderHtml}
+          <div class="actions">
+            <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">Эмулятор</a>
+            <button onclick="openModal('${r.id}')">Подробнее</button>
+          </div>
+        </div>
+      `;
+    });
   }
-});
 
-search.oninput = () => {
-  const q = search.value.toLowerCase();
-  const filtered = routers.filter(r =>
-    r.name.toLowerCase().includes(q)
-  );
-  render(filtered);
-};
+  // Обработчики событий
+  if (closeModalBtn) {
+    closeModalBtn.onclick = closeModalFunc;
+  }
 
-render(routers);
+  if (modal) {
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        closeModalFunc();
+      }
+    };
+  }
 
-// Theme toggle
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeModalFunc();
+    }
+  });
 
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  body.setAttribute('data-theme', savedTheme);
-}
+  // Поиск
+  if (search) {
+    search.oninput = () => {
+      const q = search.value.toLowerCase();
+      const filtered = routers.filter(r =>
+        r.name.toLowerCase().includes(q)
+      );
+      render(filtered);
+    };
+  }
 
-themeToggle.addEventListener('click', () => {
-  const currentTheme = body.getAttribute('data-theme');
-  const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-  body.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
+  // Тема
+  if (themeToggle) {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.setAttribute('data-theme', savedTheme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+
+  // Инициализация
+  render(routers);
 });
