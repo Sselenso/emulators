@@ -11,7 +11,6 @@
 ```
 Emulators/
 ├── index.html          # Главная страница со списком всех эмуляторов
-├── home.html           # Галерея эмуляторов (masonry-стиль)
 ├── cudy.html           # Инструкция по настройке Cudy
 ├── digma.html          # Инструкция по настройке Digma
 ├── favicon.ico
