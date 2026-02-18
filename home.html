@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Эмуляторы роутеров — еТелеком (галерея)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Шапка как в еТелеком */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #00d1c7;
+            background: white;
+            color: #00d1c7;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: #00d1c7;
+            color: white;
+        }
+
+        /* MASONRY / GALlERY STYLE - колонки как в телефонах */
+        .gallery {
+            column-count: 3;
+            column-gap: 24px;
+        }
+
+        /* Карточка - разной высоты */
+        .card {
+            break-inside: avoid;
+            margin-bottom: 24px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            transition: 0.3s;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .card:hover {
+            border-color: #00d1c7;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,209,199,0.1);
+        }
+
+        /* Заголовок карточки - серый с бирюзовой полосой */
+        .card-header {
+            background-color: #f0f0f0;
+            padding: 16px 20px;
+            border-bottom: 3px solid #00d1c7;
+        }
+
+        .card-header h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #000;
+            margin: 0;
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Список моделей */
+        .models-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .models-list li {
+            font-size: 14px;
+            color: #333;
+            padding: 6px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .models-list li:last-child {
+            border-bottom: none;
+        }
+
+        .models-list em {
+            color: #00d1c7;
+            font-style: italic;
+        }
+
+        /* Блок с эмуляторами */
+        .emulators-section {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 3px solid #00d1c7;
+        }
+
+        .emulators-section p {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .emulator-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* Бирюзовые ссылки */
+        .emulator-link {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #00d1c7;
+            padding-bottom: 2px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .emulator-link:hover {
+            color: #00d1c7;
+            border-bottom-color: #000;
+        }
+
+        /* Техническая информация */
+        .tech-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-top: 5px;
+        }
+
+        .tech-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .tech-info strong {
+            color: #00d1c7;
+        }
+
+        /* Разные размеры карточек - добавляем контент для высоты */
+        .card:nth-child(1) .models-list { min-height: 60px; }
+        .card:nth-child(2) .models-list { min-height: 120px; }
+        .card:nth-child(3) .models-list { min-height: 90px; }
+        .card:nth-child(4) .models-list { min-height: 150px; }
+        .card:nth-child(5) .models-list { min-height: 200px; }
+        .card:nth-child(6) .models-list { min-height: 80px; }
+        .card:nth-child(7) .models-list { min-height: 110px; }
+        .card:nth-child(8) .models-list { min-height: 70px; }
+        .card:nth-child(9) .models-list { min-height: 130px; }
+        .card:nth-child(10) .models-list { min-height: 100px; }
+        .card:nth-child(11) .models-list { min-height: 140px; }
+        .card:nth-child(12) .models-list { min-height: 160px; }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .gallery {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                column-count: 1;
+            }
+            .header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Эмуляторы роутеров</h1>
+            <button class="theme-toggle" aria-label="Переключить тему">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon" style="display: none;"></i>
+            </button>
+        </div>
+
+        <!-- Галерея с разноразмерными карточками -->
+        <div class="gallery">
+            <!-- Карточка 1 - маленькая -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>D-Link (серый)</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>DIR-632, DIR-825</li>
+                        <li>DIR-615 Rev K1,K2</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">DIR-615 старая</a>
+                            <a href="#" class="emulator-link">DIR-842 новая</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.0.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 2 - средняя -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>D-Link (бело-бирюзовый)</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>DIR-300NRU</li>
+                        <li>DIR-620</li>
+                        <li><em>бело-бирюзовый интерфейс</em></li>
+                        <li>популярные модели 2015-2018</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">DIR-300NRU</a>
+                            <a href="#" class="emulator-link">DIR-620</a>
+                            <a href="#" class="emulator-link">Все эмуляторы</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.0.1</p>
+                        <p><strong>MAC:</strong> с этикетки</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 3 - маленькая -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>D-Link (оранжевый)</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>DIR-300, DIR-310, DIR-320</li>
+                        <li>DIR-615, N300</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">DIR-300</a>
+                            <a href="#" class="emulator-link">DIR-615</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.0.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 4 - большая (Asus) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Asus RT (синий)</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>G32, N10U, N12U, N13, N15</li>
+                        <li>N16v1, N53, WL-500gP</li>
+                        <li><em>синий интерфейс</em></li>
+                        <li>RT-AC52U, AC55U, AC56U</li>
+                        <li>AC66U, AC68U, N10, N11P</li>
+                        <li>N12, N13U, N15U, N16</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">Чёрная</a>
+                            <a href="#" class="emulator-link">Синяя</a>
+                            <a href="#" class="emulator-link">Фиолетовая</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP новые:</strong> 192.168.50.1</p>
+                        <p><strong>IP старые:</strong> 192.168.1.1</p>
+                        <p><strong>Адрес:</strong> router.asus.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 5 - очень большая (TP-Link) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>TP-Link Archer</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>C2, C5, C7, C20</li>
+                        <li>TL-WDR3500, TL-WDR3600</li>
+                        <li>TL-WDR4300, TL-MR3020</li>
+                        <li>TL-MR3220, TL-MR3420</li>
+                        <li>TL-WR720N, TL-WR740N</li>
+                        <li>TL-WR741N (ND), TL-WR743ND</li>
+                        <li>TL-WR841HP (N, ND)</li>
+                        <li>TL-WR842ND, TL-WR940ND</li>
+                        <li>TL-WR941ND, TL-WR1042ND</li>
+                        <li>TL-WR1043ND</li>
+                        <li><em>серо-зеленый интерфейс</em></li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">Зелёная</a>
+                            <a href="#" class="emulator-link">Бирюзовая</a>
+                            <a href="#" class="emulator-link">TP-Link эмуляторы</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>Адрес:</strong> tplinkwifi.net</p>
+                        <p><strong>IP:</strong> 192.168.0.1 / 1.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 6 - средняя (Zyxel) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Zyxel / Keenetic</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>Keenetic, Keenetic Giga</li>
+                        <li>Keenetic II, Giga II</li>
+                        <li>Keenetic Lite II, Omni</li>
+                        <li>Omni II, Keenetic Start</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">Новая</a>
+                            <a href="#" class="emulator-link">Старая</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.1.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 7 - маленькая (Cudy) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Cudy</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>WR3000</li>
+                        <li>другие модели</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">WR3000</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.10.1</p>
+                        <p><strong>Пароль:</strong> password</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 8 - средняя (Tenda) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Tenda</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>AC10, AC9, AC1200</li>
+                        <li>N301, F300</li>
+                        <li>W303R, W308R, W309R</li>
+                        <li>W316R, W311R</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">AC10</a>
+                            <a href="#" class="emulator-link">Все эмуляторы</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.0.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 9 - маленькая (Mercusys) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Mercusys</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>MW325R</li>
+                        <li>AC12G</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">MW325R</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.1.1</p>
+                        <p><strong>Адрес:</strong> mwlogin.net</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 10 - большая (Xiaomi + Huawei) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Xiaomi / Huawei</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>Xiaomi Mi Router 3, 4, 4A</li>
+                        <li>Xiaomi Mi Router AX3000</li>
+                        <li>Huawei WiFi AX3</li>
+                        <li>Huawei HG8245H</li>
+                        <li><em>разные прошивки</em></li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">Xiaomi</a>
+                            <a href="#" class="emulator-link">Huawei</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>Xiaomi IP:</strong> 192.168.31.1</p>
+                        <p><strong>Huawei IP:</strong> 192.168.3.1</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 11 - средняя (Netis) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Netis</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>WF2501</li>
+                        <li>NEX系列</li>
+                        <li><em>белый / голубой интерфейс</em></li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">Белая</a>
+                            <a href="#" class="emulator-link">Голубая</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.1.1</p>
+                        <p><strong>Адрес:</strong> netis.cc</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 12 - маленькая (SNR) -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>SNR</h3>
+                </div>
+                <div class="card-content">
+                    <ul class="models-list">
+                        <li>CPE W4N</li>
+                        <li>CPE ME1</li>
+                    </ul>
+                    <div class="emulators-section">
+                        <p>Эмуляторы:</p>
+                        <div class="emulator-links">
+                            <a href="#" class="emulator-link">SNR CPE W4N</a>
+                        </div>
+                    </div>
+                    <div class="tech-info">
+                        <p><strong>IP:</strong> 192.168.1.1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переключатель темы
+        const toggleBtn = document.querySelector('.theme-toggle');
+        const sunIcon = toggleBtn.querySelector('.fa-sun');
+        const moonIcon = toggleBtn.querySelector('.fa-moon');
+        
+        toggleBtn.addEventListener('click', () => {
+            if (sunIcon.style.display === 'none') {
+                document.body.style.backgroundColor = '#f5f5f5';
+                document.body.style.color = '#000';
+                sunIcon.style.display = 'inline-block';
+                moonIcon.style.display = 'none';
+            } else {
+                document.body.style.backgroundColor = '#1a1a1a';
+                document.body.style.color = '#fff';
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline-block';
+            }
+        });
+    </script>
+</body>
+</html>
