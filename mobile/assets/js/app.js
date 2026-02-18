@@ -2,7 +2,7 @@ const routers = [
   {
     id: "dlink",
     name: "D-Link",
-    logo: "assets/img/dlink.svg",
+    icon: "📡",
     emulators: [
       { name: "DIR 615 (старая)", url: "http://em.dlink.ru/emul/DIR-615AA1A/#start/storInfo" },
       { name: "DIR 842 (новая)", url: "https://anweb.dlink.ru:8003/session/start?deviceUrl=http://127.0.0.1:8000&profile=DIR_842E_RT8197F&lang=ru" },
@@ -23,7 +23,7 @@ const routers = [
   {
     id: "tplink",
     name: "TP-Link",
-    logo: "assets/img/tplink.svg",
+    icon: "🌐",
     emulators: [
       { name: "Зелёная", url: "https://emulator.tp-link.com/Archer-C7_RU/Index.htm" },
       { name: "Бирюзовая (новая)", url: "https://emulator.tp-link.com/c6-ru-v2/index.html" },
@@ -34,17 +34,17 @@ const routers = [
       { name: "Бирюзовая", url: "https://help-wifi.com/tp-link/kak-nastroit-marshrutizator-tp-link-archer-c6/" }
     ],
     info: `
-      <h2>TP-Link</h2>
-      <p><strong>Адрес входа:</strong> http://tplinkwifi.net/</p>
+      <h2>TP-Link</h2>     
       <p><strong>IP в новых моделях:</strong> 192.168.0.1</p>
       <p><strong>IP в старых моделях:</strong> 192.168.1.1</p>
+			 <p><strong>IP:</strong> http://tplinkwifi.net/</p>
       <p><strong>MAC:</strong> +1</p>
     `
   },
   {
     id: "asus",
     name: "Asus",
-    logo: "assets/img/asus.svg",
+    icon: "🖥️",
     emulators: [
       { name: "Чёрная", url: "https://linserv.ru/Asus-RT-AC66U/" },
       { name: "Синяя", url: "https://linserv.ru/Asus-RT-N12/" },
@@ -64,8 +64,8 @@ const routers = [
   },
   {
     id: "keenetic",
-    name: "Keenetic / Zyxel",
-    logo: "assets/img/keenetic.svg",
+    name: "Netcraze / Keenetic / Zyxel",
+    icon: "📶",
     emulators: [
       { name: "Новая (user | user12345678)", url: "http://sgtramenator.keenetic.link" },
       { name: "Старая Zyxel", url: "https://linserv.ru/Zuxel-Keenetic/home.html" },
@@ -85,7 +85,7 @@ const routers = [
   {
     id: "cudy",
     name: "Cudy",
-    logo: "assets/img/cudy.svg",
+    icon: "🔷",
     emulators: [
       { name: "WR3000", url: "https://support.cudy.com/emulator/WR3000/" }
     ],
@@ -104,7 +104,7 @@ const routers = [
   {
     id: "tenda",
     name: "Tenda",
-    logo: "assets/img/tenda.svg",
+    icon: "🌊",
     emulators: [
       { name: "AC10", url: "https://static.tenda.com.cn/doc/2025/05/21/8c182a9fd98b4982b1d407e8bc9f4002/AC10v1Emulator/index.html" },
       { name: "Все эмуляторы", url: "https://www.tendacn.com/simulator/default.html" }
@@ -122,7 +122,7 @@ const routers = [
   {
     id: "digma",
     name: "Digma",
-    logo: "assets/img/digma.svg",
+    icon: "📱",
     emulators: [
       { name: "Digma = Tenda", url: "https://www.tendacn.com/simulator/default.html" }
     ],
@@ -139,7 +139,7 @@ const routers = [
   {
     id: "mercusys",
     name: "Mercusys",
-    logo: "assets/img/mercusys.svg",
+    icon: "🏠",
     emulators: [
       { name: "Любая модель", url: "https://www.mercusys.com/simulator/mw325rv2-ru/web/common/Index.htm" },
       { name: "Все эмуляторы", url: "https://www.mercusys.ru/support/simulator" }
@@ -157,7 +157,7 @@ const routers = [
   {
     id: "xiaomi",
     name: "Xiaomi",
-    logo: "assets/img/xiaomi.svg",
+    icon: "🍚",
     emulators: [
       { name: "MI Router", url: "https://linserv.ru/Xiaomi/cgi-bin/luci/home#router" }
     ],
@@ -174,7 +174,7 @@ const routers = [
   {
     id: "huawei",
     name: "Huawei",
-    logo: "assets/img/huawei.svg",
+    icon: "🔴",
     emulators: [
       { name: "Старый", url: "https://linserv.ru/HG8120H/index.asp" }
     ],
@@ -191,7 +191,7 @@ const routers = [
   {
     id: "netis",
     name: "Netis",
-    logo: "assets/img/netis.svg",
+    icon: "🔵",
     emulators: [
       { name: "Новая (белая)", url: "https://linserv.ru/Netis-GP8501G/index.htm" },
       { name: "Старая (голубая)", url: "http://www.netisru.com/Uploads/Support/Emulators/WF2501_EN/index.htm" },
@@ -210,7 +210,7 @@ const routers = [
   {
     id: "snr",
     name: "SNR",
-    logo: "assets/img/snr.svg",
+    icon: "⚡",
     emulators: [
       { name: "SNR CPE Дом.ру", url: "https://linserv.ru/SNR-CPE-W4n/home.html" },
       { name: "SNR CPE W4N", url: "https://linserv.ru/SNR-CPE-W4N/home.html" }
@@ -228,7 +228,7 @@ const routers = [
   {
     id: "wave",
     name: "Wave",
-    logo: "assets/img/wave.svg",
+    icon: "🌊",
     emulators: [
       { name: "Эмулятор", url: "../router-admin/index.html" }
     ],
@@ -243,7 +243,7 @@ const routers = [
   {
     id: "apple",
     name: "Apple",
-    logo: "assets/img/apple.svg",
+    icon: "🍎",
     emulators: [
       { name: "Airport Utility", url: "https://chasms.com/osx/yosemite/apu1.htm" }
     ],
@@ -259,7 +259,7 @@ const routers = [
   {
     id: "mikrotik",
     name: "Mikrotik",
-    logo: "assets/img/mikrotik.svg",
+    icon: "🎯",
     emulators: [
       { name: "Эмулятор без пароля", url: "http://demo.mt.lv/" }
     ],
@@ -276,7 +276,7 @@ const routers = [
   {
     id: "exotic",
     name: "Экзотика",
-    logo: "assets/img/exotic.svg",
+    icon: "🎪",
     emulators: [
       { name: "Netgear", url: "https://highspeed.tips/files/emulators/netgear_genie/start.html" },
       { name: "Linksys/Cisco", url: "https://linserv.ru/Linksys-E4200/" },
@@ -289,6 +289,8 @@ const routers = [
     info: `
       <h2>Экзотика</h2>
       <p>Netgear, Linksys, UPVEL, Totolink, Trendnet</p>
+      <p><strong>IP:</strong> см. эмулятор</p>
+      <p><strong>MAC:</strong> см. эмулятор</p>
     `
   }
 ];
@@ -300,12 +302,44 @@ const search = document.getElementById("search");
 
 function render(list) {
   grid.innerHTML = "";
-  list.forEach(r => {
+  list.forEach((r, index) => {
     const mainUrl = r.emulators && r.emulators.length > 0 ? r.emulators[0].url : "#";
+
+    // Извлекаем все IP и MAC из info (включая "IP в новых моделях" и т.д.)
+    const ipMatches = [...r.info.matchAll(/<p><strong>(IP[^<]*)<\/strong>\s*([^<]+)<\/p>/g)];
+    const macMatches = [...r.info.matchAll(/<p><strong>(MAC[^<]*)<\/strong>\s*([^<]+)<\/p>/g)];
+
+    let ipHtml = "";
+    if (ipMatches.length > 0) {
+      if (ipMatches.length === 1) {
+        ipHtml = `<div class="card-info"><span class="info-label">${ipMatches[0][1]}</span> ${ipMatches[0][2].trim()}</div>`;
+      } else {
+        ipHtml = `<div class="card-info-list">` +
+          ipMatches.map(m => `<div class="card-info-item"><span class="info-label">${m[1]}</span> ${m[2].trim()}</div>`).join("") +
+          `</div>`;
+      }
+    }
+
+    let macHtml = "";
+    if (macMatches.length > 0) {
+      if (macMatches.length === 1) {
+        macHtml = `<div class="card-info"><span class="info-label">${macMatches[0][1]}</span> ${macMatches[0][2].trim()}</div>`;
+      } else {
+        macHtml = `<div class="card-info-list">` +
+          macMatches.map(m => `<div class="card-info-item"><span class="info-label">${m[1]}</span> ${m[2].trim()}</div>`).join("") +
+          `</div>`;
+      }
+    }
+
+    // Пустой заполнитель для одинаковой высоты карточек
+    const placeholderHtml = (!ipHtml && !macHtml) ? `<div class="card-info" style="visibility:hidden">IP: placeholder</div>` : "";
+
     grid.innerHTML += `
-      <div class="card">
-        <img src="${r.logo}" alt="${r.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>📶</text></svg>'">
-        <h3>${r.name}</h3>
+      <div class="card" data-type="${r.id}">
+        <h1>${r.name}</h1>
+        ${ipHtml}
+        ${macHtml}
+        ${placeholderHtml}
         <div class="actions">
           <a href="${mainUrl}" target="_blank" rel="noopener noreferrer">Эмулятор</a>
           <button onclick="openModal('${r.id}')">Подробнее</button>
@@ -337,18 +371,32 @@ function openModal(id) {
     ${emulatorsHtml}
     ${instructionsHtml}
   `;
+  modal.classList.add('active');
   modal.style.display = "flex";
+  document.body.style.overflow = 'hidden';
 }
 
-document.getElementById("closeModal").onclick = () => {
-  modal.style.display = "none";
-};
+function closeModalFunc() {
+  modal.classList.remove('active');
+  setTimeout(() => {
+    modal.style.display = "none";
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+document.getElementById("closeModal").onclick = closeModalFunc;
 
 modal.onclick = (e) => {
   if (e.target === modal) {
-    modal.style.display = "none";
+    closeModalFunc();
   }
 };
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('active')) {
+    closeModalFunc();
+  }
+});
 
 search.oninput = () => {
   const q = search.value.toLowerCase();
