@@ -458,7 +458,7 @@ async function loadRouters() {
       originalRouters = data.map(r => ({...r}));
       routers = data.map(r => ({...r}));
     } else {
-      const response = await fetch('./assets/data/routers.json');
+      const response = await fetch('./assets/data/router.json');
       if (!response.ok) {
         throw new Error('Ошибка загрузки данных');
       }
