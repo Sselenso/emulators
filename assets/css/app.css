@@ -31,6 +31,28 @@
   --accent-color: #4a7a8c;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+	width: 7px !important;
+	height: 7px !important;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--accent-color);
+}
+
+/* Скроллбар в Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--accent-color) transparent;
+}
+
+
+
+
 /* ===== Сброс и глобальные стили ===== */
 * {
   box-sizing: border-box;
