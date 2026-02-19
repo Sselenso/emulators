@@ -85,7 +85,7 @@
       { "name": "WR3000", "url": "https://support.cudy.com/emulator/WR3000/" }
     ],
     "instructions": [
-      { "name": "Инструкция от монтажников", "url": "../cudy.html" },
+      { "name": "Инструкция от монтажников", "url": "./cudy.html" },
       { "name": "Мануал", "url": "https://www.cudy.com/ru-ru/blogs/faq/anleitung-zur-installation-des-cudy-wlan-routers" }
     ],
     "info": {
