@@ -573,40 +573,5 @@ class FontSizeManager {
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
 	window.fontManager = new FontManager();
-	window.fontSizeManager = new FontSizeManager();
-	
-	// Дополнительная обработка для меню сетки (если есть)
-	const gridBtn = document.getElementById('gridColumnsBtn');
-	const gridMenu = document.querySelector('.grid-columns-menu');
-	
-	if (gridBtn && gridMenu) {
-		gridBtn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			e.preventDefault();
-			
-			// Закрываем другие меню
-			const fontMenu = document.getElementById('font-selector-menu');
-			const sizeMenu = document.getElementById('font-size-menu');
-			
-			if (fontMenu && fontMenu.classList.contains('active')) {
-				fontMenu.classList.remove('active');
-				if (window.fontManager && window.fontManager.isMobile) {
-					window.fontManager.unlockScroll();
-				}
-			}
-			if (sizeMenu && sizeMenu.classList.contains('active') && window.fontSizeManager) {
-				window.fontSizeManager.closeMenu();
-			}
-			
-			// Открываем/закрываем меню сетки
-			gridMenu.classList.toggle('active');
-			
-			// На мобильных блокируем скролл
-			if (window.innerWidth <= 768 && gridMenu.classList.contains('active')) {
-				document.body.style.overflow = 'hidden';
-			} else if (window.innerWidth <= 768) {
-				document.body.style.overflow = '';
-			}
-		});
-	}
+	window.fontSizeManager = new FontSizeManager();	
 });
