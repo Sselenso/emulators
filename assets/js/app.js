@@ -1,3 +1,5 @@
+//app.js
+
 // Глобальные переменные
 let routers = [];
 let originalRouters = []; // Сохраняем исходный порядок
@@ -679,7 +681,7 @@ async function refreshData() {
 
 window.refreshData = refreshData;
 
-// Функция обновления темы скроллбара
+//Функция обновления темы скроллбара
 function updateScrollbarTheme() {
   const body = document.body;
   
@@ -781,6 +783,7 @@ function updateScrollbarTheme() {
     }
   `;
 }
+
 
 // Инициализация после загрузки DOM
 document.addEventListener('DOMContentLoaded', async function() {

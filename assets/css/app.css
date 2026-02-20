@@ -351,18 +351,6 @@ body {
   max-width: 25rem; /* 400px */
 }
 
-/* .search-container::before {
-  content: '🔍';
-  position: absolute;
-  left: 0.875rem; 
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem; 
-  opacity: 0.6;
-  color: var(--color-text-secondary);
-  pointer-events: none;
-} */
-
 .search-container::before {
   content: '';
   position: absolute;

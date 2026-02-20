@@ -1,0 +1,442 @@
+/* ============================================
+   🎨 СКРОЛЛБАР ДЛЯ СТАТЬИ (как в основном проекте)
+   ============================================ */
+
+/* Скроллбар для body в статье */
+/* body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-primary) var(--color-bg-surface);
+}
+
+body::-webkit-scrollbar {
+  width: 0.4375rem;  
+  height: 0.4375rem; 
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-light);
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--color-bg-surface);
+}
+
+
+.article-main {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-primary) var(--color-bg-surface);
+}
+
+.article-main::-webkit-scrollbar {
+  width: 0.4375rem;
+  height: 0.4375rem;
+}
+
+.article-main::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+}
+
+.article-main::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-light);
+}
+
+.article-main::-webkit-scrollbar-track {
+  background-color: var(--color-bg-surface);
+} */
+
+
+
+/* ============================================
+   📄 СТИЛИ ДЛЯ СТАТЬИ (в стиле основного проекта)
+   ============================================ */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  border-color: var(--color-accent-primary);
+  transform: translateX(-0.25rem);
+}
+
+.back-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ----- Основной контент ----- */
+.article-main {
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 80px);
+  background: var(--color-bg-page);
+}
+
+.article-container { 
+  margin: 0 auto;
+}
+
+/* ----- Карточка статьи ----- */
+.article-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+  transition: var(--transition);
+}
+
+/* ----- Заголовки ----- */
+.article-title {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-accent-primary);
+  border-bottom: 2px solid var(--color-accent-primary);
+  padding-bottom: 0.75rem;
+}
+
+.article-subtitle {
+  margin: 2rem 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  position: relative;
+  padding-left: 1rem;
+}
+
+.article-subtitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 4px;
+  background: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+}
+
+/* ----- Текст ----- */
+.article-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.article-text {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.highlight-text {
+  color: var(--color-accent-primary);
+  font-weight: 600;
+  background: rgba(0, 183, 255, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-sm);
+}
+
+/* ----- Галерея ----- */
+.article-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+}
+
+.grid-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  margin: 0;
+  flex: 1 1 calc(50% - 1.5rem);
+  min-width: 280px;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.gallery-item:hover {
+  transform: translateY(-0.25rem);
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0.5rem 1rem rgba(0, 183, 255, 0.2);
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 66.67%; /* Соотношение сторон 3:2 */
+  overflow: hidden;
+  background: var(--color-bg-surface);
+}
+
+.gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+  padding: 0.5rem;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.05);
+}
+
+.gallery-caption {
+  padding: 0.75rem 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+}
+
+/* Специальные стили для изображений роутера */
+.img__router {
+  object-fit: cover;
+}
+
+/* ----- Блок предупреждения ----- */
+.alert-block {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid var(--color-special);
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.alert-content {
+  flex: 1;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.alert-content code {
+  background: var(--color-bg-input);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  color: var(--color-accent-primary);
+  border: 1px solid var(--color-border);
+}
+
+/* ----- Подвал статьи ----- */
+.article-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+}
+
+.back-to-emulators {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: var(--color-accent-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-xl);
+  font-weight: 500;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.back-to-emulators:hover {
+  background: var(--color-accent-light);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 183, 255, 0.3);
+}
+
+.back-to-emulators svg {
+  fill: currentColor;
+}
+
+/* ----- Адаптивность ----- */
+@media (max-width: 768px) {
+  .article-card {
+    padding: 1.5rem;
+  }
+
+  .article-title {
+    font-size: 1.8rem;
+  }
+
+  .article-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .article-text {
+    font-size: 1rem;
+  }
+
+  .grid-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item {
+    flex: 1 1 100%;
+  }
+  
+  .topbar-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .back-link span {
+    display: none;
+  }
+  
+  .back-link {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-card {
+    padding: 1rem;
+  }
+
+  .article-title {
+    font-size: 1.5rem;
+  }
+
+  .article-text {
+    font-size: 0.95rem;
+  }
+
+  .alert-block {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ----- Анимация появления ----- */
+.article-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----- Поддержка печати ----- */
+@media print {
+  .article-topbar,
+  .theme-controls,
+  .back-to-emulators {
+    display: none !important;
+  }
+
+  .article-card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+  }
+}
+
+
+
+/* ============================================
+   📄 ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ СТАТЬИ DIGMA
+   ============================================ */
+
+/* Информационный блок */
+.info-block {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--color-accent-primary);
+}
+
+.info-block-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  color: var(--color-accent-primary);
+  font-weight: 600;
+}
+
+/* Выделенный код */
+.highlight-code {
+  background: var(--color-bg-surface);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  color: var(--color-accent-primary);
+  border: 1px solid var(--color-border);
+  font-size: 0.95em;
+}
+
+
+/* Адаптивность для новых элементов */
+@media (max-width: 768px) { 
+  
+  .info-block {
+    padding: 1rem;
+  }
+}

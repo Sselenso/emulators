@@ -1,115 +1,295 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="favicon.ico" type="image/svg+xml" />    
-    <title>Инструкция Cudy</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/style_article.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script src="./assets/js/script.js" defer></script>
-  </head>
-  <body>
-    <section class="emulators">
-      <div class="emulators__header">
-        <h2 class="emulators__title">Инструкция</h2>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
-          <i class="fas fa-sun"></i>
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Инструкция Cudy | Эмуляторы роутеров</title>
+  <link rel="icon" href="./assets/img/favicon.ico" />
+  
+  <!-- Подключаем шрифты как в основном проекте -->
+  <link rel="stylesheet" href="./assets/css/app.css" />
+  <link rel="stylesheet" href="./assets/css/article.css" />
+  
+  <!-- Скрипты для темы и шрифтов -->
+	<script src="./assets/js/article.js" defer></script>	
+  <script src="./assets/js/theme.js" defer></script>
+  <script src="./assets/js/font.js" defer></script>
+  
+</head>
+<body data-theme="dark">
+  <div class="container">
+    <!-- Шапка в стиле проекта -->
+        <header class="topbar article-topbar">
+      <div class="topbar-header">
+        <div class="topbar-left">
+          <a href="index.html" class="back-link" title="Вернуться к эмуляторам">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            <span>Назад</span>
+          </a>
+          <h1 class="page-title">Инструкция Cudy</h1>
+        </div>
+        
+        <div class="theme-controls">
+          <!-- Кнопка переключения темы -->
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Переключить тему">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+            </svg>
+          </button>
+          
+          <!-- Кнопка настройки темы -->
+          <button id="customize-theme" class="customize-theme-btn" type="button" aria-label="Настроить тему" title="Настроить цвета темы">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9c.83 0 1.5-.67 1.5-1.5S7.83 8 7 8s-1.5.67-1.5 1.5S6.17 11 7 11zm10 0c.83 0 1.5-.67 1.5-1.5S17.83 8 17 8s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-5 4.5c-2.03 0-3.8-1.11-4.75-2.75h9.5c-.95 1.64-2.72 2.75-4.75 2.75z"/>
+            </svg>
+          </button>
 
-      <main class="main">
-        <div class="container">
-          <div class="article__wrap">
-            <div class="article">
-              <h1 class="article__title">Быстрая настройка</h1>
-              <p class="article__text">
-                Подключите адаптер питания к маршрутизатору и подождите 1 минуту, пока индикатор системы не перестанет мигать и начнет постоянно гореть синим. Это означает завершение запуска системы.
-              </p>
-              <p class="article__text">
-                Вставьте сетевой кабель в WAN-порт (крайний слева) на роутере.
-              </p>
-              <div class="article__gallery">
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__router"
-                    src="./assets/img/cudy_1.webp"
-                    alt="Маршрутизатор Cudy с подключённым адаптером питания"
-                  />
-                </div>
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__router"
-                    src="./assets/img/cudy_2.webp"
-                    alt="WAN-порт маршрутизатора Cudy"
-                  />
-                </div>
+          <!-- Выбор шрифта (ПОЛНАЯ ВЕРСИЯ с меню) -->
+          <div class="font-selector-wrapper">
+            <button id="font-selector-btn" class="font-selector-btn" type="button" aria-label="Выбрать шрифт" title="Выбрать шрифт">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M9.5 5.5L5 20h3l1.2-4h5.6l1.2 4h3L14.5 5.5h-5zm2.5 3l1.8 6h-3.6l1.8-6zM21 13h-2v-2h-2v2h-2v2h2v2h2v-2h2v-2z"/>
+              </svg>
+              <span class="current-font-indicator">Inter</span>
+            </button>
+
+            <!-- Меню выбора шрифта (добавлено) -->
+            <div id="font-selector-menu" class="font-selector-menu">
+              <div class="font-selector-menu-content">
+                <h4>Выберите шрифт</h4>
+                <div class="font-options">
+                  <button class="font-option" data-font="Inter" data-font-family="'Inter', sans-serif">
+                    <span class="font-preview">Inter</span>
+                    <span class="font-example">Aa</span>
+                  </button>
+                  <button class="font-option" data-font="Montserrat" data-font-family="'Montserrat', sans-serif">
+                    <span class="font-preview">Montserrat</span>
+                    <span class="font-example">Aa</span>
+                  </button>
+                  <button class="font-option" data-font="Sofia Sans" data-font-family="'Sofia Sans', sans-serif">
+                    <span class="font-preview">Sofia Sans</span>
+                    <span class="font-example">Aa</span>
+                  </button>
+                  <button class="font-option" data-font="Manrope" data-font-family="'Manrope', sans-serif">
+                    <span class="font-preview">Manrope</span>
+                    <span class="font-example">Aa</span>
+                  </button>
+                  <button class="font-option" data-font="Geologica" data-font-family="'Geologica', sans-serif">
+                    <span class="font-preview">Geologica</span>
+                    <span class="font-example">Aa</span>
+                  </button>
+                </div>		
               </div>
-              <p class="article__text">
-                После подключения кабеля и питания индикатор WAN (третий) должен загореться. Это указывает на то, что роутер обнаружил подключение к сети (link up).
-              </p>
-              <p class="article__text">
-                Если MAC-адрес уже привязан, через пару секунд должен загореться индикатор INTERNET (второй).
-              </p>
-              <p class="article__text">
-                Если MAC-адрес не привязан, привяжите его. Через некоторое время индикатор INTERNET загорится.
-              </p>
-              <p class="article__text">
-                Это означает, что роутер успешно подключился к интернету и готов к использованию.
-              </p>
-              <div class="article__text text__alert">
-                Введите логин и пароль для входа в настройки роутера. Если роутер настраивал наш монтажник, пароль будет "password". Если роутер был сброшен до заводских настроек, используйте тот же пароль "password".
-              </div>
-              <div class="article__gallery">
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__settings"
-                    src="./assets/img/cudy_3.webp"
-                    alt="Ввод логина и пароля в настройках Cudy"
-                  />
+            </div>
+          </div>
+
+          <!-- Выбор размера шрифта (добавлено для полной функциональности) -->
+          <div class="font-size-selector-wrapper">
+            <button id="font-size-btn" class="font-size-btn" type="button" aria-label="Выбрать размер шрифта" title="Выбрать размер шрифта">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v7h3v-7h3V9H3v3z"/>
+              </svg>
+              <span class="current-size-indicator">100%</span>
+            </button>
+
+            <!-- Меню выбора размера шрифта -->
+            <div id="font-size-menu" class="font-size-menu">
+              <div class="font-size-menu-content">
+                <h4>Размер шрифта</h4>
+                <div class="font-size-options">
+                  <button class="font-size-option" data-size="75">                   
+                    <span class="size-value">75%</span>
+                  </button>      
+                  <button class="font-size-option" data-size="85">                  
+                    <span class="size-value">85%</span>
+                  </button>      
+                  <button class="font-size-option active" data-size="100">                  
+                    <span class="size-value">100%</span>
+                  </button>
                 </div>
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__settings"
-                    src="./assets/img/cudy_4.webp"
-                    alt="Меню настроек маршрутизатора Cudy"
-                  />
+                
+                <!-- Ползунок для точной настройки -->
+                <div class="font-size-slider-container">
+                  <h4>Точная настройка</h4>
+                  <input type="range" id="font-size-slider" min="75" max="100" value="100" step="1">
+                  <div class="slider-value">
+                    <span id="slider-value-display">100%</span>
+                  </div>
                 </div>
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__settings"
-                    src="./assets/img/cudy_5.webp"
-                    alt="Дополнительные настройки в интерфейсе Cudy"
-                  />
-                </div>
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__settings"
-                    src="./assets/img/cudy_6.webp"
-                    alt="Настройки интернет-подключения маршрутизатора Cudy"
-                  />
-                </div>
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__settings"
-                    src="./assets/img/cudy_7.webp"
-                    alt="Панель управления роутером Cudy"
-                  />
-                </div>
-                <div class="article__img-wrapper">
-                  <img
-                    class="article__img img__settings"
-                    src="./assets/img/cudy_8.webp"
-                    alt="Системные настройки маршрутизатора Cudy"
-                  />
+                
+                <!-- Кнопка сброса -->
+                <div class="font-size-actions">
+                  <button id="reset-font-size" class="reset-size-btn">↺ Сбросить (100%)</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </main>
-    </section>
-  </body>
+      </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="article-main">
+      <div class="article-container">
+        <article class="article-card">
+          <h1 class="article-title">Быстрая настройка роутера Cudy</h1>
+          
+          <div class="article-content">
+            <p class="article-text">
+              Подключите адаптер питания к маршрутизатору и подождите 1 минуту, пока индикатор системы не перестанет мигать и начнет постоянно гореть синим. Это означает завершение запуска системы.
+            </p>
+            
+            <p class="article-text">
+              Вставьте сетевой кабель в <strong class="highlight-text">WAN-порт</strong> (крайний слева) на роутере.
+            </p>
+
+            <!-- Галерея изображений -->
+            <div class="article-gallery">
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_1.webp"
+                    alt="Маршрутизатор Cudy с подключённым адаптером питания"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Подключение питания</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_2.webp"
+                    alt="WAN-порт маршрутизатора Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">WAN-порт (крайний слева)</figcaption>
+              </figure>
+            </div>
+
+            <p class="article-text">
+              После подключения кабеля и питания индикатор <strong class="highlight-text">WAN</strong> (третий) должен загореться. Это указывает на то, что роутер обнаружил подключение к сети (link up).
+            </p>
+
+            <p class="article-text">
+              Если MAC-адрес уже привязан, через пару секунд должен загореться индикатор <strong class="highlight-text">INTERNET</strong> (второй).
+            </p>
+
+            <p class="article-text">
+              Если MAC-адрес не привязан, привяжите его. Через некоторое время индикатор INTERNET загорится. Это означает, что роутер успешно подключился к интернету и готов к использованию.
+            </p>
+
+            <!-- Блок с предупреждением -->
+            <div class="alert-block">
+              <div class="alert-icon">ℹ️</div>
+              <div class="alert-content">
+                <strong>Важно:</strong> Введите логин и пароль для входа в настройки роутера. Если роутер настраивал наш монтажник, пароль будет <code>"password"</code>. Если роутер был сброшен до заводских настроек, используйте тот же пароль <code>"password"</code>.
+              </div>
+            </div>
+
+            <!-- Галерея скриншотов настроек -->
+            <h2 class="article-subtitle">Настройка интерфейса</h2>
+            
+            <div class="article-gallery grid-gallery">
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_3.webp"
+                    alt="Ввод логина и пароля в настройках Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Вход в настройки</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_4.webp"
+                    alt="Меню настроек маршрутизатора Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Главное меню</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_5.webp"
+                    alt="Дополнительные настройки в интерфейсе Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Дополнительные настройки</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_6.webp"
+                    alt="Настройки интернет-подключения маршрутизатора Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Настройки подключения</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_7.webp"
+                    alt="Панель управления роутером Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Панель управления</figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <div class="gallery-image-wrapper">
+                  <img
+                    class="gallery-image"
+                    src="./assets/img/cudy_8.webp"
+                    alt="Системные настройки маршрутизатора Cudy"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="gallery-caption">Системные настройки</figcaption>
+              </figure>
+            </div>
+
+            <!-- Кнопка возврата -->
+            <div class="article-footer">
+              <a href="index.html" class="back-to-emulators">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>Вернуться к эмуляторам</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <!-- Индикатор загрузки (опционально) -->
+  <div id="loading" class="loading-spinner" style="display: none;">
+    <div class="spinner"></div>
+  </div>
+</body>
 </html>
