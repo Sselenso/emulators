@@ -121,7 +121,7 @@
       { "name": "Digma = Tenda", "url": "https://www.tendacn.com/simulator/default.html" }
     ],
     "instructions": [
-      { "name": "Мануал", "url": "/emulators/digma.html" }
+      { "name": "Мануал", "url": "/emulators/digma.html"}
     ],
     "info": {
       "title": "Digma",
