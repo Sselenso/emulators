@@ -681,108 +681,7 @@ async function refreshData() {
 
 window.refreshData = refreshData;
 
-//Функция обновления темы скроллбара
-function updateScrollbarTheme() {
-  const body = document.body;
-  
-  // Создаем или обновляем стиль для скроллбара
-  let style = document.getElementById('scrollbar-style');
-  if (!style) {
-    style = document.createElement('style');
-    style.id = 'scrollbar-style';
-    document.head.appendChild(style);
-  }
-  
-  // Получаем актуальные цвета из computed styles body
-  const computedStyle = getComputedStyle(body);
-  const accentColor = computedStyle.getPropertyValue('--color-accent-primary').trim() || '#00b7ff';
-  const bgSurface = computedStyle.getPropertyValue('--color-bg-surface').trim() || '#252a33';
-  
-  style.textContent = `
-    /* Стили для скроллбара */
-    ::-webkit-scrollbar {
-      width: 0.4375rem;
-      height: 0.4375rem;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background-color: ${bgSurface} !important;
-      border-radius: 0.5rem;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background-color: ${accentColor} !important;
-      border-radius: 0.5rem;
-      border: 0.125rem solid ${bgSurface};
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: ${accentColor} !important;
-      filter: brightness(1.2);
-    }
-    
-    /* Для Firefox */
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: ${accentColor} ${bgSurface} !important;
-    }
-    
-    /* Для карточек */
-    .card::-webkit-scrollbar {
-      width: 0.3125rem;
-      height: 0.3125rem;
-    }
-    
-    .card::-webkit-scrollbar-track {
-      background-color: var(--color-bg-input) !important;
-    }
-    
-    .card::-webkit-scrollbar-thumb {
-      background-color: ${accentColor} !important;
-    }
-    
-    /* Для модального окна */
-    .modal-content::-webkit-scrollbar {
-      width: 0.3125rem;
-      height: 0.3125rem;
-    }
-    
-    .modal-content::-webkit-scrollbar-track {
-      background-color: var(--color-bg-input) !important;
-    }
-    
-    .modal-content::-webkit-scrollbar-thumb {
-      background-color: ${accentColor} !important;
-    }
-    
-    /* Адаптация для мобильных */
-    @media (max-width: 48rem) {
-      ::-webkit-scrollbar {
-        width: 0.375rem;
-        height: 0.375rem;
-      }
-      
-      .card::-webkit-scrollbar,
-      .modal-content::-webkit-scrollbar {
-        width: 0.25rem;
-        height: 0.25rem;
-      }
-    }
-    
-    @media (max-width: 30rem) {
-      ::-webkit-scrollbar {
-        width: 0.3125rem;
-        height: 0.3125rem;
-      }
-      
-      .card::-webkit-scrollbar,
-      .modal-content::-webkit-scrollbar {
-        width: 0.1875rem;
-        height: 0.1875rem;
-      }
-    }
-  `;
-}
+
 
 
 // Инициализация после загрузки DOM
@@ -893,26 +792,21 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 
   // Тема
-  if (themeToggle) {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      body.setAttribute('data-theme', savedTheme);
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      // Обновляем тему скроллбара
-      setTimeout(updateScrollbarTheme, 10);
-    });
+ if (themeToggle) {  
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    body.setAttribute('data-theme', savedTheme);
   }
 
-  // Инициализация темы скроллбара
-  updateScrollbarTheme();
-
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    // Просто меняем атрибут. theme.js перехватит это и сделает всё остальное!
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);      
+  });
+}
   // Запускаем проверку обновлений каждые 5 минут
   setInterval(checkForUpdates, 5 * 60 * 1000);
 

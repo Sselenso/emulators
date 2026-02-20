@@ -98,8 +98,8 @@ body::-webkit-scrollbar-track {
 
 /* ----- Основной контент ----- */
 .article-main {
-  padding: 2rem 1rem;
-  min-height: calc(100vh - 80px);
+  padding: 1rem;
+  min-height: calc(100dvh - 80px);
   background: var(--color-bg-page);
 }
 
@@ -113,7 +113,6 @@ body::-webkit-scrollbar-track {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 2rem;
-  box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
   transition: var(--transition);
 }
 
@@ -330,8 +329,7 @@ body::-webkit-scrollbar-track {
     flex: 1 1 100%;
   }
   
-  .topbar-left {
-    flex-direction: column;
+  .topbar-left {   
     align-items: flex-start;
     gap: 0.75rem;
   }
