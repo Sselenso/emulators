@@ -425,7 +425,7 @@ function customizeTheme() {
     });
     
     saveCustomTheme(currentTheme, colors);
-    
+    updateScrollbarTheme();
     showNotification('Тема сохранена');
     
     setTimeout(() => {
@@ -436,6 +436,7 @@ function customizeTheme() {
   
   document.getElementById('reset-custom-theme').addEventListener('click', () => {
     removeCustomTheme(currentTheme);
+		updateScrollbarTheme();
     showNotification('↺ Тема сброшена к стандартной');
     
     panel.classList.remove('active');

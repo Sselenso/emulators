@@ -72,7 +72,7 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-secondary);
-  font-size: 16px; /* Базовый размер, можно менять */
+  font-size: 16px;
 }
 
 /* ===== Применение шрифтов ко всем элементам ===== */
@@ -123,9 +123,9 @@ body {
 }
 
 /* ===== Скроллбар ===== */
-::-webkit-scrollbar {
-  width: 0.4375rem;  /* 7px */
-  height: 0.4375rem; /* 7px */
+/* ::-webkit-scrollbar {
+  width: 0.4375rem;  
+  height: 0.4375rem; 
 }
 
 ::-webkit-scrollbar-thumb {
@@ -135,7 +135,50 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent-primary) transparent;
+} */
+
+/* ===== Скроллбар (зависит от темы body) ===== */
+
+/* Для WebKit браузеров (Chrome, Safari, Edge) */
+body::-webkit-scrollbar {
+  width: 0.4375rem;  /* 7px */
+  height: 0.4375rem; /* 7px */
 }
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-light);
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--color-bg-surface);
+}
+
+/* Для Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-primary) var(--color-bg-surface);
+}
+
+/* ===== Также добавим стили для скроллбаров внутри элементов ===== */
+
+/* Для карточек с прокруткой */
+.card::-webkit-scrollbar {
+  width: 0.3125rem;  /* 5px */
+  height: 0.3125rem; /* 5px */
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+}
+
+
+
 
 /* ============================================
    📦 КОМПОНЕНТЫ
@@ -308,17 +351,36 @@ body {
   max-width: 25rem; /* 400px */
 }
 
-.search-container::before {
+/* .search-container::before {
   content: '🔍';
   position: absolute;
-  left: 0.875rem; /* 14px */
+  left: 0.875rem; 
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1rem; /* 16px */
+  font-size: 1rem; 
   opacity: 0.6;
   color: var(--color-text-secondary);
   pointer-events: none;
+} */
+
+.search-container::before {
+  content: '';
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  background-image: url('../img/search-light.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
+
+[data-theme="dark"] .search-container::before {
+  background-image: url('../img/search-dark.svg');	
+}
+
 
 .search-container input {
   width: 100%;
@@ -370,6 +432,16 @@ body {
   font-size: 0.9rem;
   margin-left: 0.625rem; /* 10px */
 }
+.search-container input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+/* Для Firefox (если вдруг появится) */
+.search-container input[type="search"]::-moz-search-cancel {
+  display: none;
+}
 
 /* ============================================
    🃏 КАРТОЧКИ
@@ -410,18 +482,140 @@ body {
   transform: scale(0.98);
 }
 
-.card.dragging {
+/* .card.dragging {
   cursor: grabbing;
   opacity: 0.6;
   transform: scale(0.98) rotate(1deg);
-  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2); /* 10px 20px */
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2); 
 }
 
 .card.drag-over {
   border: 2px dashed var(--color-accent-primary);
   transform: scale(1.02);
   background: rgba(0, 183, 255, 0.1);
+} */
+
+/* ===== DRAG & DROP СТИЛИ ===== */
+
+/* Перетаскиваемый элемент */
+.card.dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+  box-shadow: 0 0 1.25rem var(--color-shadow);
+  transition: var(--transition);
+  cursor: grabbing;
+  filter: brightness(0.9);
 }
+
+/* Целевой элемент при наведении */
+.card.drag-over {
+  position: relative;
+  animation: card-pulse 1.5s infinite;
+}
+
+.card.drag-over::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--space-unit));
+  left: calc(-1 * var(--space-unit));
+  right: calc(-1 * var(--space-unit));
+  bottom: calc(-1 * var(--space-unit));
+  border: 0.1875rem solid var(--color-accent-primary); 
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0.9375rem var(--color-accent-primary); 
+  z-index: 10;
+  pointer-events: none;
+  animation: border-pulse 1.5s infinite;
+  background: transparent;
+}
+
+@keyframes border-pulse {
+  0% {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0.9375rem var(--color-accent-primary);
+  }
+  50% {
+    border-color: var(--color-accent-light);
+    box-shadow: 0 0 1.5625rem var(--color-accent-primary); 
+  }
+  100% {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0.9375rem var(--color-accent-primary);
+  }
+}
+
+@keyframes card-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Анимация вставленного элемента */
+@keyframes insert-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 var(--color-accent-primary);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 1.25rem 0.625rem rgba(0, 183, 255, 0.3); /* 20px 10px */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 183, 255, 0);
+  }
+}
+
+.card.inserted {
+  animation: insert-pulse 0.5s ease;
+}
+
+/* ===== КНОПКА ОБНОВЛЕНИЯ ===== */
+.refresh-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 2.5); 
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  color: var(--color-text-primary);
+  background: var(--color-bg-surface);
+  border: 0.0625rem solid var(--color-border); 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--space-unit) * 1); 
+  line-height: 1;
+}
+
+.refresh-btn:hover {
+  transform: rotate(180deg);
+  color: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0.625rem var(--color-accent-primary); 
+}
+
+/* ------ НЕАКТИВНАЯ КНОПКА ЭМУЛЯТОРА ----- */
+.disabled-btn {
+  opacity: 0.5;
+  cursor: not-allowed;
+  padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 2.5);
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  display: inline-block;
+  pointer-events: none;
+  border: 0.0625rem solid transparent;
+}
+
 
 /* ----- Кнопка избранного ----- */
 .favorite-btn {
