@@ -186,7 +186,7 @@ class IPInfo {
     }
 
     /**
-     * IP Info запрос через ip-api.com
+     * IP Info запрос через ip-api.com (HTTPS)
      */
     async lookup() {
         const query = this.ipInput ? this.ipInput.value.trim() : '';
@@ -199,8 +199,8 @@ class IPInfo {
         this.showLoading();
 
         try {
-            // Используем ip-api.com
-            const url = `http://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
+            // Используем ip-api.com с HTTPS
+            const url = `https://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
             
             const response = await fetch(url, {
                 method: 'GET',
@@ -240,13 +240,13 @@ class IPInfo {
         // Определяем статус
         const isMobile = data.mobile ? ' Мобильный' : ' Стационарный';
         const isProxy = data.proxy ? ' Анонимный (VPN/Proxy)' : ' Публичный';
-        const isHosting = data.hosting ? ' Хостинг/Дата-центр' : 'Домашний/Офисный';
+        const isHosting = data.hosting ? ' Хостинг/Дата-центр' : ' Домашний/Офисный';
 
         // Формируем HTML
         let infoHtml = `
             <div class="ip-info-result-content">
                 <div class="ip-info-result-summary">
-                    <span class="ip-info-query">${data.query || query}</span>
+                    <span class="ip-info-query"> ${data.query || query}</span>
                     <span class="ip-info-status">${data.country || '—'}</span>
                 </div>
                 <div class="ip-info-grid">
@@ -256,24 +256,22 @@ class IPInfo {
         const fields = [
             { label: ' Страна', value: data.country ? `${data.country} (${data.countryCode || ''})` : null },
             { label: ' Регион', value: data.regionName || data.region || null },
-            { label: 'Город', value: data.city || null },
-            { label: 'Почтовый индекс', value: data.zip || null },
+            { label: ' Город', value: data.city || null },
+            { label: ' Почтовый индекс', value: data.zip || null },
             { label: ' Координаты', value: (data.lat && data.lon) ? `${data.lat}, ${data.lon}` : null },
-            { label: 'Часовой пояс', value: data.timezone || null },
-            { label: 'Валюта', value: data.currency || null },
-            { label: 'Провайдер', value: data.isp || null },
-            { label: 'Организация', value: data.org || null },
+            { label: ' Часовой пояс', value: data.timezone || null },
+            { label: ' Валюта', value: data.currency || null },
+            { label: ' Провайдер', value: data.isp || null },
+            { label: ' Организация', value: data.org || null },
             { label: 'ASN', value: data.as || null },
-            { label: 'Тип', value: isMobile },
-            { label: 'Безопасность', value: isProxy },
-            { label: 'Размещение', value: isHosting },
-            { label: 'Reverse DNS', value: data.reverse || null },
+            { label: ' Тип', value: isMobile },
+            { label: ' Безопасность', value: isProxy },
+            { label: ' Размещение', value: isHosting },
+            { label: ' Reverse DNS', value: data.reverse || null },
         ];
 
-        let hasData = false;
         fields.forEach(field => {
             if (field.value) {
-                hasData = true;
                 infoHtml += `
                     <div class="ip-info-item">
                         <span class="ip-info-label">${field.label}</span>
