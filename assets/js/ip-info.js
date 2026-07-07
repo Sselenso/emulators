@@ -1,5 +1,5 @@
 // ============================================
-// IP Info Tool - Using ip-api.com
+// IP Info Tool - Using ip-api.com (HTTPS + Batch)
 // ============================================
 
 class IPInfo {
@@ -7,8 +7,6 @@ class IPInfo {
         this.initElements();
         this.initEventListeners();
         this.setupModalHandlers();
-        this.map = null;
-        this.marker = null;
     }
 
     /**
@@ -75,7 +73,6 @@ class IPInfo {
             setTimeout(() => {
                 ipInfoModal.style.display = 'none';
                 document.body.style.overflow = '';
-                this.destroyMap();
             }, 300);
         }
     }
@@ -186,7 +183,23 @@ class IPInfo {
     }
 
     /**
-     * IP Info запрос через ip-api.com (HTTPS)
+     * Проверка валидности IP или домена
+     */
+    isValidQuery(query) {
+        // Проверка IP
+        const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+        if (ipRegex.test(query)) {
+            const parts = query.split('.');
+            return parts.every(p => parseInt(p) >= 0 && parseInt(p) <= 255);
+        }
+        
+        // Проверка домена
+        const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-.]*\.[a-zA-Z]{2,}$/;
+        return domainRegex.test(query);
+    }
+
+    /**
+     * IP Info запрос через ip-api.com (HTTPS + JSON)
      */
     async lookup() {
         const query = this.ipInput ? this.ipInput.value.trim() : '';
@@ -196,11 +209,44 @@ class IPInfo {
             return;
         }
 
+        // Проверяем, что это не домен с несколькими IP
+        // Если это домен - используем одиночный запрос
+        const isDomain = /^[a-zA-Z0-9][a-zA-Z0-9-.]*\.[a-zA-Z]{2,}$/.test(query);
+        
         this.showLoading();
 
         try {
-            // Используем ip-api.com с HTTPS
-            const url = `https://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
+            let data;
+            
+            if (isDomain) {
+                // Для доменов используем одиночный запрос (не batch)
+                const url = `http://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                data = await response.json();
+                
+                if (data.status === 'fail') {
+                    this.showError(data.message || 'Не удалось найти информацию');
+                    return;
+                }
+                
+                this.displayResult(data, query);
+                return;
+            }
+
+            // Для IP используем batch запрос (может пригодиться в будущем)
+            // Но для одного IP можно использовать обычный запрос
+            const url = `http://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
             
             const response = await fetch(url, {
                 method: 'GET',
@@ -213,9 +259,8 @@ class IPInfo {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const data = await response.json();
+            data = await response.json();
             
-            // Проверяем статус
             if (data.status === 'fail') {
                 this.showError(data.message || 'Не удалось найти информацию');
                 return;
@@ -238,15 +283,15 @@ class IPInfo {
         if (!this.ipResult) return;
 
         // Определяем статус
-        const isMobile = data.mobile ? ' Мобильный' : ' Стационарный';
-        const isProxy = data.proxy ? ' Анонимный (VPN/Proxy)' : ' Публичный';
-        const isHosting = data.hosting ? ' Хостинг/Дата-центр' : ' Домашний/Офисный';
+        const isMobile = data.mobile ? '📱 Мобильный' : '💻 Стационарный';
+        const isProxy = data.proxy ? '🔒 Анонимный (VPN/Proxy)' : '🌐 Публичный';
+        const isHosting = data.hosting ? '☁️ Хостинг/Дата-центр' : '🏠 Домашний/Офисный';
 
         // Формируем HTML
         let infoHtml = `
             <div class="ip-info-result-content">
                 <div class="ip-info-result-summary">
-                    <span class="ip-info-query"> ${data.query || query}</span>
+                    <span class="ip-info-query">📌 ${data.query || query}</span>
                     <span class="ip-info-status">${data.country || '—'}</span>
                 </div>
                 <div class="ip-info-grid">
@@ -254,20 +299,20 @@ class IPInfo {
 
         // Добавляем поля с данными
         const fields = [
-            { label: ' Страна', value: data.country ? `${data.country} (${data.countryCode || ''})` : null },
-            { label: ' Регион', value: data.regionName || data.region || null },
-            { label: ' Город', value: data.city || null },
-            { label: ' Почтовый индекс', value: data.zip || null },
-            { label: ' Координаты', value: (data.lat && data.lon) ? `${data.lat}, ${data.lon}` : null },
-            { label: ' Часовой пояс', value: data.timezone || null },
-            { label: ' Валюта', value: data.currency || null },
-            { label: ' Провайдер', value: data.isp || null },
-            { label: ' Организация', value: data.org || null },
-            { label: 'ASN', value: data.as || null },
-            { label: ' Тип', value: isMobile },
-            { label: ' Безопасность', value: isProxy },
-            { label: ' Размещение', value: isHosting },
-            { label: ' Reverse DNS', value: data.reverse || null },
+            { label: '🌍 Страна', value: data.country ? `${data.country} (${data.countryCode || ''})` : null },
+            { label: '📍 Регион', value: data.regionName || data.region || null },
+            { label: '🏙️ Город', value: data.city || null },
+            { label: '📮 Почтовый индекс', value: data.zip || null },
+            { label: '🗺️ Координаты', value: (data.lat && data.lon) ? `${data.lat}, ${data.lon}` : null },
+            { label: '🕐 Часовой пояс', value: data.timezone || null },
+            { label: '💰 Валюта', value: data.currency || null },
+            { label: '🏢 Провайдер', value: data.isp || null },
+            { label: '📋 Организация', value: data.org || null },
+            { label: '🔢 ASN', value: data.as || null },
+            { label: '📱 Тип', value: isMobile },
+            { label: '🔒 Безопасность', value: isProxy },
+            { label: '☁️ Размещение', value: isHosting },
+            { label: '🔃 Reverse DNS', value: data.reverse || null },
         ];
 
         fields.forEach(field => {
@@ -325,24 +370,12 @@ class IPInfo {
     }
 
     /**
-     * Уничтожить карту
-     */
-    destroyMap() {
-        if (this.map) {
-            this.map.remove();
-            this.map = null;
-            this.marker = null;
-        }
-    }
-
-    /**
      * Скрыть карту
      */
     hideMap() {
         if (this.ipMap) {
             this.ipMap.style.display = 'none';
         }
-        this.destroyMap();
     }
 }
 
