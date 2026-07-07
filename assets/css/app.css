@@ -389,7 +389,7 @@ body {
 	border: 1px solid var(--color-border);
 	background: var(--color-bg-input);
 	color: var(--color-text-primary);
-	font-size: 0.9375rem;
+	font-size: 0.85rem;
 	font-family: inherit;
 	transition: var(--transition);
 	outline: none;
@@ -620,14 +620,14 @@ body {
 }
 
 #macLookupBtn,
-#macCalcCalculateBtn {
+#macCalcCalculateBtn,#subnetCalculateBtn, #dnsLookupBtn {
 	background: var(--color-accent-primary);
 	color: var(--color-bg-page);
 	border-color: var(--color-accent-primary);
 	text-decoration: none;
 }
 #macLookupBtn:hover,
-#macCalcCalculateBtn:hover {
+#macCalcCalculateBtn:hover,#subnetCalculateBtn:hover, #dnsLookupBtn:hover  {
 	background: var(--color-accent-light);
 	border-color: var(--color-accent-light);
 	transform: scale(1.02);
