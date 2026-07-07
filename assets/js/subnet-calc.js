@@ -396,27 +396,27 @@ showResult(data) {
             ${hostNote}
             <div class="subnet-result-grid">
                 <div class="subnet-result-item">
-                    <span class="subnet-label">📌 Адрес сети</span>
+                    <span class="subnet-label">Адрес сети</span>
                     <span class="subnet-value">${data.network}</span>
                 </div>
                 <div class="subnet-result-item">
-                    <span class="subnet-label">📢 Широковещательный</span>
+                    <span class="subnet-label">Широковещательный</span>
                     <span class="subnet-value">${data.broadcast}</span>
                 </div>
                 <div class="subnet-result-item">
-                    <span class="subnet-label">🖥️ Первый хост</span>
+                    <span class="subnet-label">Первый хост</span>
                     <span class="subnet-value">${data.firstHost}</span>
                 </div>
                 <div class="subnet-result-item">
-                    <span class="subnet-label">🖥️ Последний хост</span>
+                    <span class="subnet-label"> Последний хост</span>
                     <span class="subnet-value">${data.lastHost}</span>
                 </div>
                 <div class="subnet-result-item">
-                    <span class="subnet-label">📏 Всего адресов</span>
+                    <span class="subnet-label"> Всего адресов</span>
                     <span class="subnet-value">${formatNumber(data.totalHosts)}</span>
                 </div>
                 <div class="subnet-result-item">
-                    <span class="subnet-label">📊 Доступно хостов</span>
+                    <span class="subnet-label">Доступно хостов</span>
                     <span class="subnet-value">${formatNumber(data.usableHosts)}</span>
                 </div>
             </div>

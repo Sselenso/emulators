@@ -138,6 +138,7 @@
   </button>
 	  <button id="subnetCalcOpenBtn" class="subnet-calc-btn">Калькулятор подсети</button>
 		  <button id="dnsLookupOpenBtn" class="dns-lookup-btn">DNS Lookup</button>
+			  <button id="ipInfoOpenBtn" class="ip-info-btn"> IP Info</button>
 </div>
 		
   </header>  
@@ -290,9 +291,6 @@
   </div>
 </div>
 
-
-
-<!-- DNS Lookup Modal -->
 <div class="modal mac-modal" id="dnsLookupModal">
   <div class="modal-content mac-modal-content">
     <button class="close" id="closeDnsModal">×</button>
@@ -349,12 +347,51 @@
 </div>
 
 
+<!-- IP Info Modal -->
+<div class="modal mac-modal" id="ipInfoModal">
+  <div class="modal-content mac-modal-content">
+    <button class="close" id="closeIpInfoModal">×</button>
+    <div id="ip-info-body">      
+      <div class="mac-modal-header">
+        <h2> IP Information</h2>        
+      </div>         
+    
+      <div class="search-wrap">
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="ipInfoInput" 
+            placeholder="Введите IP или домен (например: google.com)"
+            class="mac-input"
+            autocomplete="off"
+            value=""
+          >
+        </div>
+        
+        <div class="actions">
+          <button id="ipInfoLookupBtn" class="button">Найти</button>
+          <button id="ipInfoClearBtn" class="button">Очистить</button>
+        </div> 
+      </div>     
+   
+      <div id="ipInfoLoading" class="ip-info-loading" style="display: none;">
+        <div class="spinner-small"></div>
+        <span>Получение информации...</span>
+      </div>
+      
 
-
-
-
-
-
+			<!-- Карта -->
+      <div id="ipInfoMap" class="ip-info-map" style="display: none; height: 200px; border-radius: var(--radius-sm); margin-top: 0.75rem;"></div>
+      <div class="ip-info-result-container" id="ipInfoResult">				
+        <div class="ip-info-result-placeholder">
+          <p>Введите IP-адрес или домен для получения информации</p>
+        </div>
+      </div>   
+      
+      
+    </div>
+  </div>
+</div>
 
 
 </div>
@@ -373,5 +410,6 @@
 <script src="./assets/js/mac-calc.js"></script>
 <script src="./assets/js/subnet-calc.js"></script>
 <script src="./assets/js/dns-lookup.js"></script>
+<script src="./assets/js/ip-info.js"></script>
 </body>
 </html>

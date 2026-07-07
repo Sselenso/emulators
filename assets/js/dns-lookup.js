@@ -256,8 +256,7 @@ class DNSLookup {
         if (answers.length === 0) {
             this.dnsResult.innerHTML = `
                 <div class="dns-result-content">
-                    <div class="dns-result-no-records">
-                        <span class="dns-icon">📭</span>
+                    <div class="dns-result-no-records">                        
                         <p>Записи типа <strong>${type}</strong> для <strong>${domain}</strong> не найдены</p>
                         <p class="dns-hint">Возможно, домен не имеет записей этого типа</p>
                     </div>
@@ -313,7 +312,7 @@ class DNSLookup {
         this.dnsResult.innerHTML = `
             <div class="dns-result-content">
                 <div class="dns-result-summary">
-                    <span class="dns-domain">📌 ${domain}</span>
+                    <span class="dns-domain"> ${domain}</span>
                     <span class="dns-records-count">Найдено записей: ${answers.length}</span>
                 </div>
                 <div class="dns-table-wrapper">
