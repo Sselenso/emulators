@@ -9,7 +9,7 @@
       { "name": "Все эмуляторы", "url": "https://anweb.dlink.ru/" }
     ],
     "instructions": [
-      { "name": "Новая", "url": "https://pakt.ru/internet/oborudovanie/routeri/nastroyka_dir-842.html" },
+      { "name": "Новая", "url": "https://ftp.dlink.ru/pub/Router/DIR-842/Description/DIR-842_R1_User%20Manual_v.3.0.2_27.01.21_RU.pdf" },
       { "name": "Air", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/d-link/nastroyka-wi-fi-marshrutizatora-d-link-air-interfeys.html#ipoe" },
       { "name": "Черная", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/d-link/nastroyka-podklyucheniya-d-link-temnyy-interfeys.html#ipoe" }
     ],

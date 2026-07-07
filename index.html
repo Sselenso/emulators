@@ -126,23 +126,137 @@
         <button onclick="resetOrder()">↺ Сбросить порядок</button>
         <button id="gridColumnsBtn" class="grid-columns-btn">
           <span>▦</span> Сетка
-        </button>
+        </button>         
       </div>
     </div>
-  </header>
-  
-  <main class="grid" id="grid"></main>
-  
-  <!-- MODAL -->
+		<div class="toolbar-secondary">
+  <button id="macModalBtn" class="mac-modal-btn">
+    MAC Lookup
+  </button>
+  <button id="macCalcOpenBtn" class="mac-calc-btn">
+    MAC Calc
+  </button>
+</div>
+		
+  </header>  
+
+  <main class="grid" id="grid"></main>  
+ 
   <div class="modal" id="modal">
     <div class="modal-content">
       <button class="close" id="closeModal">×</button>
       <div id="modal-body"></div>
     </div>
   </div>
+  	
+
+<div class="modal mac-modal" id="macModal">
+  <div class="modal-content mac-modal-content">
+    <button class="close" id="closeMacModal">×</button>
+    <div id="mac-modal-body">      
+      <div class="mac-modal-header">
+        <h2>Производитель по MAC</h2>
+      </div>         
+    
+     <div class="progress-container" id="progressContainer" style="display: none;">
+    <div class="progress-track">
+        <div class="progress-bar" id="progressBar" style="width: 0%;">
+            <div class="progress-glow"></div>
+        </div>
+    </div>
+	</div>
+    
+     <div class="search-wrap">
+     	 <div class="search-container">
+	        <input 
+	          type="text" 
+	          id="macInput" 
+	          placeholder="Введите MAC адрес"
+	          class="mac-input"
+	          autocomplete="off"
+	        >        
+	      </div>
+	      
+	      <div class="actions">
+	        <button id="macLookupBtn" class="button">Поиск</button>
+	        <button id="macClearBtn" class="button">Очистить</button>
+	      </div> 
+     </div>     
+   
+      <div id="macLoading" class="mac-loading" style="display: none;">
+        <div class="spinner-small"></div>
+        <span>Поиск производителя...</span>
+      </div>            
+    
+      <div class="mac-result-container" id="macResult">
+        <div class="mac-result-placeholder">          
+          <p>Введите MAC-адрес для поиска</p>
+        </div>
+      </div>     
+      
+    </div>
+  </div>
 </div>
 
-<!-- Индикатор загрузки -->
+
+<div class="modal mac-modal" id="macCalcModal">
+  <div class="modal-content mac-modal-content">
+    <button class="close" id="closeMacCalcModal">×</button>
+    <div id="mac-calc-modal-body">      
+      <div class="mac-modal-header">
+        <h2>Калькулятор MAC-адресов</h2>        
+      </div>         
+    
+      <div class="search-wrap">
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="macCalcInput" 
+            placeholder="Например: 1A2B"
+            class="mac-input"
+            autocomplete="off"
+            maxlength="4"            
+          >
+        </div>
+        
+       <div class="actions">
+  <button id="macCalcCalculateBtn" class="button">Рассчитать</button>
+  <button id="macCalcClearBtn" class="button">Очистить</button>
+</div>
+      </div>     
+   
+      <div class="mac-result-container" id="macCalcResult">
+        <div class="mac-result-placeholder">
+          <p>Введите последние 4 цифры MAC-адреса</p>
+        </div>
+      </div>      
+      
+      <div class="mac-calc-info" id="macCalcInfo" style="display: none;">
+        <div class="mac-calc-info-content">
+          <div class="mac-calc-row">
+            <span class="mac-calc-label">Текущий MAC:</span>
+            <span class="mac-calc-value" id="currentMac">-</span>
+          </div>
+          <div class="mac-calc-row mac-calc-arrow">
+            <span>⬇️</span>
+          </div>
+          <div class="mac-calc-row">
+            <span class="mac-calc-label">Следующий MAC:</span>
+            <span class="mac-calc-value mac-calc-next" id="nextMac">-</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+
+
 <div id="loading" class="loading-spinner">
   <div class="spinner"></div>
 </div>
@@ -151,5 +265,8 @@
 <script src="./assets/js/theme.js"></script>
 <script src="./assets/js/grid.js"></script>
 <script src="./assets/js/font.js"></script>
+<script src="./assets/js/oui-parser.js"></script>
+<script src="./assets/js/mac-vendor.js"></script>
+<script src="./assets/js/mac-calc.js"></script>
 </body>
 </html>
