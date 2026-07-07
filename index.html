@@ -136,6 +136,8 @@
   <button id="macCalcOpenBtn" class="mac-calc-btn">
     MAC Calc
   </button>
+	  <button id="subnetCalcOpenBtn" class="subnet-calc-btn">Калькулятор подсети</button>
+		  <button id="dnsLookupOpenBtn" class="dns-lookup-btn">DNS Lookup</button>
 </div>
 		
   </header>  
@@ -252,6 +254,107 @@
 </div>
 
 
+<div class="modal mac-modal" id="subnetCalcModal">
+  <div class="modal-content mac-modal-content">
+    <button class="close" id="closeSubnetCalcModal">×</button>
+    <div id="subnet-calc-body">      
+      <div class="mac-modal-header">
+        <h2>Калькулятор подсетей</h2>       
+      </div>         
+    
+      <div class="search-wrap">
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="subnetInput" 
+            placeholder="Например: 192.168.1.0/24 или 192.168.1.0/255.255.255.0"
+            class="mac-input"
+            autocomplete="off"
+            value=""
+          >
+        </div>
+        
+        <div class="actions">
+          <button id="subnetCalculateBtn" class="button">Рассчитать</button>
+          <button id="subnetClearBtn" class="button">Очистить</button>
+        </div> 
+      </div>     
+   
+      <div class="subnet-result-container" id="subnetResult">
+        <div class="subnet-result-placeholder">
+          <p>Введите IP-адрес и маску для расчета</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<!-- DNS Lookup Modal -->
+<div class="modal mac-modal" id="dnsLookupModal">
+  <div class="modal-content mac-modal-content">
+    <button class="close" id="closeDnsModal">×</button>
+    <div id="dns-lookup-body">      
+      <div class="mac-modal-header">
+        <h2>DNS Lookup Tool</h2>        
+      </div>         
+    
+      <div class="search-wrap">
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="dnsInput" 
+            placeholder="Например: google.com"
+            class="mac-input"
+            autocomplete="off"
+            value=""
+          >
+        </div>
+        
+        <div class="dns-type-selector">
+          <label>Тип записи:</label>
+          <select id="dnsType" class="dns-select">
+            <option value="A">A</option>
+            <option value="AAAA">AAAA</option>
+            <option value="CNAME">CNAME</option>
+            <option value="MX">MX</option>
+            <option value="NS">NS</option>
+            <option value="TXT">TXT</option>
+            <option value="SOA">SOA</option>
+            <option value="ANY">ANY</option>
+          </select>
+        </div>
+        
+        <div class="actions">
+          <button id="dnsLookupBtn" class="button">Найти</button>
+          <button id="dnsClearBtn" class="button">Очистить</button>
+        </div> 
+      </div>     
+   
+      <div id="dnsLoading" class="dns-loading" style="display: none;">
+        <div class="spinner-small"></div>
+        <span>Выполняется DNS-запрос...</span>
+      </div>
+      
+      <div class="dns-result-container" id="dnsResult">
+        <div class="dns-result-placeholder">
+          <p>Введите домен и выберите тип записи</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
 
 
 </div>
@@ -268,5 +371,7 @@
 <script src="./assets/js/oui-parser.js"></script>
 <script src="./assets/js/mac-vendor.js"></script>
 <script src="./assets/js/mac-calc.js"></script>
+<script src="./assets/js/subnet-calc.js"></script>
+<script src="./assets/js/dns-lookup.js"></script>
 </body>
 </html>
