@@ -218,9 +218,13 @@ class IPInfo {
         try {
             let data;
             
+            // ИСПРАВЛЕНИЕ: Используем HTTPS вместо HTTP
+            const baseUrl = `https://ip-api.com/json/${encodeURIComponent(query)}`;
+            const params = `fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
+            
             if (isDomain) {
                 // Для доменов используем одиночный запрос (не batch)
-                const url = `http://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
+                const url = `${baseUrl}?${params}`;
                 
                 const response = await fetch(url, {
                     method: 'GET',
@@ -244,9 +248,8 @@ class IPInfo {
                 return;
             }
 
-            // Для IP используем batch запрос (может пригодиться в будущем)
-            // Но для одного IP можно использовать обычный запрос
-            const url = `http://ip-api.com/json/${encodeURIComponent(query)}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query&lang=ru`;
+            // Для IP используем обычный запрос
+            const url = `${baseUrl}?${params}`;
             
             const response = await fetch(url, {
                 method: 'GET',
@@ -357,6 +360,7 @@ class IPInfo {
         this.ipMap.style.border = '1px solid var(--color-border)';
         this.ipMap.style.overflow = 'hidden';
         
+        // Используем HTTPS для OpenStreetMap
         const url = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.05}%2C${lat-0.05}%2C${lon+0.05}%2C${lat+0.05}&layer=mapnik&marker=${lat}%2C${lon}`;
         
         this.ipMap.innerHTML = `
