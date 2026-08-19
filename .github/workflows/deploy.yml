@@ -42,6 +42,20 @@ jobs:
           echo "📁 Содержимое deploy_public:"
           ls -la deploy_public/
       
+      - name: Clear public folder on server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            echo "🗑️ Удаляем старую папку public..."
+            sudo rm -rf /home/sselenso/emulators/public
+            mkdir -p /home/sselenso/emulators/public
+            sudo chown -R $USER:$USER /home/sselenso/emulators/public
+            echo "✅ Папка public очищена"
+      
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -53,7 +67,6 @@ jobs:
           target: /home/sselenso/emulators
           strip_components: 1
           overwrite: true
-          # rm: true  # УБРАЛИ! Теперь не удаляем папку
       
       - name: Set permissions
         uses: appleboy/ssh-action@v1.2.0
@@ -91,6 +104,6 @@ jobs:
             echo ""
             echo "=========================================="
             echo "✅ Деплой emulators.familyarh.com завершен!"
-            echo "📁 Файлы добавлены/обновлены"
+            echo "📁 Папка public полностью обновлена"
             echo "🌐 Сайт: https://emulators.familyarh.com"
             echo "=========================================="
