@@ -13,6 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
+      - name: Clean and prepare
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            echo "🗑️ Удаляем старую папку public..."
+            sudo rm -rf /home/sselenso/emulators/public
+            mkdir -p /home/sselenso/emulators/public
+            sudo chown -R $USER:$USER /home/sselenso/emulators/public
+            echo "✅ Папка public создана"
+      
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -24,7 +38,7 @@ jobs:
           target: /home/sselenso/emulators/
           overwrite: true
       
-      - name: Set permissions
+      - name: Set permissions for Nginx
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -32,8 +46,16 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
-            echo "📁 Проверяем файлы на сервере:"
+            echo "📁 Проверяем файлы:"
             ls -la /home/sselenso/emulators/public/
+            
+            # Проверяем наличие index.html
+            if [ -f "/home/sselenso/emulators/public/index.html" ]; then
+              echo "✅ index.html найден!"
+            else
+              echo "❌ index.html НЕ НАЙДЕН!"
+              exit 1
+            fi
             
             # Устанавливаем права для Nginx
             sudo chown -R www-data:www-data /home/sselenso/emulators/public
