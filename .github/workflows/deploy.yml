@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Deploy public folder to server
+      - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -21,8 +21,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
           source: public/
-          target: /home/sselenso/emulators
-          strip_components: 1
+          target: /home/sselenso/emulators/
           overwrite: true
       
       - name: Set permissions
@@ -36,35 +35,10 @@ jobs:
             echo "📁 Проверяем файлы на сервере:"
             ls -la /home/sselenso/emulators/public/
             
-            # Проверяем наличие index.html
-            if [ -f "/home/sselenso/emulators/public/index.html" ]; then
-              echo "✅ index.html найден!"
-            else
-              echo "❌ index.html НЕ НАЙДЕН!"
-              exit 1
-            fi
-            
-            # Проверяем наличие cudy.html
-            if [ -f "/home/sselenso/emulators/public/cudy.html" ]; then
-              echo "✅ cudy.html найден!"
-            fi
-            
-            # Проверяем наличие digma.html
-            if [ -f "/home/sselenso/emulators/public/digma.html" ]; then
-              echo "✅ digma.html найден!"
-            fi
-            
-            # Проверяем наличие папки assets
-            if [ -d "/home/sselenso/emulators/public/assets" ]; then
-              echo "✅ папка assets найдена!"
-            fi
-            
             # Устанавливаем права для Nginx
             sudo chown -R www-data:www-data /home/sselenso/emulators/public
             sudo chmod -R 755 /home/sselenso/emulators/public
             
             echo ""
-            echo "=========================================="
-            echo "✅ Деплой emulators.familyarh.com завершен!"
+            echo "✅ Деплой завершен!"
             echo "🌐 Сайт: https://emulators.familyarh.com"
-            echo "=========================================="
