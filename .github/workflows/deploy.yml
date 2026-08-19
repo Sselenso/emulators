@@ -61,6 +61,7 @@ jobs:
             sudo chmod -R 755 /home/sselenso/emulators
             
             echo "✅ Папка подготовлена"
+            ls -la /home/sselenso/emulators/
       
       - name: Deploy files to server
         uses: appleboy/scp-action@v0.1.7
@@ -70,11 +71,11 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
           source: deploy_public/
-          target: /home/sselenso/emulators/public
+          target: /home/sselenso/emulators/public/
           strip_components: 1
           overwrite: true
       
-      - name: Set permissions for Nginx
+      - name: Set permissions and verify
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -101,6 +102,11 @@ jobs:
             # Проверяем наличие digma.html
             if [ -f "/home/sselenso/emulators/public/digma.html" ]; then
               echo "✅ digma.html найден!"
+            fi
+            
+            # Проверяем наличие папки assets
+            if [ -d "/home/sselenso/emulators/public/assets" ]; then
+              echo "✅ папка assets найдена!"
             fi
             
             # Устанавливаем права для Nginx
