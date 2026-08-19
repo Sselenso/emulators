@@ -1,0 +1,287 @@
+[
+  {
+    "id": "dlink",
+    "name": "D-Link",
+    "icon": "📡",
+    "emulators": [
+			{ "name": "DIR 842 (новая)", "url": "https://anweb.dlink.ru:8003/session/start?deviceUrl=http://127.0.0.1:8000&profile=DIR_842E_RT8197F&lang=ru" },
+      { "name": "DIR 615 (старая)", "url": "http://em.dlink.ru/emul/DIR-615AA1A/#start/storInfo" },      
+      { "name": "Все эмуляторы", "url": "https://anweb.dlink.ru/" }
+    ],
+    "instructions": [
+      { "name": "Новая", "url": "https://pakt.ru/internet/oborudovanie/routeri/nastroyka_dir-842.html" },
+      { "name": "Air", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/d-link/nastroyka-wi-fi-marshrutizatora-d-link-air-interfeys.html#ipoe" },
+      { "name": "Черная", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/d-link/nastroyka-podklyucheniya-d-link-temnyy-interfeys.html#ipoe" }
+    ],
+    "info": {
+      "title": "D-Link",
+      "ip": ["192.168.0.1"],
+      "mac": ["с этикетки", "у старых моделей: +1"]
+    }
+  },
+  {
+    "id": "tplink",
+    "name": "TP-Link",
+    "icon": "🌐",
+    "emulators": [
+      { "name": "Зелёная", "url": "https://emulator.tp-link.com/Archer-C7_RU/Index.htm" },
+      { "name": "Бирюзовая (новая)", "url": "https://emulator.tp-link.com/c6-ru-v2/index.html" },
+      { "name": "Все эмуляторы", "url": "https://www.tp-link.com/kz/support/emulator/" }
+    ],
+    "instructions": [
+      { "name": "Зеленая", "url": "https://help-wifi.com/tp-link/nastrojka-routera-tp-link-tl-wr841n-podklyuchenie-nastrojka-interneta-i-wi-fi/" },
+      { "name": "Бирюзовая", "url": "https://help-wifi.com/tp-link/kak-nastroit-marshrutizator-tp-link-archer-c6/" }
+    ],
+    "info": {
+      "title": "TP-Link",
+      "ip": ["в новых моделях: 192.168.0.1", "в старых моделях: 192.168.1.1", "http://tplinkwifi.net/"],
+      "mac": ["+1"]
+    }
+  },
+  {
+    "id": "asus",
+    "name": "Asus",
+    "icon": "🖥️",
+    "emulators": [
+      { "name": "Чёрная", "url": "https://linserv.ru/Asus-RT-AC66U/" },
+      { "name": "Синяя", "url": "https://linserv.ru/Asus-RT-N12/" },
+      { "name": "Фиолетовая", "url": "https://linserv.ru/Asus_old/index-2.html" }
+    ],
+    "instructions": [
+      { "name": "Черная", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/asus/nastroyka-wi-fi-marshrutizatora-asus-rtn-12.html#ipoe" },
+      { "name": "Синяя", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/asus/nastroyka-wi-fi-marshrutizatora-asus-rt-n16.html#ipoe" }
+    ],
+    "info": {
+      "title": "Asus",
+      "ip": ["в новых моделях: 192.168.50.1", "в старых моделях: 192.168.1.1", "http://router.asus.com"],
+      "mac": ["с этикетки"]
+    }
+  },
+  {
+    "id": "keenetic",
+    "name": "Netcraze / Keenetic / Zyxel",
+    "icon": "📶",
+    "emulators": [
+      { "name": "Новая (user | user12345678)", "url": "http://sgtramenator.keenetic.link" },
+      { "name": "Старая Zyxel", "url": "https://linserv.ru/Zuxel-Keenetic/home.html" },
+      { "name": "Старая Zyxel 2", "url": "https://linserv.ru/Keenetic-4G-II/index.html" },
+      { "name": "Старая Zyxel 3", "url": "https://linserv.ru/Keenetic-4G/index.html" }
+    ],
+    "instructions": [
+      { "name": "Новая", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/keenetic/nastroyka-wi-fi-routera-keenetic-startlite.html#ipoe" },
+      { "name": "Старая", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/zyxel/nastroyka-wi-fi-marshrutizatora-zyxel-keenetic-lite.html#ipoe" }
+    ],
+    "info": {
+      "title": "Keenetic / Zyxel",
+      "ip": ["192.168.1.1"],
+      "mac": ["с этикетки"]
+    }
+  },
+  {
+    "id": "cudy",
+    "name": "Cudy",
+    "icon": "🔷",
+    "emulators": [
+      { "name": "WR3000", "url": "https://support.cudy.com/emulator/WR3000/" }
+    ],
+    "instructions": [
+      { "name": "Инструкция от монтажников", "url": "./cudy.html" },
+      { "name": "Мануал", "url": "https://www.cudy.com/ru-ru/blogs/faq/anleitung-zur-installation-des-cudy-wlan-routers" }
+    ],
+    "info": {
+      "title": "Cudy",
+      "ip": ["192.168.10.1", "http://cudy.net"],
+      "mac": ["+1"],
+      "password": "password"
+    }
+  },
+  {
+    "id": "tenda",
+    "name": "Tenda",
+    "icon": "🌊",
+    "emulators": [
+      { "name": "AC10", "url": "https://static.tenda.com.cn/doc/2025/05/21/8c182a9fd98b4982b1d407e8bc9f4002/AC10v1Emulator/index.html" },
+      { "name": "Все эмуляторы", "url": "https://www.tendacn.com/simulator/default.html" }
+    ],
+    "instructions": [
+      { "name": "Новая прошивка", "url": "https://help-wifi.com/tenda/bystraya-nastrojka-marshrutizatora-tenda-ac9-ac1200/" },
+      { "name": "Старая прошивка", "url": "https://help-wifi.com/tenda/nastrojka-routera-tenda-n301/" }
+    ],
+    "info": {
+      "title": "Tenda",
+      "ip": ["192.168.0.1"],
+      "mac": ["+1"]
+    }
+  },
+  {
+    "id": "digma",
+    "name": "Digma",
+    "icon": "📱",
+    "emulators": [
+      { "name": "Digma = Tenda", "url": "https://www.tendacn.com/simulator/default.html" }
+    ],
+    "instructions": [
+      { "name": "Мануал", "url": "../digma.html" }
+    ],
+    "info": {
+      "title": "Digma",
+      "ip": ["192.168.0.1", "digmawifi.com"],
+      "mac": ["На этикетке + см. мануал"]
+    }
+  },
+  {
+    "id": "mercusys",
+    "name": "Mercusys",
+    "icon": "🏠",
+    "emulators": [
+      { "name": "Любая модель", "url": "https://www.mercusys.com/simulator/mw325rv2-ru/web/common/Index.htm" },
+      { "name": "Все эмуляторы", "url": "https://www.mercusys.ru/support/simulator" }
+    ],
+    "instructions": [
+      { "name": "Все прошивки", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/mercusys/nastroyka-wi-fi-marshrutizatora-mercusys-ac12g.html#ipoe" }
+    ],
+    "info": {
+      "title": "Mercusys",
+      "ip": ["192.168.1.1", "http://mwlogin.net"],
+      "mac": ["+1"]
+    }
+  },
+  {
+    "id": "xiaomi",
+    "name": "Xiaomi",
+    "icon": "🍚",
+    "emulators": [
+      { "name": "MI Router", "url": "https://linserv.ru/Xiaomi/cgi-bin/luci/home#router" }
+    ],
+    "instructions": [
+      { "name": "На английском", "url": "https://help-wifi.com/xiaomi/podklyuchenie-i-nastrojka-xiaomi-mi-wi-fi-router-3/" },
+      { "name": "На китайском", "url": "https://tcenter.ru/upload/stelecom-b2c/Xiaomi_mi_wifi_router_3_s_interfeysom_na_kitayskom.pdf" }
+    ],
+    "info": {
+      "title": "Xiaomi",
+      "ip": ["192.168.31.1"],
+      "mac": ["с этикетки"]
+    }
+  },
+  {
+    "id": "huawei",
+    "name": "Huawei",
+    "icon": "🔴",
+    "emulators": [
+      { "name": "Старый", "url": "https://linserv.ru/HG8120H/index.asp" }
+    ],
+    "instructions": [
+      { "name": "AX3", "url": "https://consumer.huawei.com/ru/community/details/Statya-Nastroyka-routera-Huawei-WiFi-AX3/topicId-31438/" },
+      { "name": "Старая", "url": "https://setuprouter.com/router/huawei/hg8245h/screenshots.html" }
+    ],
+    "info": {
+      "title": "Huawei",
+      "ip": ["192.168.3.1"],
+      "mac": ["+1"]
+    }
+  },
+  {
+    "id": "netis",
+    "name": "Netis",
+    "icon": "🔵",
+    "emulators": [
+      { "name": "Новая (белая)", "url": "https://linserv.ru/Netis-GP8501G/index.htm" },
+      { "name": "Старая (голубая)", "url": "http://www.netisru.com/Uploads/Support/Emulators/WF2501_EN/index.htm" },
+      { "name": "Все эмуляторы", "url": "https://linserv.ru/Netis-WF2501/" }
+    ],
+    "instructions": [
+      { "name": "Инструкция", "url": "https://my.volia.com/kiev/ru/faq/article/nastroika-wi-fi-routerov-netis" }
+    ],
+    "info": {
+      "title": "Netis",
+      "ip": ["192.168.1.1", "https://netis.cc"],
+      "mac": ["+1"]
+    }
+  },
+  {
+    "id": "snr",
+    "name": "SNR",
+    "icon": "⚡",
+    "emulators": [
+      { "name": "SNR CPE Дом.ру", "url": "https://linserv.ru/SNR-CPE-W4n/home.html" },
+      { "name": "SNR CPE W4N", "url": "https://linserv.ru/SNR-CPE-W4N/home.html" }
+    ],
+    "instructions": [
+      { "name": "Новая прошивка", "url": "https://support.freedom-vrn.ru/guide/nastroyka-wi-fi-routerov/39/nastroyka-wi-fi-marshrutizatora-snr-cpe-me1.html#ipoe" },
+      { "name": "Старая", "url": "https://netintel.ru/index.php?id=76" }
+    ],
+    "info": {
+      "title": "SNR",
+      "ip": ["192.168.1.1"],
+      "mac": ["с этикетки"]
+    }
+  },
+  {
+    "id": "wave",
+    "name": "Wave",
+    "icon": "🌊",
+    "emulators": [
+      { "name": "Эмулятор", "url": "../router-admin/index.html" }
+    ],
+    "instructions": [],
+    "info": {
+      "title": "Wave",
+      "ip": ["192.168.1.1"],
+      "mac": ["с этикетки"],
+      "note": "Настроить можно не прошитый под ДОМ.РУ"
+    }
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "icon": "🍎",
+    "emulators": [
+      { "name": "Airport Utility", "url": "https://chasms.com/osx/yosemite/apu1.htm" }
+    ],
+    "instructions": [
+      { "name": "Мануал", "url": "https://help.citylink.pro/category/38/question/214" }
+    ],
+    "info": {
+      "title": "Apple",
+      "ip": ["10.0.1.1"],
+      "mac": ["с этикетки"]
+    }
+  },
+  {
+    "id": "mikrotik",
+    "name": "Mikrotik",
+    "icon": "🎯",
+    "emulators": [
+      { "name": "Эмулятор без пароля", "url": "http://demo.mt.lv/" }
+    ],
+    "instructions": [
+      { "name": "Winbox", "url": "https://www.technotrade.com.ua/Articles/mikrotik_router_setup.php" },
+      { "name": "QuickSet", "url": "https://www.technotrade.com.ua/Articles/mikrotik_quickset_setup_2012-10-12.php" }
+    ],
+    "info": {
+      "title": "Mikrotik",
+      "ip": ["192.168.88.1"],
+      "mac": ["с этикетки"]
+    }
+  },
+  {
+    "id": "exotic",
+    "name": "Экзотика",
+    "icon": "🎪",
+    "emulators": [
+      { "name": "Netgear", "url": "https://highspeed.tips/files/emulators/netgear_genie/start.html" },
+      { "name": "Linksys/Cisco", "url": "https://linserv.ru/Linksys-E4200/" },
+      { "name": "Linksys", "url": "https://linserv.ru/Linksys-WRT330N/" },
+      { "name": "UPVEL", "url": "http://upvel.ru/support/emulyatoryi.html" },
+      { "name": "Totolink", "url": "https://totolink.net/home/news/me_name/menu_listtpl/support/id/41.html" },
+      { "name": "Trendnet", "url": "https://www.trendnet.com/emulators/TEW-923DAP_V1.0R/index.html" }
+    ],
+    "instructions": [],
+    "info": {
+      "title": "Экзотика",
+      "description": "Netgear, Linksys, UPVEL, Totolink, Trendnet",
+      "ip": ["см. эмулятор"],
+      "mac": ["см. эмулятор"]
+    }
+  }
+]

@@ -1,0 +1,424 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Настройка безопасности беспроводной сети - wlan0</h2>
+    <p class="content-description">
+      Эта страница позволяет настроить безопасность беспроводной сети. Использование функции WEP или WPA Encryption Keys поможет предотвратить несанкционированный доступ к вашей беспроводной сети.
+    </p>
+  </div>
+
+  <!-- Выбор SSID -->
+  <div class="form-row">
+    <div class="form-label">Выбрать SSID:</div>
+    <div class="form-field-group">
+      <select class="form-control">
+        <option>Root AP - [XDM RUS-2.4G]</option>
+      </select>
+      <div class="button-group">
+        <button class="btn btn-secondary">Сохранить</button>
+        <button class="btn btn-secondary">Сохранить и применить</button>
+        <button class="btn btn-secondary">Сбросить</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Настройки безопасности -->
+  <div class="security-settings">
+    <!-- Шифрование -->
+    <div class="form-row">
+      <div class="form-label">Шифрование</div>
+      <div class="form-field">
+        <select class="form-control">
+          <option selected>WPA2 WPA3 MIXED</option>
+          <option>WPA3 Only</option>
+          <option>WPA2 Only</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Cipher Suite -->
+    <div class="form-row">
+      <div class="form-label">Cipher Suite</div>
+      <div class="form-field checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="cipher-tkip" name="cipher" value="tkip">
+          <span>TKIP</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="cipher-aes" name="cipher" value="aes" checked>
+          <span>AES</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Защита управляющих кадров -->
+    <div class="form-row">
+      <div class="form-label">Защита управляющих кадров:</div>
+      <div class="form-field radio-group">
+        <label class="radio-label">
+          <input type="radio" name="mgmt_frame_protection" value="none" id="mgmt-none">
+          <span>нет</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="mgmt_frame_protection" value="possible" id="mgmt-possible" checked>
+          <span>возможно</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="mgmt_frame_protection" value="required" id="mgmt-required">
+          <span>требуется</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- SHA256 -->
+    <div class="form-row">
+      <div class="form-label">SHA256:</div>
+      <div class="form-field radio-group">
+        <label class="radio-label">
+          <input type="radio" name="sha256" value="disabled" id="sha-disabled">
+          <span>отключено</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="sha256" value="enabled" id="sha-enabled" checked>
+          <span>включено</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Общий ключ -->
+    <div class="form-row">
+      <div class="form-label">Общий ключ:</div>
+      <div class="form-field">
+        <div class="password-field">
+          <input type="password" class="form-control" id="shared-key" placeholder="Введите ключ">
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-password">
+            <span>Show Password</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .security-settings {
+    margin-top: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 8px 0;
+  }
+
+  .form-label {
+    width: 200px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-field-group {
+    flex: 1;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  select.form-control {
+    min-width: 250px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 32px;
+    appearance: none;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .checkbox-group,
+  .radio-group {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #f8fafc;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .checkbox-label,
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox-label input[type="checkbox"],
+  .radio-label input[type="radio"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .checkbox-label span,
+  .radio-label span {
+    line-height: 1;
+  }
+
+  .password-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .password-field .form-control {
+    flex: 1;
+    border: 1px solid #b0c0d0;
+    background: #fff;
+    margin: 0;
+  }
+
+  .password-field .checkbox-label {
+    white-space: nowrap;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .form-field-group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .button-group {
+      justify-content: flex-start;
+    }
+
+    select.form-control {
+      width: 100%;
+    }
+
+    .password-field {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .checkbox-group,
+    .radio-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Показ/скрытие пароля
+  const showPassword = document.getElementById('show-password');
+  const keyInput = document.getElementById('shared-key');
+
+  if (showPassword && keyInput) {
+    showPassword.addEventListener('change', function() {
+      keyInput.type = this.checked ? 'text' : 'password';
+    });
+  }
+
+  // Обработка кнопок
+  const buttons = document.querySelectorAll('.btn-secondary');
+  
+  const showNotification = (message) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `
+      <span>✓</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const text = this.textContent.trim();
+      
+      if (text.includes('Сохранить')) {
+        const message = text === 'Сохранить' ? 'Настройки сохранены' : 'Применено!';
+        showNotification(message);
+      } else if (text === 'Сбросить') {
+        // Сброс формы
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+          select.selectedIndex = 0;
+        });
+        
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = checkbox.id === 'cipher-aes';
+        });
+        
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+          if (radio.id === 'mgmt-possible' || radio.id === 'sha-enabled') {
+            radio.checked = true;
+          } else {
+            radio.checked = false;
+          }
+        });
+        
+        if (keyInput) {
+          keyInput.value = '';
+        }
+        
+        showNotification('Настройки сброшены');
+      }
+    });
+  });
+})();
+</script>

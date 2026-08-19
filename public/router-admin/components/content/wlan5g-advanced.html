@@ -1,0 +1,559 @@
+<div class="content-section active">
+  <div class="content-header">
+    <h2 class="content-title">Расширенные настройки беспроводной сети - wlan0</h2>
+    <p class="content-description">
+      Эти настройки предназначены только для более технически ориентированных пользователей, у которых есть достаточно знаний о беспроводной сети. Эта настройка не должна изменяться, если вы не знаете, какие влияние изменение этих параметров окажет на вашу точку доступа.
+    </p>
+  </div>
+
+  <div class="advanced-settings">
+    <!-- Интервал маяка -->
+    <div class="form-row">
+      <div class="form-label">Интервал маяка:</div>
+      <div class="form-field">
+        <div class="field-with-hint">
+          <input type="text" class="form-control" value="100" style="width: 80px;">
+          <span class="hint">(100–1024 мс)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DTIM Period -->
+    <div class="form-row">
+      <div class="form-label">DTIM Period:</div>
+      <div class="form-field">
+        <div class="field-with-hint">
+          <input type="text" class="form-control" value="1" style="width: 80px;">
+          <span class="hint">(1–255)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тип преамбулы -->
+    <div class="form-row">
+      <div class="form-label">Тип преамбулы:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="preamble" value="long" checked>
+            <span>Длинная преамбула</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="preamble" value="short">
+            <span>Короткая преамбула</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Агрегация -->
+    <div class="form-row">
+      <div class="form-label">Агрегация:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="aggregation" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="aggregation" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Короткое GI -->
+    <div class="form-row">
+      <div class="form-label">Короткое GI:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="gi" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="gi" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Разделение WLAN -->
+    <div class="form-row">
+      <div class="form-label">Разделение WLAN:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="wlan_split" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="wlan_split" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TX Beamforming -->
+    <div class="form-row">
+      <div class="form-label">TX Beamforming:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="beamforming" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="beamforming" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Целевое время профилирования -->
+    <div class="form-row">
+      <div class="form-label">Целевое время профилирования:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="profiling" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="profiling" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Мощность в каналах -->
+    <div class="form-row">
+      <div class="form-label">Мощность в каналах:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="power_channel" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="power_channel" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Мощность RF -->
+    <div class="form-row">
+      <div class="form-label">Мощность RF:</div>
+      <div class="form-field">
+        <div class="radio-group rf-group">
+          <label class="radio-label">
+            <input type="radio" name="rf_power" value="100" checked>
+            <span>100%</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="rf_power" value="70">
+            <span>70%</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="rf_power" value="50">
+            <span>50%</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="rf_power" value="35">
+            <span>35%</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="rf_power" value="15">
+            <span>15%</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Поддержка 802.11k -->
+    <div class="form-row">
+      <div class="form-label">Поддержка 802.11k:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="dot11k" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="dot11k" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Поддержка 802.11v -->
+    <div class="form-row">
+      <div class="form-label">Поддержка 802.11v:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="dot11v" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="dot11v" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- BSS Transition -->
+    <div class="form-row">
+      <div class="form-label">BSS Transition:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="bss_transition" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="bss_transition" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Band Steering -->
+    <div class="form-row">
+      <div class="form-label">Band Steering:</div>
+      <div class="form-field">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="band_steering" value="enabled" checked>
+            <span>Включено</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="band_steering" value="disabled">
+            <span>Отключено</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="btn btn-secondary">Сохранить</button>
+    <button class="btn btn-primary">Сохранить и применить</button>
+    <button class="btn btn-danger">Отмена</button>
+  </div>
+</div>
+
+<style>
+  /* Унифицированные стили (общие с предыдущей страницей) */
+  * {
+    box-sizing: border-box;
+  }
+
+  .content-section {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .content-header {
+    margin-bottom: 24px;
+  }
+
+  .content-title {
+    font-size: 20px;
+    color: #004466;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+
+  .content-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e8f0;
+  }
+
+  .advanced-settings {
+    margin-top: 20px;
+  }
+
+  .form-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding: 4px 0;
+  }
+
+  .form-label {
+    width: 220px;
+    font-weight: 600;
+    color: #004466;
+    font-size: 14px;
+    padding-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .form-field {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .form-control {
+    padding: 8px 12px;
+    border: 1px solid #b0c0d0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 38px;
+  }
+
+  .form-control:focus {
+    border-color: #006699;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,102,153,0.1);
+  }
+
+  .field-with-hint {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: #666;
+    background: #f5f7fa;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #f8fafc;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e8f0;
+  }
+
+  .rf-group {
+    gap: 16px;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .radio-label input[type="radio"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .radio-label span {
+    line-height: 1;
+  }
+
+  .button-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 38px;
+    white-space: nowrap;
+  }
+
+  .btn-secondary {
+    background: #f0f4f8;
+    border-color: #b0c0d0;
+    color: #004466;
+  }
+
+  .btn-secondary:hover {
+    background: #e4eaf2;
+    border-color: #90a0b8;
+  }
+
+  .btn-primary {
+    background: #006699;
+    border-color: #004466;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #004466;
+  }
+
+  .btn-danger {
+    background: #f8f0f0;
+    border-color: #d0b0b0;
+    color: #993333;
+  }
+
+  .btn-danger:hover {
+    background: #f0e0e0;
+    border-color: #b09090;
+  }
+
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .form-label {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .radio-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .rf-group {
+      align-items: flex-start;
+    }
+
+    .field-with-hint {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .button-group {
+      justify-content: center;
+    }
+  }
+
+  /* Уведомления */
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Функция показа уведомлений
+  const showNotification = (message) => {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerHTML = `
+      <span>✓</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, 300);
+    }, 3000);
+  };
+
+  // Обработка кнопок
+  const buttons = document.querySelectorAll('.btn');
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const text = this.textContent.trim();
+      
+      if (text.includes('Сохранить')) {
+        const message = text === 'Сохранить' ? 'Настройки сохранены' : 'Применено!';
+        showNotification(message);
+      } else if (text === 'Отмена') {
+        // Сброс всех значений к исходным
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+          if (input.previousValue) {
+            input.value = input.previousValue;
+          }
+        });
+        
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+          if (radio.defaultChecked) {
+            radio.checked = true;
+          }
+        });
+        
+        showNotification('Изменения отменены');
+      }
+    });
+  });
+
+  // Сохраняем исходные значения для кнопки "Отмена"
+  const textInputs = document.querySelectorAll('input[type="text"]');
+  textInputs.forEach(input => {
+    input.previousValue = input.value;
+  });
+})();
+</script>
