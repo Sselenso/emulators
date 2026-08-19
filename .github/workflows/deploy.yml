@@ -1,10 +1,8 @@
-name: Deploy Emulators
+name: Deploy Emulators to VPS
 
 on:
   push:
     branches: [ main, master ]
-    paths:
-      - 'emulators/public/**'
   workflow_dispatch:
 
 jobs:
@@ -15,16 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Deploy to server
+      - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
-          source: emulators/public/
-          target: /home/sselenso/emulators
-          strip_components: 2
+          source: "index.html,digma.html,cudy.html,data.json,favicon.ico,assets,mobile,router-admin"
+          target: /home/sselenso/emulators/public
+          overwrite: true
+          rm: true
       
       - name: Set permissions
         uses: appleboy/ssh-action@v1.2.0
@@ -34,23 +33,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
-            echo "📁 Проверяем файлы на сервере:"
+            sudo chown -R www-data:www-data /home/sselenso/emulators/public
+            sudo chmod -R 755 /home/sselenso/emulators/public
+            echo "✅ Деплой завершен!"
+            echo "📁 Файлы:"
             ls -la /home/sselenso/emulators/public/
-            
-            # Проверяем наличие index.html
-            if [ -f "/home/sselenso/emulators/public/index.html" ]; then
-              echo "✅ index.html найден!"
-            else
-              echo "❌ index.html НЕ НАЙДЕН!"
-              exit 1
-            fi
-            
-            # Устанавливаем права
-            sudo chown -R www-data:www-data /home/sselenso/emulators/public || true
-            sudo chmod -R 755 /home/sselenso/emulators/public || true
-            
-            echo ""
-            echo "=========================================="
-            echo "✅ Деплой emulators.familyarh.com завершен!"
-            echo "🌐 Сайт: https://emulators.familyarh.com"
-            echo "=========================================="
