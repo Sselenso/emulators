@@ -85,8 +85,8 @@
       { "name": "WR3000", "url": "https://support.cudy.com/emulator/WR3000/" }
     ],
     "instructions": [
-      { "name": "Инструкция от монтажников", "url": "./cudy.html" },
-      { "name": "Мануал", "url": "https://www.cudy.com/ru-ru/blogs/faq/anleitung-zur-installation-des-cudy-wlan-routers" }
+      { "name": "Инструкция от монтажников", "url": "/cudy.html" },
+      { "name": "Мануал", "url": "https://docs.cudy.com/user_guide/" }
     ],
     "info": {
       "title": "Cudy",
@@ -121,7 +121,7 @@
       { "name": "Digma = Tenda", "url": "https://www.tendacn.com/simulator/default.html" }
     ],
     "instructions": [
-      { "name": "Мануал", "url": "../digma.html" }
+      { "name": "Мануал", "url": "/digma.html" }
     ],
     "info": {
       "title": "Digma",
@@ -221,7 +221,7 @@
     "name": "Wave",
     "icon": "🌊",
     "emulators": [
-      { "name": "Эмулятор", "url": "../router-admin/index.html" }
+      { "name": "Эмулятор", "url": "/router-admin/index.html" }
     ],
     "instructions": [],
     "info": {

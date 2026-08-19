@@ -18,17 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
       const currentTheme = body.getAttribute('data-theme');
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      // Ничего больше делать не нужно!
+      localStorage.setItem('theme', newTheme);      
     });
   }
 
-	
-  
+	 
 
 
 
-  // Ленивая загрузка изображений
+
   const images = document.querySelectorAll('.gallery-image');
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {

@@ -2,13 +2,13 @@
 
 // Глобальные переменные
 let routers = [];
-let originalRouters = []; // Сохраняем исходный порядок
-let filteredRouters = []; // Текущий отфильтрованный список
+let originalRouters = []; 
+let filteredRouters = []; 
 let draggedItem = null;
-let currentSearchQuery = ''; // Текущий поисковый запрос
-let favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Избранное
+let currentSearchQuery = ''; 
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-// Ссылки на DOM элементы (будут инициализированы позже)
+
 let gridElement = null;
 
 // Функция открытия модалки
