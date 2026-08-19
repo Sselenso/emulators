@@ -13,69 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Prepare files
-        run: |
-          echo "📁 Подготовка файлов для деплоя..."
-          mkdir -p deploy_public
-          
-          # Копируем все HTML файлы
-          cp -v *.html deploy_public/ 2>/dev/null || echo "No HTML files"
-          cp -v data.json deploy_public/ 2>/dev/null || echo "No data.json"
-          cp -v favicon.ico deploy_public/ 2>/dev/null || echo "No favicon.ico"
-          
-          # Копируем папки
-          if [ -d "assets" ]; then
-            cp -rv assets deploy_public/
-            echo "✅ assets скопированы"
-          fi
-          
-          if [ -d "mobile" ]; then
-            cp -rv mobile deploy_public/
-            echo "✅ mobile скопирована"
-          fi
-          
-          if [ -d "router-admin" ]; then
-            cp -rv router-admin deploy_public/
-            echo "✅ router-admin скопирована"
-          fi
-          
-          echo "📁 Содержимое deploy_public:"
-          ls -la deploy_public/
-      
-      - name: Clean and prepare folder on server
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
-          script: |
-            echo "🗑️ Удаляем всё содержимое /home/sselenso/emulators/..."
-            sudo rm -rf /home/sselenso/emulators/*
-            
-            echo "📁 Создаём папку public..."
-            mkdir -p /home/sselenso/emulators/public
-            
-            echo "🔒 Устанавливаем права..."
-            sudo chown -R $USER:$USER /home/sselenso/emulators
-            sudo chmod -R 755 /home/sselenso/emulators
-            
-            echo "✅ Папка подготовлена"
-            ls -la /home/sselenso/emulators/
-      
-      - name: Deploy files to server
+      - name: Deploy public folder to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
-          source: deploy_public/
-          target: /home/sselenso/emulators/public/
+          source: public/
+          target: /home/sselenso/emulators
           strip_components: 1
           overwrite: true
       
-      - name: Set permissions and verify
+      - name: Set permissions
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -116,6 +66,5 @@ jobs:
             echo ""
             echo "=========================================="
             echo "✅ Деплой emulators.familyarh.com завершен!"
-            echo "📁 Папка emulators полностью обновлена"
             echo "🌐 Сайт: https://emulators.familyarh.com"
             echo "=========================================="
